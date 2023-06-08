@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Common-->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="selectedIcon">#3364E0</color>
+    <!--Toolbar -->
+    <color name="subTitle">#80000000</color>
+    <!--Main Fragment-->
+    <color name="item1">#FFF2D2</color>
+</resources>
