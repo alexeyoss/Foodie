@@ -4,25 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="148dp"
-    app:cardCornerRadius="10dp"
-    tools:layout_marginTop="8dp">
+    app:cardCornerRadius="@dimen/cardcornerRadius">
 
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/category_picture_desc"
         android:scaleType="fitXY"
         tools:src="@drawable/dr_rise" />
 
     <TextView
+        style="@style/ItemMainFragmentTextStyle"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginTop="@dimen/medium_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
