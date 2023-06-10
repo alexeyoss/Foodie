@@ -21,6 +21,9 @@ android {
 
         debug {
             applicationIdSuffix ".beta"
+
+            buildConfigField("String", "BASE_URL", "\"https://run.mocky.io/\"")
+            buildConfigField("String", "API_VERSION", "\"v3/\"")
         }
 
         release {
