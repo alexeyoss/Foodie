@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Foodie</string>
+    <!--Main fragment-->
+    <string name="category_picture_desc">Category picture</string>
+
+    <!--Category fragment-->
+    <string name="dishes_picture_desc">Dishes picture</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="category_picture_desc">Category picture</string>
 </resources>

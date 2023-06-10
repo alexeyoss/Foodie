@@ -4,6 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CategoryList(
-    val categories: ArrayList<CategoryDTO>
+data class DishesList(
+    val dishes: ArrayList<DishesDTO>
 ) : Parcelable

@@ -1,20 +1,22 @@
-package ru.alexeyoss.foodie.presentation
+package ru.alexeyoss.foodie.presentation.dishes
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ru.alexeyoss.foodie.databinding.FragmentCategoryBinding
+import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.foodie.databinding.FragmentDishesBinding
 
-class CategoryFragment : Fragment() {
+@AndroidEntryPoint
+class DishesFragment : Fragment() {
 
-    private var binding: FragmentCategoryBinding? = null
+    private var binding: FragmentDishesBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentCategoryBinding.inflate(layoutInflater, container, false)
+        val binding = FragmentDishesBinding.inflate(layoutInflater, container, false)
         this.binding = binding
         return binding.root
     }

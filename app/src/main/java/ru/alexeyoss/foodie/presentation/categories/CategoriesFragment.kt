@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.presentation
+package ru.alexeyoss.foodie.presentation.categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.alexeyoss.foodie.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.foodie.databinding.FragmentCategoriesBinding
 
-class MainFragment : Fragment() {
 
-    private var binding: FragmentMainBinding? = null
+@AndroidEntryPoint
+class CategoriesFragment : Fragment() {
+
+    private var binding: FragmentCategoriesBinding? = null
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentMainBinding.inflate(layoutInflater, container, false)
+        val binding = FragmentCategoriesBinding.inflate(layoutInflater, container, false)
         this.binding = binding
         return binding.root
     }

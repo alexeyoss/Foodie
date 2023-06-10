@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.presentation
+package ru.alexeyoss.foodie.presentation.categories
 
 import android.graphics.Rect
 import android.view.View

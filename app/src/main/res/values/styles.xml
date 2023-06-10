@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Main Fragment -->
-    <style name="ItemMainFragmentTextStyle">
+    <!--Main Activity-->
+    <style name="BottomNavigationViewTextAppearance">
+        <item name="android:fontFamily">@font/sfp_medium</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Categories Fragment -->
+    <style name="ItemCategoriesFragmentTextStyle">
         <item name="android:fontFamily">@font/sfp_medium</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/extra_large_text_size</item>
@@ -10,10 +17,22 @@
         <item name="android:maxLines">3</item>
     </style>
 
-    <style name="BottomNavigationViewTextAppearance">
+    <!--Dishes Fragment-->
+    <style name="ItemDishesFragmentTextStyle">
+        <item name="android:fontFamily">@font/sfp_regular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <!--Dish Details Dialog Fragment-->
+    <style name="TitleDishDetailFragmentTextStyle">
         <item name="android:fontFamily">@font/sfp_medium</item>
-        <item name="android:textSize">@dimen/small_text_size</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
     </style>
 
 </resources>

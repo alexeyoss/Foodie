@@ -9,4 +9,6 @@
     <color name="subTitle">#80000000</color>
     <!--Main Fragment-->
     <color name="item1">#FFF2D2</color>
+    <!--Category Fragment && Dish Dialog Fragment -->
+    <color name="backgroundItem">#F8F7F5</color>
 </resources>

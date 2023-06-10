@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.MainActivity">
 
-    <!--TODO Amend the Toolbar layout-->
+    <!-- TODO Amend the Toolbar layout -->
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -44,14 +44,17 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:layout="@layout/fragment_main" />
+        app:navGraph="@navigation/main_nav_graph"
+        tools:layout="@layout/fragment_dish_details_dialog" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
