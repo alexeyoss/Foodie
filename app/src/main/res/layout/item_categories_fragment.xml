@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/defaultCornerRadius"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="343dp"
+        android:layout_width="wrap_content"
         android:layout_height="148dp"
-        android:contentDescription="@string/category_picture_desc"
-        tools:src="@drawable/background_fish" />
+        android:background="@drawable/background_fish"
+        android:contentDescription="@string/category_picture_desc" />
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/ItemCategoriesFragmentTextStyle"
@@ -23,10 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/medium_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Пекарни и кондитерские" />
-
-
-</com.google.android.material.card.MaterialCardView>
+        tools:text="Азиатская кухня" />
+</FrameLayout>
 

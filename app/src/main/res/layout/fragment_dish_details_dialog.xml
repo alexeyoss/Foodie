@@ -5,96 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_layout"
-    android:paddingHorizontal="16dp"
-    android:paddingVertical="16dp"
-    tools:context=".presentation.DishDetailsDialogFragment">
+    android:paddingHorizontal="@dimen/large_padding"
+    android:paddingVertical="@dimen/large_padding"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:context=".presentation.dishes.DishDetailsDialogFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/favorite_btn"
-        style="@style/btn_style"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/add_to_favorite_button_desc"
-        app:cornerRadius="@dimen/defaultCornerRadius"
-        app:icon="@drawable/ic_favorite"
-        app:layout_constraintEnd_toStartOf="@+id/close_btn"
-        app:layout_constraintTop_toTopOf="@+id/close_btn" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/close_btn"
-        style="@style/btn_style"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/close_button_desc"
-        app:cornerRadius="@dimen/defaultCornerRadius"
-        app:icon="@drawable/ic_close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.card.MaterialCardView
+    <include
         android:id="@+id/cardImageView"
+        layout="@layout/dish_image_with_background"
         android:layout_width="match_parent"
         android:layout_height="232dp"
-        app:cardBackgroundColor="@color/backgroundItem"
-        app:cardCornerRadius="@dimen/defaultCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/dishImage"
-            android:layout_width="198dp"
-            android:layout_height="204dp"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            tools:src="@drawable/dishes_rice" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/dishTitle"
-        style="@style/TitleDishDetailFragmentTextStyle"
-        android:layout_width="0dp"
+    <include
+        android:id="@+id/dishInfo"
+        layout="@layout/dish_title_with_price_and_weight"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardImageView"
-        tools:text="Рыба с овощами и рисом" />
+        app:layout_constraintTop_toBottomOf="@id/cardImageView" />
 
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/priceAndWeightBarrier"
+    <include
+        layout="@layout/fav_and_close_btns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="dishPrice,dishWeight" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/dishPrice"
-        style="@style/PriceDishDetailFragmentTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/dishWeight"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dishTitle"
-        tools:text="@string/dishPrice" />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/dishWeight"
-        style="@style/WeightDishDetailFragmentTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/dishPrice"
-        app:layout_constraintTop_toBottomOf="@id/dishTitle"
-        tools:text="@string/dishWeight" />
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginEnd="@dimen/small_margin"
+        app:layout_constraintEnd_toEndOf="@id/cardImageView"
+        app:layout_constraintTop_toTopOf="@id/cardImageView" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -102,22 +47,25 @@
         style="@style/DishDescriptionDetailFragmentTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dishPrice"
+        app:layout_constraintTop_toBottomOf="@+id/dishInfo"
         tools:maxLines="6"
         tools:text="@tools:sample/lorem/random" />
 
 
     <com.google.android.material.button.MaterialButton
+        style="@style/large_btn_common_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingVertical="15dp"
+        android:layout_marginTop="@dimen/large_margin"
         android:text="@string/addToCart_btn_text"
-        app:cornerRadius="@dimen/defaultCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dishDescription" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

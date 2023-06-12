@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--Common styles-->
+    <style name="small_btn_common_style" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:padding">@dimen/small_padding</item>
+        <item name="iconPadding">@dimen/zero_padding</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">@color/black</item>
+    </style>
+
+    <style name="large_btn_common_style" parent="Widget.MaterialComponents.Button">
+        <item name="android:paddingTop">@dimen/specific_padding</item>
+        <item name="android:paddingBottom">@dimen/specific_padding</item>
+        <item name="cornerRadius">@dimen/defaultCornerRadius</item>
+    </style>
+
     <!--Main Activity-->
-    <style name="BottomNavigationViewTextAppearance">
+    <style name="BottomNavigationViewTextStyle">
         <item name="android:fontFamily">@font/sfp_medium</item>
         <item name="android:textSize">@dimen/small_text_size</item>
         <item name="android:textStyle">normal</item>
@@ -57,14 +74,11 @@
         <item name="android:textSize">@dimen/default_text_size</item>
     </style>
 
-    <style name="btn_style" parent="Widget.MaterialComponents.Button">
-        <item name="android:layout_width">40dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:backgroundTint">@color/white</item>
-        <item name="android:padding">8dp</item>
-        <item name="iconPadding">0dp</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconTint">@color/black</item>
+    <!--Quantity Selector-->
+    <style name="ShapeAppearanceOverlay.App.CornerRound" parent="">
+        <item name="cornerSize">@dimen/defaultCornerRadius</item>
+        <item name="cornerFamily">rounded</item>
     </style>
+
 
 </resources>

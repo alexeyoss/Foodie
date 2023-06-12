@@ -14,4 +14,6 @@
     <!--Dish Dialog Fragment-->
     <color name="weightTextColor">#66000000</color>
     <color name="descriptionTextColor">#A6000000</color>
+    <!--Quantity selector-->
+    <color name="quantity_selector_background_color">#EFEEEC</color>
 </resources>

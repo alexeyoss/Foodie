@@ -6,9 +6,16 @@
     <!--Category fragment-->
     <string name="dishes_picture_desc">Dishes picture</string>
     <!--Dish Details Dialog Fragment-->
-    <string name="dishPrice">%1$s \u20BD </string>
-    <string name="dishWeight">• %1$sг</string>
+    <string name="default_dishPrice">- \u20BD </string>
+    <string name="valuedDishPrice">%1$s \u20BD </string>
+    <string name="default_dishWeight">• - г</string>
+    <string name="valuedDishWeight">• %1$sг</string>
+
     <string name="addToCart_btn_text">Добавить в корзину</string>
     <string name="add_to_favorite_button_desc">Add to Favorite button</string>
     <string name="close_button_desc">Close button description</string>
+
+    <!--Cart Fragment-->
+    <string name="default_total_text">Оплатить - \u20BD </string>
+    <string name="total_text">Оплатить %1$s \u20BD </string>
 </resources>

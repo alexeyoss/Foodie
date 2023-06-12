@@ -55,17 +55,17 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:navGraph="@navigation/main_nav_graph"
-        tools:layout="@layout/fragment_categories" />
+        tools:layout="@layout/fragment_dishes" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:itemIconSize="24dp"
+        app:itemIconSize="@dimen/ic_size_bottomview"
         app:itemIconTint="@color/bottom_nav_color"
-        app:itemTextAppearanceActive="@style/BottomNavigationViewTextAppearance"
-        app:itemTextAppearanceInactive="@style/BottomNavigationViewTextAppearance"
+        app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
+        app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
         app:itemTextColor="@color/bottom_nav_color"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,14 +78,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+        app:layout_constraintGuide_end="@dimen/large_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
+        app:layout_constraintGuide_begin="@dimen/large_margin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.presentation
+package ru.alexeyoss.foodie.presentation.dishes
 
 import android.os.Bundle
 import android.view.LayoutInflater
