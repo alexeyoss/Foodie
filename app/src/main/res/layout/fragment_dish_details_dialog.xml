@@ -9,15 +9,46 @@
     android:paddingVertical="16dp"
     tools:context=".presentation.DishDetailsDialogFragment">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/favorite_btn"
+        style="@style/btn_style"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/add_to_favorite_button_desc"
+        app:cornerRadius="@dimen/defaultCornerRadius"
+        app:icon="@drawable/ic_favorite"
+        app:layout_constraintEnd_toStartOf="@+id/close_btn"
+        app:layout_constraintTop_toTopOf="@+id/close_btn" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/close_btn"
+        style="@style/btn_style"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/close_button_desc"
+        app:cornerRadius="@dimen/defaultCornerRadius"
+        app:icon="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardImageView"
         android:layout_width="match_parent"
         android:layout_height="232dp"
         app:cardBackgroundColor="@color/backgroundItem"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/defaultCornerRadius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dishImage"
+            android:layout_width="198dp"
+            android:layout_height="204dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/dishes_rice" />
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dishTitle"
@@ -28,37 +59,65 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardImageView"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="Рыба с овощами и рисом" />
 
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
+        android:id="@+id/priceAndWeightBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
         app:constraint_referenced_ids="dishPrice,dishWeight" />
 
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dishPrice"
-        style="@style/TitleDishDetailFragmentTextStyle"
+        style="@style/PriceDishDetailFragmentTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/dishWeight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dishTitle"
+        tools:text="@string/dishPrice" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dishWeight"
+        style="@style/WeightDishDetailFragmentTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/dishPrice"
         app:layout_constraintTop_toBottomOf="@id/dishTitle"
-        tools:text="@tools:sample/lorem" />
+        tools:text="@string/dishWeight" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/dishWeight"
-        style="@style/TitleDishDetailFragmentTextStyle"
-        android:layout_width="wrap_content"
+        android:id="@+id/dishDescription"
+        style="@style/DishDescriptionDetailFragmentTextStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/dishTitle"
-        tools:layout_editor_absoluteX="222dp"
-        tools:text="@tools:sample/lorem" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dishPrice"
+        tools:maxLines="6"
+        tools:text="@tools:sample/lorem/random" />
 
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingVertical="15dp"
+        android:text="@string/addToCart_btn_text"
+        app:cornerRadius="@dimen/defaultCornerRadius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dishDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
