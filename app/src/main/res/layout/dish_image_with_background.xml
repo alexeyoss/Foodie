@@ -24,7 +24,7 @@
             android:layout_marginVertical="@dimen/medium_margin"
             android:contentDescription="@string/dishes_picture_desc"
             android:scaleType="fitCenter"
-            tools:src="@drawable/dishes_rice" />
+            tools:src="@tools:sample/avatars" />
 
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

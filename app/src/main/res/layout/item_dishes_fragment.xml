@@ -24,6 +24,6 @@
         app:layout_constraintEnd_toEndOf="@id/cardImageView"
         app:layout_constraintStart_toStartOf="@id/cardImageView"
         app:layout_constraintTop_toBottomOf="@id/cardImageView"
-        tools:text="Салат по восточному" />
+        tools:text="@tools:sample/last_names" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

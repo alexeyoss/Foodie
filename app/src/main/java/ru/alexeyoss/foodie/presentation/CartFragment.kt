@@ -10,10 +10,7 @@ import ru.alexeyoss.foodie.databinding.FragmentCartBinding
 
 @AndroidEntryPoint
 class CartFragment : Fragment() {
-
-
     private var binding: FragmentCartBinding? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.domain
+package ru.alexeyoss.foodie.di
 
 import dagger.Module
 import dagger.Provides

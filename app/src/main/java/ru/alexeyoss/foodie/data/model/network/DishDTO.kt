@@ -1,10 +1,10 @@
-package ru.alexeyoss.foodie.data.models
+package ru.alexeyoss.foodie.data.model.network
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class DishesDTO(
+data class DishDTO(
     val id: Int,
     val name: String,
     val price: Int,

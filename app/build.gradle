@@ -66,8 +66,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
-    /* next version into alpha, wait stable build*/
-    implementation 'com.squareup.okhttp3:okhttp:4.11.0'
+    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.11.0"
     /*by viewModel extension*/
     implementation "androidx.fragment:fragment-ktx:1.6.0"
     /* asynchronous */

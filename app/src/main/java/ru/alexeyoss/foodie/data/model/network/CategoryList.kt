@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.data.models
+package ru.alexeyoss.foodie.data.model.network
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

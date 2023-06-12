@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/categoriesFragment">
 
+    <fragment
+        android:id="@+id/dishesFragment"
+        android:name="ru.alexeyoss.foodie.presentation.dishes.DishesFragment"
+        android:label="fragment_dishes"
+        tools:layout="@layout/fragment_dishes" >
+        <action
+            android:id="@+id/action_dishesFragment_to_dishDetailsDialogFragment"
+            app:destination="@id/dishDetailsDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dishDetailsDialogFragment"
+        android:name="ru.alexeyoss.foodie.presentation.dishes.DishDetailsDialogFragment"
+        android:label="fragment_dish_details_dialog"
+        tools:layout="@layout/fragment_dish_details_dialog" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="ru.alexeyoss.foodie.presentation.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="ru.alexeyoss.foodie.presentation.categories.CategoriesFragment"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_dishesFragment"
+            app:destination="@id/dishesFragment" />
+    </fragment>
 </navigation>
