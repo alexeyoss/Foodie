@@ -20,6 +20,7 @@ class CategoriesFragment : Fragment() {
     private var binding: FragmentCategoriesBinding? = null
 
     private val viewModel: CategoriesViewModel by viewModels()
+    private val categoryAdapter = CategoryAdapter(::onCategoryClick)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -42,7 +43,7 @@ class CategoriesFragment : Fragment() {
             .map { it.UiCategories }
             .distinctUntilChanged()
             .collectOnLifecycle(this) { categories ->
-//            adapter.submitList(categories ) // Simple insertion of category
+                categoryAdapter.submitList(categories) // Simple insertion of category
             }
     }
 
@@ -52,11 +53,15 @@ class CategoriesFragment : Fragment() {
             recyclerView.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//                adapter = enterBinAdapter
+                adapter = categoryAdapter
                 addItemDecoration(MarginItemDecoration(8))
                 itemAnimator = null
             }
         }
+    }
+
+    private fun onCategoryClick() {
+        // TODO category clicked
     }
 
 

@@ -2,14 +2,15 @@ package ru.alexeyoss.foodie.presentation.categories
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.alexeyoss.foodie.data.model.ui.UiDish
+import ru.alexeyoss.foodie.data.model.ui.UiCategory
 import ru.alexeyoss.foodie.databinding.ItemCategoriesFragmentBinding
 
 class CategoryAdapter(
     private val onClickCategory: () -> Unit
-) : ListAdapter<UiDish, CategoryAdapter.CategoryHolder>() {
+) : ListAdapter<UiCategory, CategoryAdapter.CategoryHolder>(diffUtil) {
 
     inner class CategoryHolder(
         binding: ItemCategoriesFragmentBinding, private val onClickCategory: () -> Unit
@@ -25,5 +26,21 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
         TODO("Not yet implemented")
+    }
+
+    companion object {
+        private val diffUtil = object : DiffUtil.ItemCallback<UiCategory>() {
+            override fun areItemsTheSame(
+                oldItem: UiCategory, newItem: UiCategory
+            ): Boolean {
+                return oldItem.category.id == newItem.category.id
+            }
+
+            override fun areContentsTheSame(
+                oldItem: UiCategory, newItem: UiCategory
+            ): Boolean {
+                return oldItem.category == newItem.category
+            }
+        }
     }
 }
