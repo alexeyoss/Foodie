@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.map
 import ru.alexeyoss.foodie.databinding.FragmentCategoriesBinding
 import ru.alexeyoss.foodie.presentation.collectOnLifecycle
 
-
 @AndroidEntryPoint
 class CategoriesFragment : Fragment() {
 
@@ -43,12 +42,13 @@ class CategoriesFragment : Fragment() {
             .map { it.UiCategories }
             .distinctUntilChanged()
             .collectOnLifecycle(this) { categories ->
-                categoryAdapter.submitList(categories) // Simple insertion of category
+                categoryAdapter.submitList(categories)
             }
     }
 
     private fun initRecyclerView() {
         val binding = checkNotNull(binding)
+
         with(binding) {
             recyclerView.apply {
                 setHasFixedSize(true)
@@ -60,8 +60,10 @@ class CategoriesFragment : Fragment() {
         }
     }
 
-    private fun onCategoryClick() {
-        // TODO category clicked
+    private fun onCategoryClick(categoryId: Int) {
+        when (categoryId) {
+            1 -> Unit
+        }
     }
 
 

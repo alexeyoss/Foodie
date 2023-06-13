@@ -5,18 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.alexeyoss.foodie.data.model.ui.UiCategory
 import ru.alexeyoss.foodie.databinding.ItemCategoriesFragmentBinding
 
 class CategoryAdapter(
-    private val onClickCategory: () -> Unit
+    private val onClickCategory: (categoryId: Int) -> Unit
 ) : ListAdapter<UiCategory, CategoryAdapter.CategoryHolder>(diffUtil) {
 
-    inner class CategoryHolder(
-        binding: ItemCategoriesFragmentBinding, private val onClickCategory: () -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,7 +21,29 @@ class CategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.onBind(currentList[position])
+    }
+
+
+    inner class CategoryHolder(
+        private val binding: ItemCategoriesFragmentBinding, private val onClickCategory: (categoryId: Int) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            with(binding) {
+                root.setOnClickListener {
+                    if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
+                    onClickCategory(currentList[bindingAdapterPosition].id)
+                }
+            }
+        }
+
+        fun onBind(item: UiCategory) {
+            with(binding) {
+                Glide.with(itemView.context).load(item.image_url).centerCrop().into(backgroundImage)
+
+                categoryTitle.text = item.name
+            }
+        }
     }
 
     companion object {
@@ -33,13 +51,13 @@ class CategoryAdapter(
             override fun areItemsTheSame(
                 oldItem: UiCategory, newItem: UiCategory
             ): Boolean {
-                return oldItem.category.id == newItem.category.id
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
                 oldItem: UiCategory, newItem: UiCategory
             ): Boolean {
-                return oldItem.category == newItem.category
+                return oldItem == newItem
             }
         }
     }

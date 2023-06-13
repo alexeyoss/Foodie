@@ -6,15 +6,17 @@ import ru.alexeyoss.foodie.data.model.ui.UiCategory
 class CategoryMapper : BaseMapper<UiCategory, CategoryDTO> {
     override fun mapToDomainModel(foreignModel: CategoryDTO): UiCategory {
         return UiCategory(
-            category = foreignModel
+            id = foreignModel.id,
+            name = foreignModel.name,
+            image_url = foreignModel.image_url,
         )
     }
 
     override fun mapToForeignModel(domainModel: UiCategory): CategoryDTO {
         return CategoryDTO(
-            id = domainModel.category.id,
-            name = domainModel.category.name,
-            imageUrl = domainModel.category.imageUrl
+            id = domainModel.id,
+            name = domainModel.name,
+            image_url = domainModel.image_url
         )
     }
 }

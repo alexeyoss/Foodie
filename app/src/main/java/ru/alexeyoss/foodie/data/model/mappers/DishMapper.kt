@@ -6,7 +6,13 @@ import ru.alexeyoss.foodie.data.model.ui.UiDish
 class DishMapper : BaseMapper<UiDish, DishDTO> {
     override fun mapToDomainModel(foreignModel: DishDTO): UiDish {
         return UiDish(
-            dish = foreignModel,
+            id = foreignModel.id,
+            name = foreignModel.name,
+            price = foreignModel.price,
+            weight = foreignModel.weight,
+            description = foreignModel.description,
+            imageUrl = foreignModel.imageUrl,
+            tegs = foreignModel.tegs,
             isFavorite = false,
             isInCart = false
         )
@@ -14,13 +20,13 @@ class DishMapper : BaseMapper<UiDish, DishDTO> {
 
     override fun mapToForeignModel(domainModel: UiDish): DishDTO {
         return DishDTO(
-            id = domainModel.dish.id,
-            name = domainModel.dish.name,
-            price = domainModel.dish.price,
-            weight = domainModel.dish.weight,
-            description = domainModel.dish.description,
-            imageUrl = domainModel.dish.imageUrl,
-            tegs = domainModel.dish.tegs
+            id = domainModel.id,
+            name = domainModel.name,
+            price = domainModel.price,
+            weight = domainModel.weight,
+            description = domainModel.description,
+            imageUrl = domainModel.imageUrl,
+            tegs = domainModel.tegs
         )
     }
 

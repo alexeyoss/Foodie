@@ -30,10 +30,12 @@ class CategoriesViewModel
         viewModelScope.launch(ioDispatcher + exceptionHandler) {
             mainRepository.getCategories().let { responseState ->
                 when (responseState) {
-                    is ResponseStates.Success -> store.update { applicationState ->
-                        return@update applicationState.copy(
-                            UiCategories = responseState.data
-                        )
+                    is ResponseStates.Success -> {
+                        store.update { applicationState ->
+                            return@update applicationState.copy(
+                                UiCategories = responseState.data
+                            )
+                        }
                     }
 
                     else -> Unit // TODO  error handling

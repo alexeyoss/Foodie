@@ -1,9 +1,11 @@
 package ru.alexeyoss.foodie.data.model.network
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
+
 data class CategoryList(
-    val categories: ArrayList<CategoryDTO>
-) : Parcelable
+    @SerializedName("сategories")
+    @Expose
+    val categories: List<CategoryDTO>
+)

@@ -12,6 +12,7 @@
         android:contentDescription="@string/category_picture_desc" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/categoryTitle"
         style="@style/ItemCategoriesFragmentTextStyle"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
