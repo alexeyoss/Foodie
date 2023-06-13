@@ -8,7 +8,7 @@
         android:visible="true" />
     <item
         android:id="@+id/searchFragment"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_search"
         android:title="Поиск"
         android:visible="true" />
@@ -20,7 +20,7 @@
         android:visible="true" />
     <item
         android:id="@+id/accountFragment"
-        android:enabled="true"
+        android:enabled="false"
         android:icon="@drawable/ic_account"
         android:title="Аккаунт"
         android:visible="true" />

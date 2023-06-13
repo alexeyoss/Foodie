@@ -13,9 +13,9 @@
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        app:spanCount="3"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:itemCount="15"
-        tools:listitem="@layout/item_dishes_fragment" />
+        tools:listitem="@layout/item_dishes_fragment"
+        tools:spanCount="3" />
 
 </FrameLayout>

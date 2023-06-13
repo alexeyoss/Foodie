@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
+import ru.alexeyoss.foodie.presentation.utils.lazyUnsafe
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

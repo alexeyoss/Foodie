@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.databinding.FragmentCategoriesBinding
+import ru.alexeyoss.foodie.presentation.categories.decorator.CategoryMarginItemDecoration
 import ru.alexeyoss.foodie.presentation.collectOnLifecycle
+import ru.alexeyoss.foodie.presentation.utils.toDp
 
 @AndroidEntryPoint
 class CategoriesFragment : Fragment() {
@@ -34,13 +38,10 @@ class CategoriesFragment : Fragment() {
         initListeners()
 
         viewModel.getCategories()
-
     }
 
     private fun initListeners() {
-        viewModel.store.stateFlow
-            .map { it.UiCategories }
-            .distinctUntilChanged()
+        viewModel.store.stateFlow.map { it.UiCategories }.distinctUntilChanged()
             .collectOnLifecycle(this) { categories ->
                 categoryAdapter.submitList(categories)
             }
@@ -54,21 +55,33 @@ class CategoriesFragment : Fragment() {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 adapter = categoryAdapter
-                addItemDecoration(MarginItemDecoration(8))
+                addItemDecoration(
+                    CategoryMarginItemDecoration(
+                        verticalMargin = ITEM_VERTICAL_MARGIN.toDp(),
+                        firstItemTopMargin = ITEM_VERTICAL_MARGIN.toDp(),
+                        lastItemMargin = ITEM_VERTICAL_MARGIN.toDp()
+                    )
+                )
                 itemAnimator = null
             }
         }
     }
 
     private fun onCategoryClick(categoryId: Int) {
-        when (categoryId) {
-            1 -> Unit
-        }
+        findNavController().navigate(R.id.dishesFragment)
+//         TODO determinate the certain category dishes
+//        when (categoryId) {
+//            1 -> Unit
+//        }
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    companion object {
+        const val ITEM_VERTICAL_MARGIN = 8
     }
 }

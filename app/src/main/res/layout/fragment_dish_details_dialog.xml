@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_layout"
+    android:background="@drawable/dish_details_background"
     android:paddingHorizontal="@dimen/large_padding"
     android:paddingVertical="@dimen/large_padding"
     app:layout_constraintEnd_toEndOf="parent"

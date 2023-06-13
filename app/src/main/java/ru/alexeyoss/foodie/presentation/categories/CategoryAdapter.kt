@@ -13,7 +13,6 @@ class CategoryAdapter(
     private val onClickCategory: (categoryId: Int) -> Unit
 ) : ListAdapter<UiCategory, CategoryAdapter.CategoryHolder>(diffUtil) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCategoriesFragmentBinding.inflate(inflater, parent, false)
@@ -32,15 +31,15 @@ class CategoryAdapter(
             with(binding) {
                 root.setOnClickListener {
                     if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
-                    onClickCategory(currentList[bindingAdapterPosition].id)
+                    val itemId = currentList[bindingAdapterPosition].id
+                    onClickCategory(itemId)
                 }
             }
         }
 
         fun onBind(item: UiCategory) {
             with(binding) {
-                Glide.with(itemView.context).load(item.image_url).centerCrop().into(backgroundImage)
-
+                Glide.with(itemView.context).load(item.image_url).into(backgroundImage)
                 categoryTitle.text = item.name
             }
         }

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imageLayout"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_categories_backgorund">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backgroundImage"
         android:layout_width="wrap_content"
         android:layout_height="148dp"
-        android:background="@drawable/background_fish"
-        android:contentDescription="@string/category_picture_desc" />
+        android:contentDescription="@string/category_picture_desc"
+        tools:background="@drawable/background_fish" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/categoryTitle"
