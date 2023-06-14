@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_total_text">Оплатить - \u20BD </string>
+    <string name="total_text">Оплатить %1$s \u20BD </string>
+    <string name="dishes_picture_desc">Dishes picture</string>
+    <string name="default_dishPrice">- \u20BD </string>
+    <string name="valuedDishPrice">%1$s \u20BD </string>
+    <string name="default_dishWeight">• - г</string>
+    <string name="valuedDishWeight">• %1$sг</string>
+</resources>

@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.alexeyoss.foodie.data.model.ui.UiCategory
-import ru.alexeyoss.foodie.databinding.ItemCategoriesFragmentBinding
+import ru.alexeyoss.features.categories.databinding.ItemCategoriesFragmentBinding
+import ru.alexeyoss.features.categories.domain.entities.UiCategory
 
 class CategoriesAdapter(
     private val onClickCategory: (categoryId: Int) -> Unit

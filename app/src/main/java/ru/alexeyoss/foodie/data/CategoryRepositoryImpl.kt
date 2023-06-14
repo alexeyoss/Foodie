@@ -2,7 +2,7 @@ package ru.alexeyoss.foodie.data
 
 import ru.alexeyoss.features.categories.domain.CategoriesRepository
 import ru.alexeyoss.foodie.data.model.mappers.CategoryMapper
-import ru.alexeyoss.foodie.data.model.ui.UiCategory
+import ru.alexeyoss.features.categories.domain.entities.UiCategory
 import ru.alexeyoss.foodie.data.network.ApiService
 import ru.alexeyoss.foodie.data.network.ResponseStates
 import ru.alexeyoss.foodie.data.network.safeCall

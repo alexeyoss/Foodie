@@ -1,9 +1,6 @@
-package ru.alexeyoss.foodie.data.model.ui
+package ru.alexeyoss.features.dishes.domain.entities
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class UiDish(
     val id: Int,
     val name: String,
@@ -14,4 +11,4 @@ data class UiDish(
     val tegs: ArrayList<String>,
     val isFavorite: Boolean,
     val isInCart: Boolean
-) : Parcelable
+)

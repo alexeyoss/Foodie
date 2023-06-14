@@ -1,7 +1,7 @@
 package ru.alexeyoss.foodie.data.model.mappers
 
 import ru.alexeyoss.foodie.data.model.network.CategoryDTO
-import ru.alexeyoss.foodie.data.model.ui.UiCategory
+import ru.alexeyoss.features.categories.domain.entities.UiCategory
 
 class CategoryMapper : BaseMapper<UiCategory, CategoryDTO> {
     override fun mapToDomainModel(foreignModel: CategoryDTO): UiCategory {

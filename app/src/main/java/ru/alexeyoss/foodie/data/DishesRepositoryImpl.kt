@@ -1,11 +1,10 @@
 package ru.alexeyoss.foodie.data
 
 import ru.alexeyoss.foodie.data.model.mappers.DishMapper
-import ru.alexeyoss.foodie.data.model.ui.UiDish
+import ru.alexeyoss.features.dishes.domain.entities.UiDish
 import ru.alexeyoss.foodie.data.network.ApiService
 import ru.alexeyoss.foodie.data.network.ResponseStates
 import ru.alexeyoss.foodie.data.network.safeCall
-import ru.alexeyoss.features.dishes.domain.DishesRepository
 import javax.inject.Inject
 
 class DishesRepositoryImpl

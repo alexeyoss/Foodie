@@ -1,7 +1,7 @@
 package ru.alexeyoss.foodie.data.model.mappers
 
 import ru.alexeyoss.foodie.data.model.network.DishDTO
-import ru.alexeyoss.foodie.data.model.ui.UiDish
+import ru.alexeyoss.features.dishes.domain.entities.UiDish
 
 class DishMapper : BaseMapper<UiDish, DishDTO> {
     override fun mapToDomainModel(foreignModel: DishDTO): UiDish {

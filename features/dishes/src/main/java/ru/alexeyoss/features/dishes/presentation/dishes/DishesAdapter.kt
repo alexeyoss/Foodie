@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.alexeyoss.foodie.data.model.ui.UiDish
-import ru.alexeyoss.foodie.databinding.ItemDishesFragmentBinding
+import ru.alexeyoss.features.dishes.databinding.ItemDishesFragmentBinding
+import ru.alexeyoss.features.dishes.domain.entities.UiDish
 
 class DishesAdapter(
     private val onClickDish: (UiDish) -> Unit

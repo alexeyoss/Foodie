@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
-import ru.alexeyoss.foodie.databinding.FragmentDishDetailsDialogBinding
+import ru.alexeyoss.features.dishes.databinding.FragmentDishDetailsDialogBinding
 
 @AndroidEntryPoint
 class DishDetailsDialogFragment : Fragment() {
