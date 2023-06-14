@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace "ru.alexeyoss.foodie"
-    compileSdk 33
+    compileSdk targetAndroidSdk
 
     defaultConfig {
         applicationId "ru.alexeyoss.foodie"
-        minSdk 24
-        targetSdk 33
+        minSdk minAndroidSdk
+        targetSdk targetAndroidSdk
         versionCode 1
         versionName "1.0"
 
@@ -24,9 +24,6 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://run.mocky.io/\"")
-            buildConfigField("String", "API_VERSION", "\"v3/\"")
-
             applicationIdSuffix ".beta"
             ext.enableCrashlytics = false
             minifyEnabled false
@@ -45,44 +42,32 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
 
-    buildFeatures {
-        viewBinding true
-    }
-    kapt {
-        correctErrorTypes = true
-    }
+kapt {
+    correctErrorTypes = true
+}
 
+hilt {
+    enableAggregatingTask = true
 }
 
 dependencies {
 
-    implementation "androidx.core:core-ktx:1.10.1"
-    implementation "androidx.appcompat:appcompat:1.6.1"
-    implementation "com.google.android.material:material:1.9.0"
-    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    /*Network tools*/
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation libs.android.coreKtx
+    implementation libs.android.appCompat
+    implementation libs.android.constraintLayout
+    implementation libs.android.navigationFragments
+    implementation libs.android.navigationUI
 
-    implementation "com.squareup.okhttp3:okhttp:4.11.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.11.0"
-    /*by viewModel extension*/
-    implementation "androidx.fragment:fragment-ktx:1.6.0"
-    /* asynchronous */
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
-    /* RecyclerView */
-    implementation "androidx.recyclerview:recyclerview:1.3.0"
-    /* Logging */
-    implementation "com.jakewharton.timber:timber:5.0.1"
-    /*UI extension*/
-    implementation "de.hdodenhof:circleimageview:3.1.0"
-    /*Navigation */
-    implementation "androidx.navigation:navigation-fragment-ktx:2.6.0"
-    implementation "androidx.navigation:navigation-ui-ktx:2.6.0"
-    /* DI */
-    implementation "com.google.dagger:hilt-android:2.46.1"
-    kapt "com.google.dagger:hilt-compiler:2.46.1"
-    /* Glide */
-    implementation "com.github.bumptech.glide:glide:4.15.1"
+    implementation libs.google.material
+
+    implementation libs.google.hilt
+    kapt libs.google.hiltCompiler
+
+
+    implementation libs.additionalstuff.timber
+//    implementation libs.additionalstuff.circleImageView
+    implementation libs.additionalstuff.glide
+
 }

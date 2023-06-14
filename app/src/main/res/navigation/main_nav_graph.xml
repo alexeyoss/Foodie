@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dishesFragment"
-        android:name="ru.alexeyoss.foodie.presentation.dishes.DishesFragment"
+        android:name="ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment"
         android:label="fragment_dishes"
         tools:layout="@layout/fragment_dishes" >
         <action
@@ -16,31 +16,16 @@
     </fragment>
     <fragment
         android:id="@+id/dishDetailsDialogFragment"
-        android:name="ru.alexeyoss.foodie.presentation.dishes.DishDetailsDialogFragment"
+        android:name="ru.alexeyoss.features.dishes.presentation.DishDetailsDialogFragment"
         android:label="fragment_dish_details_dialog"
         tools:layout="@layout/fragment_dish_details_dialog" />
     <fragment
-        android:id="@+id/cartFragment"
-        android:name="ru.alexeyoss.foodie.presentation.cart.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
-    <fragment
         android:id="@+id/categoriesFragment"
-        android:name="ru.alexeyoss.foodie.presentation.categories.CategoriesFragment"
+        android:name="ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" >
         <action
             android:id="@+id/action_categoriesFragment_to_dishesFragment"
             app:destination="@id/dishesFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/accountFragment"
-        android:name="ru.alexeyoss.foodie.presentation.account.AccountFragment"
-        android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="ru.alexeyoss.foodie.presentation.search.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
 </navigation>

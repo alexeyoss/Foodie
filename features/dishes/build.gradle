@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id "kotlin-kapt"
+    id "com.google.dagger.hilt.android"
+}
+
+android {
+    namespace 'ru.alexeyoss.features.dishes'
+    compileSdk targetAndroidSdk
+
+    defaultConfig {
+        minSdk minAndroidSdk
+        targetSdk targetAndroidSdk
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+
+dependencies {
+
+    implementation libs.android.coreKtx
+    implementation libs.android.appCompat
+    implementation libs.android.constraintLayout
+    implementation libs.android.fragmentKtx
+    implementation libs.android.recyclerView
+
+    implementation libs.google.material
+
+    implementation libs.google.hilt
+    kapt libs.google.hiltCompiler
+
+    implementation libs.additionalstuff.timber
+    implementation libs.additionalstuff.glide
+
+    implementation project(Modules.Core.presentation)
+}

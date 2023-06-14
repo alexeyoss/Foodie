@@ -4,13 +4,13 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import ru.alexeyoss.foodie.data.MainRepositoryImpl
-import ru.alexeyoss.foodie.domain.MainRepository
+import ru.alexeyoss.foodie.data.CategoryRepositoryImpl
+import ru.alexeyoss.features.categories.domain.CategoryRepository
 
 @Module
 @InstallIn(ViewModelComponent::class)
 interface RepositoryModule {
 
     @Binds
-    fun bindMainRepository(impl: MainRepositoryImpl): MainRepository
+    fun bindMainRepository(impl: CategoryRepositoryImpl): ru.alexeyoss.features.categories.domain.CategoryRepository
 }

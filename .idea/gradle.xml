@@ -11,6 +11,16 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/presentation" />
+            <option value="$PROJECT_DIR$/core/theme" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/cart" />
+            <option value="$PROJECT_DIR$/features/categories" />
+            <option value="$PROJECT_DIR$/features/dishes" />
+            <option value="$PROJECT_DIR$/services" />
+            <option value="$PROJECT_DIR$/services/location" />
           </set>
         </option>
       </GradleProjectSettings>

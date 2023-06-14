@@ -6,9 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import ru.alexeyoss.foodie.FoodieApplication
+import ru.alexeyoss.foodie.FoodieApp
 import ru.alexeyoss.foodie.redux.ApplicationState
-import ru.alexeyoss.foodie.redux.Store
 import javax.inject.Singleton
 
 @Module
@@ -17,8 +16,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApplication(@ApplicationContext application: Context): FoodieApplication =
-        application as FoodieApplication
+    fun provideApplication(@ApplicationContext application: Context): FoodieApp =
+        application as FoodieApp
 
     @Singleton
     @Provides
