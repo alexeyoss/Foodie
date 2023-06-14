@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import androidx.viewbinding.ViewBinding
 import kotlin.reflect.KProperty
 
 inline fun <reified B : ViewBinding> Fragment.viewBinding(): ViewBindingDelegate<B> {

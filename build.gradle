@@ -11,6 +11,7 @@ buildscript {
         contraintLayout_version = "2.1.4"
         nav_version = "2.6.0"
         recyclerView_version = "1.3.0"
+        lifecycle_version = "2.5.1"
 
         /* Google libs */
         material_version = "1.9.0"
@@ -31,13 +32,15 @@ buildscript {
 
         libs = [
                 android        : [
-                        coreKtx            : "androidx.core:core-ktx:$coreKtx_version",
-                        appCompat          : "androidx.appcompat:appcompat:$appCompat_version",
-                        constraintLayout   : "androidx.constraintlayout:constraintlayout:$contraintLayout_version",
-                        navigationFragments: "androidx.navigation:navigation-fragment-ktx:$nav_version",
-                        navigationUI       : "androidx.navigation:navigation-ui-ktx:$nav_version",
-                        fragmentKtx        : "androidx.fragment:fragment-ktx:$fragmentKtx_version",
-                        recyclerView       : "androidx.recyclerview:recyclerview:$recyclerView_version",
+                        coreKtx              : "androidx.core:core-ktx:$coreKtx_version",
+                        appCompat            : "androidx.appcompat:appcompat:$appCompat_version",
+                        constraintLayout     : "androidx.constraintlayout:constraintlayout:$contraintLayout_version",
+                        navigationFragments  : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+                        navigationUI         : "androidx.navigation:navigation-ui-ktx:$nav_version",
+                        fragmentKtx          : "androidx.fragment:fragment-ktx:$fragmentKtx_version",
+                        recyclerView         : "androidx.recyclerview:recyclerview:$recyclerView_version",
+                        lifecycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
+                        lifecycleViewModelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
                 ],
 
                 google         : [

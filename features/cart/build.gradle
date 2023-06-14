@@ -50,7 +50,6 @@ dependencies {
     kapt libs.google.hiltCompiler
 
     implementation libs.additionalstuff.timber
-    implementation libs.additionalstuff.glide
 
     implementation project(Modules.Core.presentation)
 }

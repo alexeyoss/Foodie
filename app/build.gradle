@@ -1,7 +1,6 @@
 plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
-    id "kotlin-parcelize"
     id "androidx.navigation.safeargs.kotlin"
     id "kotlin-kapt"
     id "com.google.dagger.hilt.android"
@@ -18,7 +17,6 @@ android {
         targetSdk targetAndroidSdk
         versionCode 1
         versionName "1.0"
-
     }
 
     buildTypes {
@@ -41,6 +39,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -65,9 +67,10 @@ dependencies {
     implementation libs.google.hilt
     kapt libs.google.hiltCompiler
 
-
-    implementation libs.additionalstuff.timber
-//    implementation libs.additionalstuff.circleImageView
-    implementation libs.additionalstuff.glide
-
+    implementation project(Modules.Core.presentation)
+    implementation project(Modules.Data)
+    implementation project(Modules.Features.cart)
+    implementation project(Modules.Features.categories)
+    implementation project(Modules.Features.dishes)
+    implementation project(Modules.Services.location)
 }
