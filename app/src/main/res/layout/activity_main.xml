@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:navGraph="@navigation/main_nav_graph"
-        tools:layout="@layout/fragment_dishes" />
+        tools:layout="@layout/fragment_categories" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

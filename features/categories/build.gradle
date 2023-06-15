@@ -43,13 +43,14 @@ dependencies {
     implementation libs.android.constraintLayout
     implementation libs.android.fragmentKtx
     implementation libs.android.recyclerView
+    implementation libs.android.navigationFragments
+    implementation libs.android.navigationUI
 
     implementation libs.google.material
 
     implementation libs.google.hilt
     kapt libs.google.hiltCompiler
 
-    implementation libs.additionalstuff.timber
     implementation libs.additionalstuff.glide
 
     implementation project(Modules.Core.presentation)

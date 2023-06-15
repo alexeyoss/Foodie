@@ -1,7 +1,6 @@
 plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
-    id "androidx.navigation.safeargs.kotlin"
     id "kotlin-kapt"
     id "com.google.dagger.hilt.android"
 }
@@ -66,6 +65,8 @@ dependencies {
 
     implementation libs.google.hilt
     kapt libs.google.hiltCompiler
+
+    implementation libs.additionalstuff.circleImageView
 
     implementation project(Modules.Core.presentation)
     implementation project(Modules.Data)

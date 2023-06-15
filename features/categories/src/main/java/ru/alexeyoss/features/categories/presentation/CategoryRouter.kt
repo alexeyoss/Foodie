@@ -2,7 +2,13 @@ package ru.alexeyoss.features.categories.presentation
 
 interface CategoryRouter {
 
-    fun goToDishes()
+    /**
+     * Go to Dishes screen feature
+     * */
+    fun launchDishesScreen()
 
+    /**
+     * Go back to the previous screen.
+     */
     fun goBack()
 }

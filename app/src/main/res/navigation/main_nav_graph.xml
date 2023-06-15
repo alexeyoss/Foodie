@@ -1,31 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/categoriesFragment">
+    app:startDestination="@id/categories_nav_graph">
 
-    <fragment
-        android:id="@+id/dishesFragment"
-        android:name="ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment"
-        android:label="fragment_dishes"
-        tools:layout="@layout/fragment_dishes" >
-        <action
-            android:id="@+id/action_dishesFragment_to_dishDetailsDialogFragment"
-            app:destination="@id/dishDetailsDialogFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/dishDetailsDialogFragment"
-        android:name="ru.alexeyoss.features.dishes.presentation.DishDetailsDialogFragment"
-        android:label="fragment_dish_details_dialog"
-        tools:layout="@layout/fragment_dish_details_dialog" />
-    <fragment
-        android:id="@+id/categoriesFragment"
-        android:name="ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment"
-        android:label="fragment_categories"
-        tools:layout="@layout/fragment_categories" >
-        <action
-            android:id="@+id/action_categoriesFragment_to_dishesFragment"
-            app:destination="@id/dishesFragment" />
-    </fragment>
+    <include app:graph="@navigation/categories_nav_graph" />
+    <include app:graph="@navigation/dishes_nav_graph" />
 </navigation>

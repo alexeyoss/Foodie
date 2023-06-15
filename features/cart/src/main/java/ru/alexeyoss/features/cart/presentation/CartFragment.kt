@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.core.presentation.ToolbarStates
+import ru.alexeyoss.core.presentation.ToolbarTitleHandler
 import ru.alexeyoss.features.cart.databinding.FragmentCartBinding
 
 @AndroidEntryPoint
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), ToolbarTitleHandler {
     private var binding: FragmentCartBinding? = null
 
     override fun onCreateView(
@@ -23,5 +25,9 @@ class CartFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         this.binding = null
+    }
+
+    override fun getToolbarState(): ToolbarStates {
+        return ToolbarStates.LOCATION
     }
 }
