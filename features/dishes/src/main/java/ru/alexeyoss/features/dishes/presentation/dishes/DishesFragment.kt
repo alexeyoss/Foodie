@@ -9,12 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
 import ru.alexeyoss.features.dishes.R
-import ru.alexeyoss.foodie.data.model.ui.UiDish
-import ru.alexeyoss.foodie.databinding.FragmentDishesBinding
-import ru.alexeyoss.foodie.presentation.collectOnLifecycle
+import ru.alexeyoss.features.dishes.databinding.FragmentDishesBinding
+import ru.alexeyoss.features.dishes.domain.entities.UiDish
 
 @AndroidEntryPoint
 class DishesFragment : Fragment() {
@@ -41,12 +38,12 @@ class DishesFragment : Fragment() {
 
 
     private fun initListeners() {
-        viewModel.store.stateFlow
-            .map { it.UiDishes }
-            .distinctUntilChanged()
-            .collectOnLifecycle(this) { dishes ->
-                dishAdapter.submitList(dishes)
-            }
+//        viewModel.store.stateFlow
+//            .map { it.UiDishes }
+//            .distinctUntilChanged()
+//            .collectOnLifecycle(this) { dishes ->
+//                dishAdapter.submitList(dishes)
+//            }
     }
 
     private fun initRecyclerView() {
@@ -55,8 +52,10 @@ class DishesFragment : Fragment() {
         with(binding) {
             recyclerView.apply {
                 setHasFixedSize(true)
-                layoutManager = GridLayoutManager(context,
-                    ru.alexeyoss.features.dishes.DishesFragment.SPAN_COUNT, GridLayoutManager.VERTICAL, false)
+                layoutManager = GridLayoutManager(
+                    context,
+                    SPAN_COUNT, GridLayoutManager.VERTICAL, false
+                )
                 adapter = dishAdapter
                 // TODO debug item spacing
 //                addItemDecoration(

@@ -1,17 +1,17 @@
-@file:Suppress("UNCHECKED_CAST")
-
 package ru.alexeyoss.foodie.mediators
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import ru.alexeyoss.core.common.CommonException
 import ru.alexeyoss.core.common.ConnectionException
 import ru.alexeyoss.core.common.Container
-import ru.alexeyoss.core.common.RemoteServiceException
-import ru.alexeyoss.core.common.UserFriendlyException
 import ru.alexeyoss.network.ErrorState
 import ru.alexeyoss.network.ResponseStates
 
-fun <NetworkData> buildRequestFlow(
+/**
+ * Flow wrapper for matching [ResponseStates] with [Container] states
+ * */
+fun <NetworkData> buildMediatorFlow(
     block: suspend () -> ResponseStates<NetworkData>
 ): Flow<Container<NetworkData>> {
     return flow {
@@ -23,24 +23,19 @@ fun <NetworkData> buildRequestFlow(
             )
 
             is ResponseStates.Error -> Container.Error(
-                exception = UserFriendlyException(
-                    userFriendlyMessage = responseState.throwable.message ?: "",
-                    cause = responseState.throwable
+                exception = CommonException(
+                    message = responseState.throwable.message ?: ""
                 )
             )
 
             is ErrorState.GenericError -> Container.Error(
-                exception = UserFriendlyException(
-                    userFriendlyMessage = responseState.throwable.message ?: "",
-                    cause = responseState.throwable
+                exception = CommonException(
+                    message = responseState.throwable.message ?: ""
                 )
             )
 
             is ErrorState.ServerError -> Container.Error(
-                exception = RemoteServiceException(
-                    message = responseState.message ?: ""
-
-                )
+                exception = ConnectionException()
             )
         }
         emit(containerState)

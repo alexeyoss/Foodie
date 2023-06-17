@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
+import ru.alexeyoss.core.common.CoroutinesModule
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ import javax.inject.Inject
 class DishesViewModel
 @Inject
 constructor(
-//    @CoroutinesModule.IoDispatcher
+    @CoroutinesModule.IoDispatcher
     private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
 

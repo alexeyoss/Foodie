@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.alexeyoss.foodie.BuildConfig
+import ru.alexeyoss.network.BuildConfig
 import ru.alexeyoss.network.MainApiService
 import timber.log.Timber
 import java.util.concurrent.TimeUnit

@@ -5,9 +5,14 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ru.alexeyoss.core.common.Container
 import ru.alexeyoss.core.common.CoroutinesModule
-import ru.alexeyoss.foodie.data.network.ResponseStates
+import ru.alexeyoss.features.categories.domain.GetCategoriesUseCase
+import ru.alexeyoss.features.categories.presentation.CategoriesEvents
+import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,26 +20,41 @@ import javax.inject.Inject
 class CategoriesViewModel
 @Inject constructor(
     @CoroutinesModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-//   useCase
+    private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         Timber.i(throwable)
     }
 
-    fun getCategories() {
+    private val _categoriesFlow: MutableStateFlow<CategoriesUiState> = MutableStateFlow(CategoriesUiState.Initial)
+    val categoriesFlow = _categoriesFlow.asStateFlow()
+
+    fun setEvent(categoriesEvents: CategoriesEvents) {
+        when (categoriesEvents) {
+            CategoriesEvents.GetCategories -> getCategories()
+        }
+    }
+
+    private fun getCategories() {
         viewModelScope.launch(ioDispatcher + exceptionHandler) {
-            mainRepository.getCategories().let { responseState ->
-                when (responseState) {
-                    is ResponseStates.Success -> {
-                        store.update { applicationState ->
-                            return@update applicationState.copy(
-                                UiCategories = responseState.data
-                            )
-                        }
+            getCategoriesUseCase.invoke().collect { container ->
+                when (container) {
+                    is Container.Error -> {
+                        _categoriesFlow.emit(
+                            CategoriesUiState.Error(container.exception)
+                        )
                     }
 
-                    else -> Unit // TODO  error handling
+                    is Container.Loading -> _categoriesFlow.emit(CategoriesUiState.Loading)
+
+                    is Container.Success -> {
+                        _categoriesFlow.emit(
+                            CategoriesUiState.Success(
+                                container.extract()
+                            )
+                        )
+                    }
                 }
             }
         }

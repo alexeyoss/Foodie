@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.core.presentation.collectOnLifecycle
 import ru.alexeyoss.core.presentation.toDp
 import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
+import ru.alexeyoss.features.categories.presentation.CategoriesEvents
+import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import ru.alexeyoss.features.categories.presentation.decorators.CategoryMarginItemDecoration
 
 @AndroidEntryPoint
@@ -32,14 +35,20 @@ class CategoriesFragment : Fragment() {
         initRecyclerView()
         initListeners()
 
-        viewModel.getCategories()
+        viewModel.setEvent(CategoriesEvents.GetCategories)
     }
 
     private fun initListeners() {
-//        viewModel.store.stateFlow.map { it.UiCategories }.distinctUntilChanged()
-//            .collectOnLifecycle(this) { categories ->
-//                categoryAdapter.submitList(categories)
-//            }
+        viewModel.categoriesFlow.collectOnLifecycle(this@CategoriesFragment) { categoriesUiState ->
+            when (categoriesUiState) {
+                // TODO implement other States
+                is CategoriesUiState.Error -> Unit
+                is CategoriesUiState.Initial -> Unit
+                is CategoriesUiState.Loading -> Unit
+                is CategoriesUiState.Success -> categoryAdapter.submitList(categoriesUiState.data)
+            }
+
+        }
     }
 
     private fun initRecyclerView() {
