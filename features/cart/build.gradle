@@ -49,7 +49,6 @@ dependencies {
     implementation libs.google.hilt
     kapt libs.google.hiltCompiler
 
-    implementation libs.additionalstuff.timber
-
+    implementation project(Modules.Core.common)
     implementation project(Modules.Core.presentation)
 }

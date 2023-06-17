@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+//    private val navComponentRouter = NavComponentRouterImpl(this, R.id.navHostFragment)
+
     private val navController by lazy {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navHostFragment.navController
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         locationPermissionsLauncher.launch(permissionList)
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
+
 
         appBarConfiguration = AppBarConfiguration(navGraph = navController.graph)
         initNavComponent()
@@ -97,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                 ToolbarStates.LOCATION -> {
 
                 }
+
                 ToolbarStates.CLEAR_TITLE -> {
 
                 }

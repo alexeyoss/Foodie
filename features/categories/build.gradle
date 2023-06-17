@@ -53,5 +53,6 @@ dependencies {
 
     implementation libs.additionalstuff.glide
 
+    implementation project(Modules.Core.common)
     implementation project(Modules.Core.presentation)
 }

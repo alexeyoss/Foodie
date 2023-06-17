@@ -22,4 +22,9 @@ constructor(
     fun getCategoryDishes() {
 
     }
+
+//    class State(
+//        val products: List<ProductWithCartInfo>,
+//        val filter: ProductFilter,
+//    )
 }

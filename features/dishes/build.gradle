@@ -1,12 +1,12 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
     id "kotlin-kapt"
     id "com.google.dagger.hilt.android"
 }
 
 android {
-    namespace 'ru.alexeyoss.features.dishes'
+    namespace "ru.alexeyoss.features.dishes"
     compileSdk targetAndroidSdk
 
     defaultConfig {
@@ -19,7 +19,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
     compileOptions {
@@ -27,7 +27,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "1.8"
     }
 
     buildFeatures {
@@ -53,5 +53,6 @@ dependencies {
 
     implementation libs.additionalstuff.glide
 
+    implementation project(Modules.Core.common)
     implementation project(Modules.Core.presentation)
 }

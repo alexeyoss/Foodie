@@ -3,7 +3,7 @@ package ru.alexeyoss.foodie
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.annotation.IdRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,13 +13,14 @@ import javax.inject.Inject
 
 class NavComponentRouterImpl
 @Inject constructor(
-    private val activity: AppCompatActivity,
+    private val activity: FragmentActivity,
     @IdRes private val fragmentContainerId: Int,
 ) : NavComponentRouter {
 
 
     override fun launchScreen(
-        @IdRes destinationId: Int, arg: Parcelable?
+        @IdRes destinationId: Int,
+        arg: Parcelable?
     ) {
         if (arg == null) {
             getRootNavController().navigate(resId = destinationId)

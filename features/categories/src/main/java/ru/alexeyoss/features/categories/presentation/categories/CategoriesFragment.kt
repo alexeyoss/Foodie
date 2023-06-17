@@ -6,16 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
-import ru.alexeyoss.features.categories.R
-import ru.alexeyoss.foodie.databinding.FragmentCategoriesBinding
-import ru.alexeyoss.foodie.presentation.categories.decorator.CategoryMarginItemDecoration
-import ru.alexeyoss.foodie.presentation.collectOnLifecycle
-import ru.alexeyoss.foodie.presentation.utils.toDp
+import ru.alexeyoss.core.presentation.toDp
+import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
+import ru.alexeyoss.features.categories.presentation.decorators.CategoryMarginItemDecoration
 
 @AndroidEntryPoint
 class CategoriesFragment : Fragment() {
@@ -41,10 +36,10 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun initListeners() {
-        viewModel.store.stateFlow.map { it.UiCategories }.distinctUntilChanged()
-            .collectOnLifecycle(this) { categories ->
-                categoryAdapter.submitList(categories)
-            }
+//        viewModel.store.stateFlow.map { it.UiCategories }.distinctUntilChanged()
+//            .collectOnLifecycle(this) { categories ->
+//                categoryAdapter.submitList(categories)
+//            }
     }
 
     private fun initRecyclerView() {
@@ -57,9 +52,9 @@ class CategoriesFragment : Fragment() {
                 adapter = categoryAdapter
                 addItemDecoration(
                     CategoryMarginItemDecoration(
-                        verticalMargin = ru.alexeyoss.features.categories.CategoriesFragment.ITEM_VERTICAL_MARGIN.toDp(),
-                        firstItemTopMargin = ru.alexeyoss.features.categories.CategoriesFragment.ITEM_VERTICAL_MARGIN.toDp(),
-                        lastItemMargin = ru.alexeyoss.features.categories.CategoriesFragment.ITEM_VERTICAL_MARGIN.toDp()
+                        verticalMargin = ITEM_VERTICAL_MARGIN.toDp(),
+                        firstItemTopMargin = ITEM_VERTICAL_MARGIN.toDp(),
+                        lastItemMargin = ITEM_VERTICAL_MARGIN.toDp()
                     )
                 )
                 itemAnimator = null
@@ -68,7 +63,7 @@ class CategoriesFragment : Fragment() {
     }
 
     private fun onCategoryClick(categoryId: Int) {
-        findNavController().navigate(R.id.dishesFragment)
+//        findNavController().navigate(R.id.dishesFragment)
 //         TODO determinate the certain category dishes
 //        when (categoryId) {
 //            1 -> Unit

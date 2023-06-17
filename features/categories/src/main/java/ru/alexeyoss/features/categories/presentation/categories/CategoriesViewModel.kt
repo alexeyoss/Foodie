@@ -6,11 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import ru.alexeyoss.core.common.CoroutinesModule
 import ru.alexeyoss.foodie.data.network.ResponseStates
-import ru.alexeyoss.foodie.di.CoroutinesModule
-import ru.alexeyoss.foodie.domain.MainRepository
-import ru.alexeyoss.foodie.redux.ApplicationState
-import ru.alexeyoss.foodie.redux.Store
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -18,8 +15,7 @@ import javax.inject.Inject
 class CategoriesViewModel
 @Inject constructor(
     @CoroutinesModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val mainRepository: MainRepository,
-    val store: Store<ApplicationState>
+//   useCase
 ) : ViewModel() {
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->

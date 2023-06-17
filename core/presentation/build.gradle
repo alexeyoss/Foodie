@@ -1,10 +1,12 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "kotlin-kapt"
+    id "com.google.dagger.hilt.android"
 }
 
 android {
-    namespace 'ru.alexeyoss.core.presentation'
+    namespace "ru.alexeyoss.core.presentation"
     compileSdk targetAndroidSdk
 
     defaultConfig {
@@ -15,7 +17,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
     compileOptions {
@@ -23,7 +25,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "1.8"
     }
     buildFeatures {
         viewBinding = true
@@ -37,8 +39,8 @@ dependencies {
     implementation libs.android.lifecycleRuntimeKtx
 
     implementation libs.google.material
-
-    implementation libs.jetbrains.coroutinesCore
+    implementation libs.google.hilt
+    kapt libs.google.hiltCompiler
 
     api project(Modules.Core.theme)
 

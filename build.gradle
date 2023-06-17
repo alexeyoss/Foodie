@@ -69,10 +69,12 @@ buildscript {
 
         Modules = [
                 Core    : [
+                        common      : ":core:common",
                         presentation: ":core:presentation",
                         theme       : ":core:theme",
                 ],
                 Data    : ":data",
+                Network    : ":network",
                 Features: [
                         cart      : ":features:cart",
                         categories: ":features:categories",
@@ -86,7 +88,6 @@ buildscript {
 
         dependencies {
             classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.6.0"
-//            classpath "com.google.dagger:hilt-android-gradle-plugin:2.45"
         }
     }
 }
