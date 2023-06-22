@@ -1,86 +1,113 @@
 package ru.alexeyoss.features.dishes.presentation.dishes
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.core.presentation.ARG_SCREEN
+import ru.alexeyoss.core.presentation.collectOnLifecycle
+import ru.alexeyoss.core.presentation.dp
+import ru.alexeyoss.core.presentation.itemDecorators.GridLayoutMarginItemDecoration
+import ru.alexeyoss.core.presentation.itemDecorators.LinearHorizontalMarginItemDecoration
+import ru.alexeyoss.core.presentation.viewBinding
 import ru.alexeyoss.features.dishes.R
 import ru.alexeyoss.features.dishes.databinding.FragmentDishesBinding
-import ru.alexeyoss.features.dishes.domain.entities.UiDish
+import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
+import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
+import ru.alexeyoss.features.dishes.presentation.DishesRouter
+import ru.alexeyoss.features.dishes.presentation.DishesSideEffects
+import ru.alexeyoss.features.dishes.presentation.dishes.adapters.DishesAdapter
+import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class DishesFragment : Fragment() {
+class DishesFragment : Fragment(R.layout.fragment_dishes) {
 
-    private var binding: FragmentDishesBinding? = null
+    @Inject
+    lateinit var dishesRouter: DishesRouter
+
+    private val binding by viewBinding<FragmentDishesBinding>()
 
     private val viewModel: DishesViewModel by viewModels()
-    private val dishAdapter = DishesAdapter(::onDishClick)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentDishesBinding.inflate(layoutInflater, container, false)
-        this.binding = binding
-        return binding.root
-    }
+    private val dishAdapter = DishesAdapter(::onDishClick)
+    private val filterAdapter = FiltersAdapter(::onFilterSelected)
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initRecyclerView()
+        initRecyclerViews()
         initListeners()
-
-        viewModel.getCategoryDishes()
     }
 
 
     private fun initListeners() {
-//        viewModel.store.stateFlow
-//            .map { it.UiDishes }
-//            .distinctUntilChanged()
-//            .collectOnLifecycle(this) { dishes ->
-//                dishAdapter.submitList(dishes)
-//            }
-    }
-
-    private fun initRecyclerView() {
-        val binding = checkNotNull(binding)
-
-        with(binding) {
-            recyclerView.apply {
-                setHasFixedSize(true)
-                layoutManager = GridLayoutManager(
-                    context,
-                    SPAN_COUNT, GridLayoutManager.VERTICAL, false
-                )
-                adapter = dishAdapter
-                // TODO debug item spacing
-//                addItemDecoration(
-//                    DishesMarginItemDecoration(
-//                        spanCount = SPAN_COUNT,
-//                        spacing = SPACING.toPx(),
-//                        includeEdge = false
-//                    )
-//                )
-                itemAnimator = null
+        viewModel.sideEffects.collectOnLifecycle(this@DishesFragment) { sideEffect ->
+            when (sideEffect) {
+                is DishesSideEffects.Error -> Unit
+                is DishesSideEffects.Initial -> Unit
+                is DishesSideEffects.Loading -> Unit
             }
+        }
+
+
+        viewModel.dishListState.observe(viewLifecycleOwner) { dishListState ->
+            filterAdapter.submitList(dishListState.filters.toList())
+            dishAdapter.submitList(dishListState.filteredDishes)
         }
     }
 
-    private fun onDishClick(uiDish: UiDish) {
-        findNavController().navigate(R.id.dishesFragment)
+    private fun initRecyclerViews() = with(binding) {
+        dishesRecyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = GridLayoutManager(context, GRID_SPAN_COUNT, GridLayoutManager.VERTICAL, false)
+            adapter = dishAdapter
+            itemAnimator = null
+            // TODO Debug DishesMarginItemDecoration
+            addItemDecoration(
+                GridLayoutMarginItemDecoration(
+                    spanCount = GRID_SPAN_COUNT.dp,
+                    spacing = GRID_SPACING.dp,
+                    includeEdge = false
+                )
+            )
+        }
+
+
+        filtersRecyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = filterAdapter
+            addItemDecoration(
+                LinearHorizontalMarginItemDecoration(
+                    horizontalMargin = FILTERS_MARGIN.dp
+                )
+            )
+            itemAnimator = null
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        this.binding = null
+    private fun onDishClick(uiDish: UiDishDTO) {
+        dishesRouter.launchDishDetailsDialog(uiDish)
     }
+
+    private fun onFilterSelected(uiFilterDTO: UiFilterDTO) {
+        viewModel.newFilterSelected(uiFilterDTO)
+    }
+
 
     companion object {
-        const val SPAN_COUNT = 3
-        const val SPACING = 8
+        fun getNewInstance(categoryName: String): DishesFragment {
+            return DishesFragment().apply {
+                arguments = bundleOf(ARG_SCREEN to categoryName)
+            }
+        }
+
+        const val GRID_SPAN_COUNT = 3
+        const val GRID_SPACING = 8
+        const val FILTERS_MARGIN = 8
     }
 }

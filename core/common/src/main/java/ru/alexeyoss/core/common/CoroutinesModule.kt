@@ -12,7 +12,6 @@ import javax.inject.Qualifier
 @InstallIn(SingletonComponent::class)
 object CoroutinesModule {
 
-    // TODO Think about extract independent COMMON module for coroutines (out of presentation layer)
     @IoDispatcher
     @Provides
     fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO

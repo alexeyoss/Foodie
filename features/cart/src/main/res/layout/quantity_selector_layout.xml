@@ -19,7 +19,7 @@
             android:layout_marginStart="6dp"
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRound"
+            app:shapeAppearanceOverlay="@style/shapeAppearanceOverlay"
             app:srcCompat="@drawable/ic_minus"
             app:tint="@color/black" />
 
@@ -41,7 +41,7 @@
             android:layout_marginEnd="6dp"
             android:background="?selectableItemBackgroundBorderless"
             android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerRound"
+            app:shapeAppearanceOverlay="@style/shapeAppearanceOverlay"
             app:srcCompat="@drawable/ic_plus"
             app:tint="@color/black" />
 

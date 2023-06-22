@@ -58,8 +58,6 @@ dependencies {
     implementation libs.android.coreKtx
     implementation libs.android.appCompat
     implementation libs.android.constraintLayout
-    implementation libs.android.navigationFragments
-    implementation libs.android.navigationUI
 
     implementation libs.google.material
 
@@ -68,6 +66,7 @@ dependencies {
 
     implementation libs.additionalstuff.circleImageView
     implementation libs.additionalstuff.timber
+    implementation libs.additionalstuff.cicerone
 
     implementation project(Modules.Core.common)
     implementation project(Modules.Core.presentation)

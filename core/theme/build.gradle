@@ -33,7 +33,6 @@ dependencies {
 
     implementation libs.android.coreKtx
     implementation libs.android.appCompat
-
     implementation libs.google.material
 
 }

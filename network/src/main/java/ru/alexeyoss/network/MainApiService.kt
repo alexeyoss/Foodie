@@ -2,7 +2,7 @@ package ru.alexeyoss.network
 
 import retrofit2.http.GET
 import ru.alexeyoss.network.categories.models.CategoryListDTO
-import ru.alexeyoss.network.dishes.models.DishesList
+import ru.alexeyoss.network.dishes.models.DishesListDTO
 
 interface MainApiService {
 
@@ -10,6 +10,6 @@ interface MainApiService {
     suspend fun getCategories(): CategoryListDTO
 
     @GET("aba7ecaa-0a70-453b-b62d-0e326c859b3b")
-    suspend fun getCategoryDishes(): DishesList
+    suspend fun getDishes(): DishesListDTO
 
 }

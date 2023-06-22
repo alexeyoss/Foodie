@@ -10,7 +10,7 @@ import ru.alexeyoss.features.categories.databinding.ItemCategoriesFragmentBindin
 import ru.alexeyoss.features.categories.domain.entities.UiCategory
 
 class CategoriesAdapter(
-    private val onClickCategory: (categoryId: Int) -> Unit
+    private val onClickCategory: (categoryName: String) -> Unit
 ) : ListAdapter<UiCategory, CategoriesAdapter.CategoryHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
@@ -25,14 +25,15 @@ class CategoriesAdapter(
 
 
     inner class CategoryHolder(
-        private val binding: ItemCategoriesFragmentBinding, private val onClickCategory: (categoryId: Int) -> Unit
+        private val binding: ItemCategoriesFragmentBinding,
+        private val onClickCategory: (categoryName: String) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             with(binding) {
                 root.setOnClickListener {
                     if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
-                    val itemId = currentList[bindingAdapterPosition].id
-                    onClickCategory(itemId)
+                    val item = currentList[bindingAdapterPosition]
+                    onClickCategory(item.name)
                 }
             }
         }

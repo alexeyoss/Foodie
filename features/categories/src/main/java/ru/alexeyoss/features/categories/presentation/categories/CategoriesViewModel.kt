@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 import ru.alexeyoss.core.common.Container
 import ru.alexeyoss.core.common.CoroutinesModule
 import ru.alexeyoss.features.categories.domain.GetCategoriesUseCase
-import ru.alexeyoss.features.categories.presentation.CategoriesEvents
 import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import timber.log.Timber
 import javax.inject.Inject
@@ -30,13 +29,8 @@ class CategoriesViewModel
     private val _categoriesFlow: MutableStateFlow<CategoriesUiState> = MutableStateFlow(CategoriesUiState.Initial)
     val categoriesFlow = _categoriesFlow.asStateFlow()
 
-    fun setEvent(categoriesEvents: CategoriesEvents) {
-        when (categoriesEvents) {
-            CategoriesEvents.GetCategories -> getCategories()
-        }
-    }
 
-    private fun getCategories() {
+    fun getCategories() {
         viewModelScope.launch(ioDispatcher + exceptionHandler) {
             getCategoriesUseCase.invoke().collect { container ->
                 when (container) {
@@ -50,9 +44,7 @@ class CategoriesViewModel
 
                     is Container.Success -> {
                         _categoriesFlow.emit(
-                            CategoriesUiState.Success(
-                                container.extract()
-                            )
+                            CategoriesUiState.Success(container.extract())
                         )
                     }
                 }

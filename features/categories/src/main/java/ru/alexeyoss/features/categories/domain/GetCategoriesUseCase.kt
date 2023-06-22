@@ -10,10 +10,8 @@ import javax.inject.Inject
 
 class GetCategoriesUseCase
 @Inject constructor(
-    @CoroutinesModule.IoDispatcher val ioDispatcher: CoroutineDispatcher,
     private val categoriesRepository: CategoriesRepository
 ) {
-
 
     suspend operator fun invoke(): Flow<Container<List<UiCategory>>> {
         return categoriesRepository.getCategories()

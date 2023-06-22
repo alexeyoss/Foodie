@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/imageLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/item_categories_backgorund">
+    app:cardCornerRadius="@dimen/defaultCornerRadius"
+    app:cardElevation="@dimen/zeroCardElevation">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="wrap_content"
-        android:layout_height="148dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/category_picture_desc"
         tools:background="@drawable/background_fish" />
 
@@ -21,5 +23,5 @@
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginTop="@dimen/medium_margin"
         tools:text="Азиатская кухня" />
-</FrameLayout>
+</androidx.cardview.widget.CardView>
 

@@ -1,41 +1,39 @@
 package ru.alexeyoss.features.categories.presentation.categories
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.core.common.BackButtonListener
+import ru.alexeyoss.core.presentation.ToolbarStateHandler
+import ru.alexeyoss.core.presentation.ToolbarStates
 import ru.alexeyoss.core.presentation.collectOnLifecycle
-import ru.alexeyoss.core.presentation.toDp
+import ru.alexeyoss.core.presentation.dp
+import ru.alexeyoss.core.presentation.itemDecorators.LinearVerticalMarginItemDecoration
+import ru.alexeyoss.core.presentation.viewBinding
+import ru.alexeyoss.features.categories.R
 import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
-import ru.alexeyoss.features.categories.presentation.CategoriesEvents
 import ru.alexeyoss.features.categories.presentation.CategoriesUiState
-import ru.alexeyoss.features.categories.presentation.decorators.CategoryMarginItemDecoration
+import ru.alexeyoss.features.categories.presentation.CategoryRouter
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class CategoriesFragment : Fragment() {
+class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateHandler, BackButtonListener {
 
-    private var binding: FragmentCategoriesBinding? = null
 
-    private val viewModel: CategoriesViewModel by viewModels()
+    @Inject
+    lateinit var categoryRouter: CategoryRouter
+    private val binding by viewBinding<FragmentCategoriesBinding>()
+    private val viewModel by viewModels<CategoriesViewModel>()
     private val categoryAdapter = CategoriesAdapter(::onCategoryClick)
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentCategoriesBinding.inflate(layoutInflater, container, false)
-        this.binding = binding
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initRecyclerView()
         initListeners()
 
-        viewModel.setEvent(CategoriesEvents.GetCategories)
+        viewModel.getCategories()
     }
 
     private fun initListeners() {
@@ -51,41 +49,40 @@ class CategoriesFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerView() {
-        val binding = checkNotNull(binding)
+    private fun initRecyclerView() = with(binding) {
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = categoryAdapter
 
-        with(binding) {
-            recyclerView.apply {
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                adapter = categoryAdapter
-                addItemDecoration(
-                    CategoryMarginItemDecoration(
-                        verticalMargin = ITEM_VERTICAL_MARGIN.toDp(),
-                        firstItemTopMargin = ITEM_VERTICAL_MARGIN.toDp(),
-                        lastItemMargin = ITEM_VERTICAL_MARGIN.toDp()
-                    )
+            addItemDecoration(
+                LinearVerticalMarginItemDecoration(
+                    verticalMargin = ITEM_VERTICAL_MARGIN.dp,
+                    firstItemTopMargin = ITEM_VERTICAL_MARGIN.dp,
+                    lastItemMargin = ITEM_VERTICAL_MARGIN.dp
                 )
-                itemAnimator = null
-            }
+            )
+            itemAnimator = null
         }
     }
 
-    private fun onCategoryClick(categoryId: Int) {
-//        findNavController().navigate(R.id.dishesFragment)
-//         TODO determinate the certain category dishes
-//        when (categoryId) {
-//            1 -> Unit
-//        }
+    private fun onCategoryClick(categoryName: String) {
+        categoryRouter.launchDishesScreen(categoryName)
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
+    override fun getToolbarState(): ToolbarStates = ToolbarStates.LocationView
+    override fun onBackPressed(): Boolean {
+        categoryRouter.goBack()
+        return true
     }
+
 
     companion object {
         const val ITEM_VERTICAL_MARGIN = 8
+
+        fun getNewInstance(): CategoriesFragment {
+            return CategoriesFragment()
+        }
     }
+
 }

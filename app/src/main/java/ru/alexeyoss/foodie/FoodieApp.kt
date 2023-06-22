@@ -6,6 +6,7 @@ import timber.log.Timber
 
 @HiltAndroidApp
 class FoodieApp : Application() {
+
     override fun onCreate() {
         super.onCreate()
         setDebugLogging()

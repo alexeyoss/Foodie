@@ -14,11 +14,13 @@
     <!-- Paddings -->
     <dimen name="zero_padding">0dp</dimen>
     <dimen name="extra_small_padding">4dp</dimen>
-    <dimen name="small_padding">8dp</dimen>
+    <dimen name="small_padding">10dp</dimen>
     <dimen name="medium_padding">12dp</dimen>
     <dimen name="specific_padding">15dp</dimen>
     <dimen name="large_padding">16dp</dimen>
-    <!--Corner Radius-->
+    <!--CardView-->
     <dimen name="defaultCornerRadius">10dp</dimen>
+    <dimen name="zeroCardElevation">0dp</dimen>
+    <!--BottomNavigationView-->
     <dimen name="ic_size_bottomview">24dp</dimen>
 </resources>

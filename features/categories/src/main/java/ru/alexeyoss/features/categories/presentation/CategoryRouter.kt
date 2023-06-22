@@ -5,7 +5,7 @@ interface CategoryRouter {
     /**
      * Go to Dishes screen feature
      * */
-    fun launchDishesScreen()
+    fun launchDishesScreen(categoryName: String)
 
     /**
      * Go back to the previous screen.

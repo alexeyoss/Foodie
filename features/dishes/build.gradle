@@ -3,6 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "kotlin-kapt"
     id "com.google.dagger.hilt.android"
+    id "kotlin-parcelize"
 }
 
 android {
@@ -43,8 +44,7 @@ dependencies {
     implementation libs.android.constraintLayout
     implementation libs.android.fragmentKtx
     implementation libs.android.recyclerView
-    implementation libs.android.navigationFragments
-    implementation libs.android.navigationUI
+    implementation libs.android.cardView
 
     implementation libs.google.material
 

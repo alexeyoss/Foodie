@@ -9,8 +9,7 @@
     android:paddingVertical="@dimen/large_padding"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:context="ru.alexeyoss.features.dishes.presentation.DishDetailsDialogFragment">
+    app:layout_constraintTop_toTopOf="parent">
 
 
     <include

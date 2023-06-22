@@ -1,23 +1,20 @@
 package ru.alexeyoss.foodie.mediators.categories
 
+import com.github.terrakok.cicerone.Router
 import ru.alexeyoss.features.categories.presentation.CategoryRouter
-import ru.alexeyoss.features.dishes.R
-import ru.alexeyoss.foodie.NavComponentRouter
+import ru.alexeyoss.foodie.navigation.Screens
 import javax.inject.Inject
 
 class AdapterCategoriesRouter
 @Inject constructor(
-    private val navComponentRouter: NavComponentRouter
+    private val router: Router
 ) : CategoryRouter {
 
-    override fun launchDishesScreen() {
-        navComponentRouter.launchScreen(
-            destinationId = R.id.dishesFragment,
-            arg = null
-        )
+    override fun launchDishesScreen(categoryName: String) {
+        router.navigateTo(Screens.dishes(categoryName))
     }
 
     override fun goBack() {
-        navComponentRouter.goBack()
+        router.finishChain()
     }
 }

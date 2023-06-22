@@ -1,6 +1,6 @@
 package ru.alexeyoss.core.presentation
 
-enum class ToolbarStates {
-    LOCATION,
-    CLEAR_TITLE
+sealed interface ToolbarStates {
+    object LocationView : ToolbarStates
+    data class CustomTitle(val title: String) : ToolbarStates
 }

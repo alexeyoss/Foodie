@@ -8,6 +8,23 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
 import kotlin.reflect.KProperty
 
+/**
+ * Create and hold a [ViewBinding] class only while fragment view exists and is not
+ * destroyed (after onCreateView and before onDestroyView callbacks).
+ *
+ * Usage example:
+ *
+ * ```
+ * class MyFragment : Fragment(R.layout.fragment_test) {
+ *
+ *     private val binding by viewBinding<FragmentTestBinding>()
+ *
+ *     fun doSomething() {
+ *         binding.textView.text = "Oooops"
+ *     }
+ * }
+ * ```
+ */
 inline fun <reified B : ViewBinding> Fragment.viewBinding(): ViewBindingDelegate<B> {
     val fragment = this
     return ViewBindingDelegate(fragment, B::class.java)

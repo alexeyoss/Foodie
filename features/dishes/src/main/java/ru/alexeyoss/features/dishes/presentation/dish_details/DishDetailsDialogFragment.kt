@@ -1,25 +1,27 @@
 package ru.alexeyoss.features.dishes.presentation.dish_details
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.core.os.bundleOf
+import androidx.fragment.app.DialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.core.presentation.ARG_SCREEN
+import ru.alexeyoss.core.presentation.viewBinding
+import ru.alexeyoss.features.dishes.R
 import ru.alexeyoss.features.dishes.databinding.FragmentDishDetailsDialogBinding
+import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 
 @AndroidEntryPoint
-class DishDetailsDialogFragment : Fragment() {
+class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_dialog) {
 
-    private var binding: FragmentDishDetailsDialogBinding? = null
+    private val binding by viewBinding<FragmentDishDetailsDialogBinding>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val binding = FragmentDishDetailsDialogBinding.inflate(layoutInflater, container, false)
-        this.binding = binding
-        return binding.root
+    companion object {
+        fun getNewInstance(uiDish: UiDishDTO): DishDetailsDialogFragment {
+            return DishDetailsDialogFragment().apply {
+                arguments = bundleOf(ARG_SCREEN to uiDish)
+            }
+        }
+
     }
+
 
 }
