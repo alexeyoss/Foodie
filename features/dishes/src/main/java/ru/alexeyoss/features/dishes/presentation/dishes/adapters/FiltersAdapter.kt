@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.alexeyoss.core.theme.R.color
 import ru.alexeyoss.features.dishes.databinding.ItemFiltersFragmentBinding
-import ru.alexeyoss.features.dishes.domain.models.DishListState
 import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
 
 class FiltersAdapter(
@@ -42,7 +41,7 @@ class FiltersAdapter(
             with(binding) {
                 filterText.text = item.displayText
                 filterText.setTextStyle(item.isChecked)
-                cardView.setChecked(item.isChecked)
+                cardView.setCheckedStyle(item.isChecked)
             }
         }
 
@@ -54,7 +53,7 @@ class FiltersAdapter(
             setTextColor(textColor)
         }
 
-        private fun CardView.setChecked(isChecked: Boolean) {
+        private fun CardView.setCheckedStyle(isChecked: Boolean) {
             val backgroundColor = when (isChecked) {
                 true -> color.colorPrimary
                 else -> color.backgroundItem
