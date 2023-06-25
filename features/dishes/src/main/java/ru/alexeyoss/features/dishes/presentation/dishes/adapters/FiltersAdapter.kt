@@ -47,16 +47,16 @@ class FiltersAdapter(
 
         private fun TextView.setTextStyle(isChecked: Boolean) {
             val textColor = when (isChecked) {
-                true -> color.white
-                else -> color.black
+                true -> resources.getColor(color.white, null)
+                false -> resources.getColor(color.black, null)
             }
             setTextColor(textColor)
         }
 
         private fun CardView.setCheckedStyle(isChecked: Boolean) {
             val backgroundColor = when (isChecked) {
-                true -> color.colorPrimary
-                else -> color.backgroundItem
+                true -> resources.getColor(color.colorPrimary, null)
+                false -> resources.getColor(color.backgroundItem, null)
             }
             setCardBackgroundColor(backgroundColor)
         }
