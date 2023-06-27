@@ -10,37 +10,33 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
+        style="?attr/appBarLayoutStyle"
         android:layout_width="0dp"
-        app:elevation="@dimen/zeroCardElevation"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/customToolbar"
+            style="?attr/toolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="?attr/actionBarSize"
             app:logo="@drawable/ic_pinpoint"
-            app:subtitleTextAppearance="@style/ToolbarSubTitleTextStyle"
-            app:titleTextAppearance="@style/ToolbarTitleTextStyle"
             tools:subtitle="12 Августа, 2023"
             tools:title="Санкт-Петербург">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                style="@style/Widget.Foodie.ProfileImageView.Light"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
                 android:src="@drawable/default_photo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
@@ -51,20 +47,14 @@
         app:layout_constraintEnd_toEndOf="@id/rightGuideline"
         app:layout_constraintStart_toStartOf="@id/leftGuideline"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        tools:layout="@layout/fragment_dishes" />
+        tools:layout="@layout/fragment_categories" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
+        style="?attr/bottomNavigationStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:itemIconSize="@dimen/ic_size_bottomview"
-        app:itemIconTint="@color/bottom_nav_color"
-        app:itemTextAppearanceActive="@style/BottomNavigationViewTextStyle"
-        app:itemTextAppearanceInactive="@style/BottomNavigationViewTextStyle"
-        app:itemTextColor="@color/bottom_nav_color"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ru.alexeyoss.core.common.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,6 +56,17 @@ class MainActivity : AppCompatActivity() {
         }
         locationPermissionsLauncher.launch(permissionList)
         initListeners()
+
+        // TODO Remove after debugging
+        fragmentsStackListener()
+    }
+
+    // TODO Remove after debugging
+    private fun fragmentsStackListener() {
+        supportFragmentManager.addOnBackStackChangedListener {
+            Timber.tag("FRAG")
+                .i("${supportFragmentManager.backStackEntryCount} - ${supportFragmentManager.findFragmentById(R.id.navHostFragment)}")
+        }
     }
 
     private fun initListeners() {

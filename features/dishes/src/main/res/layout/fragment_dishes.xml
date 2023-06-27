@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment">
+    tools:context="ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment"
+    tools:theme="@style/Theme.Foodie">
 
-    <!--TODO investigate why "0dp" or "wrap_content" height  not showing the items -->
+    <!-- TODO investigate why "0dp" or "wrap_content" height  not showing the items -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/filtersRecyclerView"
         android:layout_width="match_parent"

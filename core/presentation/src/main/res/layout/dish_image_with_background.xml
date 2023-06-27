@@ -3,29 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:theme="@style/Theme.Foodie">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardImageView"
+        style="?attr/shapeAppearanceMediumComponent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/large_margin"
-        app:cardBackgroundColor="@color/backgroundItem"
-        app:cardCornerRadius="@dimen/defaultCornerRadius"
-        app:cardElevation="@dimen/zeroCardElevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:layout_marginVertical="@dimen/medium_margin"
             android:contentDescription="@string/dishes_picture_desc"
             android:scaleType="fitCenter"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@drawable/default_photo" />
 
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

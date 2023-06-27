@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:theme="@style/Theme.Foodie">
 
     <include
         android:id="@+id/cardImageView"
@@ -16,17 +17,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/include"
+        android:id="@+id/titleWithPriceAndWeight"
         layout="@layout/dish_title_with_price_and_weight"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/include2"
+        app:layout_constraintEnd_toStartOf="@+id/quantity_selector"
         app:layout_constraintStart_toEndOf="@id/cardImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/include2"
+        android:id="@+id/quantity_selector"
         layout="@layout/quantity_selector_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

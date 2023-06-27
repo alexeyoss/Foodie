@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Common-->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#3364E0</color>
-    <color name="unCheckedIcon">#A5A9B2</color>
-    <!--Toolbar -->
-    <color name="subTitle">#80000000</color>
-    <!--Main Fragment-->
-    <color name="item1">#FFF2D2</color>
-    <!--Category Fragment-->
-    <color name="backgroundItem">#F8F7F5</color>
-    <!--Dish Dialog Fragment-->
-    <color name="weightTextColor">#66000000</color>
-    <color name="descriptionTextColor">#A6000000</color>
-    <!--Quantity selector-->
-    <color name="quantity_selector_background_color">#EFEEEC</color>
+    <color name="blue">#3364E0</color>
+    <color name="grey">#80000000</color>
+    <color name="grey_background">#F8F7F5</color>
+    <color name="grey_quantitySelector_background">#EFEEEC</color>
+    <color name="grey_bottomNavView">#A5A9B2</color>
 </resources>

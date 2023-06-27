@@ -1,0 +1,40 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.Foodie" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimarySurface">@color/white</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorSurface">@color/grey_background</item>
+        <item name="itemTextColor">@color/black</item>
+        <item name="helperTextTextColor">@color/grey</item>
+        <!-- System UI. -->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- AppBar layout, Toolbar. -->
+        <item name="appBarLayoutStyle">@style/Widget.Foodie.AppBarLayout.Light</item>
+        <item name="toolbarStyle">@style/Widget.Foodie.Toolbar.Light</item>
+        <!--Bottom Navigation View-->
+        <item name="bottomNavigationStyle">@style/Widget.Foodie.BottomNavigationView.Light</item>
+        <!-- Buttons -->
+        <item name="buttonStyleSmall">@style/Widget.Foodie.Button.Light.SmallSize</item>
+        <item name="buttonStyle">@style/Widget.Foodie.Button.Primary.LargeSize</item>
+        <!-- Shapes. -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Foodie.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Foodie.MediumComponent</item>
+        <!-- Typography. -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.Foodie.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.Foodie.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.Foodie.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Foodie.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Foodie.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Foodie.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.Foodie.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.Foodie.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Foodie.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.Foodie.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.Foodie.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.Foodie.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.Foodie.Overline</item>
+    </style>
+</resources>

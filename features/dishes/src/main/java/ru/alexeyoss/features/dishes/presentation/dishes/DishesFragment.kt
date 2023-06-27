@@ -18,17 +18,13 @@ import ru.alexeyoss.features.dishes.R
 import ru.alexeyoss.features.dishes.databinding.FragmentDishesBinding
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
-import ru.alexeyoss.features.dishes.presentation.DishesRouter
 import ru.alexeyoss.features.dishes.presentation.DishesSideEffects
+import ru.alexeyoss.features.dishes.presentation.dish_details.DishDetailsDialogFragment
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.DishesAdapter
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class DishesFragment : Fragment(R.layout.fragment_dishes) {
-
-    @Inject
-    lateinit var dishesRouter: DishesRouter
 
     private val binding by viewBinding<FragmentDishesBinding>()
 
@@ -69,9 +65,7 @@ class DishesFragment : Fragment(R.layout.fragment_dishes) {
             // TODO Debug DishesMarginItemDecoration
             addItemDecoration(
                 GridLayoutMarginItemDecoration(
-                    spanCount = GRID_SPAN_COUNT.dp,
-                    spacing = GRID_SPACING.dp,
-                    includeEdge = false
+                    spanCount = GRID_SPAN_COUNT.dp, spacing = GRID_SPACING.dp, includeEdge = false
                 )
             )
         }
@@ -91,7 +85,7 @@ class DishesFragment : Fragment(R.layout.fragment_dishes) {
     }
 
     private fun onDishClick(uiDish: UiDishDTO) {
-        dishesRouter.launchDishDetailsDialog(uiDish)
+        DishDetailsDialogFragment.getNewInstance(uiDish).show(parentFragmentManager, null)
     }
 
     private fun onFilterSelected(uiFilterDTO: UiFilterDTO) {

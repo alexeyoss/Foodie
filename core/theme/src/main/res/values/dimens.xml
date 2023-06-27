@@ -20,7 +20,7 @@
     <dimen name="large_padding">16dp</dimen>
     <!--CardView-->
     <dimen name="defaultCornerRadius">10dp</dimen>
-    <dimen name="zeroCardElevation">0dp</dimen>
+    <dimen name="zeroElevation">0dp</dimen>
     <!--BottomNavigationView-->
-    <dimen name="ic_size_bottomview">24dp</dimen>
+    <dimen name="icon_size_bottomView">24dp</dimen>
 </resources>

@@ -3,49 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:theme="@style/Theme.Foodie">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="99dp"
-        android:layout_height="32dp"
-        android:backgroundTint="@color/quantity_selector_background_color"
-        app:cardCornerRadius="@dimen/defaultCornerRadius">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:backgroundTint="@color/grey_quantitySelector_background">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/minusImageView"
+            style="@style/Widget.Foodie.QuantitySelector.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center"
-            android:layout_marginStart="6dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/shapeAppearanceOverlay"
-            app:srcCompat="@drawable/ic_minus"
-            app:tint="@color/black" />
+            android:layout_marginStart="@dimen/small_margin"
+            app:srcCompat="@drawable/ic_minus" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/quantityTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/sfp_medium"
-            android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textAppearance="?attr/textAppearanceButton"
             tools:text="4" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/plusImageView"
+            style="@style/Widget.Foodie.QuantitySelector.Light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"
-            android:layout_marginEnd="6dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:scaleType="centerCrop"
-            app:shapeAppearanceOverlay="@style/shapeAppearanceOverlay"
-            app:srcCompat="@drawable/ic_plus"
-            app:tint="@color/black" />
+            android:layout_marginEnd="@dimen/small_margin"
+            app:srcCompat="@drawable/ic_plus" />
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </FrameLayout>

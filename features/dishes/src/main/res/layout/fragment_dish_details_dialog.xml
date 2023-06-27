@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/dish_details_background"
+    android:layout_height="match_parent"
+    android:background="@color/white"
     android:paddingHorizontal="@dimen/large_padding"
     android:paddingVertical="@dimen/large_padding"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    tools:theme="@style/Theme.Foodie">
 
 
     <include
         android:id="@+id/cardImageView"
         layout="@layout/dish_image_with_background"
-        android:layout_width="match_parent"
-        android:layout_height="232dp"
+        android:layout_width="0dp"
+        android:layout_height="204dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@id/cardImageView" />
 
     <include
+        android:id="@+id/fav_close_buttons"
         layout="@layout/fav_and_close_btns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,12 +43,12 @@
         app:layout_constraintTop_toTopOf="@id/cardImageView" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dishDescription"
-        style="@style/DishDescriptionDetailFragmentTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_margin"
+        android:textAppearance="?attr/textAppearanceCaption"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dishInfo"
@@ -55,8 +57,8 @@
 
 
     <com.google.android.material.button.MaterialButton
-        style="@style/large_btn_common_style"
-        android:layout_width="match_parent"
+        style="?attr/buttonStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/large_margin"
         android:text="@string/addToCart_btn_text"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.Foodie"
     tools:context="ru.alexeyoss.features.cart.presentation.CartFragment">
 
 
@@ -16,7 +17,7 @@
         tools:listitem="@layout/item_cart_fragment" />
 
     <com.google.android.material.button.MaterialButton
-        style="@style/large_btn_common_style"
+        style="?attr/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

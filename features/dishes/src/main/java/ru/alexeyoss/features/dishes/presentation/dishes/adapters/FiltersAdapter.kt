@@ -55,8 +55,8 @@ class FiltersAdapter(
 
         private fun CardView.setCheckedStyle(isChecked: Boolean) {
             val backgroundColor = when (isChecked) {
-                true -> resources.getColor(color.colorPrimary, null)
-                false -> resources.getColor(color.backgroundItem, null)
+                true -> resources.getColor(color.blue, null)
+                false -> resources.getColor(color.grey_background, null)
             }
             setCardBackgroundColor(backgroundColor)
         }
