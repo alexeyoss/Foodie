@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.navigation
+package ru.alexeyoss.foodie
 
 import android.Manifest
 import android.os.Bundle
@@ -8,12 +8,11 @@ import androidx.core.app.ActivityCompat
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
-import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import ru.alexeyoss.core.common.BackButtonListener
-import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
+import ru.alexeyoss.foodie.navigation.Screens
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,8 +23,9 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+
     @Inject
-    lateinit var router: Router
+    lateinit var mainActivityRouter: MainActivityRouter
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         // TODO Remove after debugging
         fragmentsStackListener()
+
     }
 
     // TODO Remove after debugging
@@ -74,13 +75,13 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.categoriesFragment -> {
-                    router.navigateTo(Screens.categories())
+                    mainActivityRouter.navigateTo(Screens.categories())
                     true
                 }
 
                 R.id.searchFragment -> true
                 R.id.cartFragment -> {
-                    router.navigateTo(Screens.cart())
+                    mainActivityRouter.navigateTo(Screens.cart())
                     true
                 }
 

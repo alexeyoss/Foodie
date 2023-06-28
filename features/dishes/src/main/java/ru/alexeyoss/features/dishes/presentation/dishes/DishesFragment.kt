@@ -28,7 +28,7 @@ class DishesFragment : Fragment(R.layout.fragment_dishes) {
 
     private val binding by viewBinding<FragmentDishesBinding>()
 
-    private val viewModel: DishesViewModel by viewModels()
+    private val viewModel by viewModels<DishesViewModel>()
 
     private val dishAdapter = DishesAdapter(::onDishClick)
     private val filterAdapter = FiltersAdapter(::onFilterSelected)

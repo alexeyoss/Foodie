@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Foodie</string>
+    <string name="premissionRationalText">Разрешение требуется для корректно отображения продуктовой линейки</string>
+    <string name="settingsRationalText">Разрешение требуется для корректно отображения продуктовой линейки</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

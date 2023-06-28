@@ -83,7 +83,9 @@ buildscript {
                 ],
 
                 Services: [
-                        location: ":services:location"
+                        location   : ":services:location",
+                        dataStore  : ":services:dataStore",
+                        permission: ":services:permission"
                 ]
         ]
     }

@@ -1,7 +1,8 @@
-package ru.alexeyoss.foodie
+package ru.alexeyoss.foodie.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import ru.alexeyoss.foodie.BuildConfig
 import timber.log.Timber
 
 @HiltAndroidApp
