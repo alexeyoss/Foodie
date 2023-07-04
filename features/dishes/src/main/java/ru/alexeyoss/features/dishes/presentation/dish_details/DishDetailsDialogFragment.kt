@@ -5,7 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
-import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.core.common.BackButtonListener
 import ru.alexeyoss.core.presentation.ARG_SCREEN
 import ru.alexeyoss.core.presentation.viewBinding
 import ru.alexeyoss.features.dishes.R
@@ -14,8 +14,7 @@ import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import timber.log.Timber
 
 
-@AndroidEntryPoint
-class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_dialog) {
+class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_dialog), BackButtonListener {
 
     private val binding by viewBinding<FragmentDishDetailsDialogBinding>()
     override fun getTheme(): Int = ru.alexeyoss.core.theme.R.style.Theme_Foodie_Dialog_CustomSize
@@ -60,6 +59,12 @@ class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_
             }
         }
 
+    }
+
+
+    override fun onBackPressed(): Boolean {
+        dismiss()
+        return true
     }
 
 

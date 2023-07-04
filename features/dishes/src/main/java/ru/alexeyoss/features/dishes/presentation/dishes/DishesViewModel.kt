@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +21,6 @@ import ru.alexeyoss.features.dishes.presentation.DishesSideEffects
 import timber.log.Timber
 import javax.inject.Inject
 
-@HiltViewModel
 class DishesViewModel
 @Inject constructor(
     @CoroutinesModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher,

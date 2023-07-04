@@ -2,8 +2,6 @@ package ru.alexeyoss.network.di
 
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -15,9 +13,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
 object NetworkModule {
-
 
     @Singleton
     @Provides
@@ -26,9 +22,8 @@ object NetworkModule {
             .also { it.level = HttpLoggingInterceptor.Level.BODY }
     }
 
-
-    @Singleton
     @Provides
+    @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
     ): OkHttpClient {
@@ -38,9 +33,8 @@ object NetworkModule {
             .build()
     }
 
-
-    @Singleton
     @Provides
+    @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient
     ): Retrofit {
@@ -51,8 +45,8 @@ object NetworkModule {
             .build()
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideApiService(retrofit: Retrofit): MainApiService =
         retrofit.create(MainApiService::class.java)
 

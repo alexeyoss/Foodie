@@ -2,14 +2,16 @@ package ru.alexeyoss.foodie.mediators.dishes.di
 
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import ru.alexeyoss.features.dishes.domain.repositories.DishesRepository
 import ru.alexeyoss.features.dishes.presentation.DishesRouter
 import ru.alexeyoss.foodie.mediators.dishes.AdapterDishesRouter
+import ru.alexeyoss.foodie.mediators.dishes.repositories.AdapterDishesRepository
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
-interface DishesRouterModule {
+internal interface DishesMediatorModule {
+
+    @Binds
+    fun bindDishesRepository(impl: AdapterDishesRepository): DishesRepository
 
     @Binds
     fun bindDishesRouter(impl: AdapterDishesRouter): DishesRouter

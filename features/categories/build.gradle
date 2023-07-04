@@ -2,7 +2,6 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id "kotlin-kapt"
-    id "com.google.dagger.hilt.android"
 }
 
 android {
@@ -12,8 +11,6 @@ android {
     defaultConfig {
         minSdk minAndroidSdk
         targetSdk targetAndroidSdk
-
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -46,8 +43,8 @@ dependencies {
 
     implementation libs.google.material
 
-    implementation libs.google.hilt
-    kapt libs.google.hiltCompiler
+    implementation libs.google.dagger
+    kapt libs.google.daggerCompiler
 
     implementation libs.additionalstuff.glide
     implementation libs.additionalstuff.timber

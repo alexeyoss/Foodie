@@ -2,7 +2,6 @@ package ru.alexeyoss.features.categories.presentation.categories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +14,6 @@ import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import timber.log.Timber
 import javax.inject.Inject
 
-@HiltViewModel
 class CategoriesViewModel
 @Inject constructor(
     @CoroutinesModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher,

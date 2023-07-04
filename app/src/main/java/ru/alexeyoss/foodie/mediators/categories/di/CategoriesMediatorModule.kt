@@ -2,15 +2,18 @@ package ru.alexeyoss.foodie.mediators.categories.di
 
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import ru.alexeyoss.features.categories.domain.repositories.CategoriesRepository
 import ru.alexeyoss.features.categories.presentation.CategoryRouter
 import ru.alexeyoss.foodie.mediators.categories.AdapterCategoriesRouter
+import ru.alexeyoss.foodie.mediators.categories.repositories.AdapterCategoriesRepository
+
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
-interface CategoriesRouterModule {
+internal interface CategoriesMediatorModule {
+    @Binds
+    fun bindCategoriesRepository(impl: AdapterCategoriesRepository): CategoriesRepository
 
     @Binds
     fun bindCategoriesRouter(impl: AdapterCategoriesRouter): CategoryRouter
+
 }

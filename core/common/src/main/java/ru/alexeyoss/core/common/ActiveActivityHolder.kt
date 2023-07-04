@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.asFlow
 
 class ActiveActivityHolder {
 
-
     var activity: Activity? = null
 
     val activityFlow: Flow<Activity> = listOfNotNull(activity).asFlow()
@@ -17,9 +16,4 @@ class ActiveActivityHolder {
     fun clearActivity() {
         this.activity = null
     }
-}
-
-
-fun Activity.asFlow(): Flow<Activity> {
-    return listOf(this).asFlow()
 }

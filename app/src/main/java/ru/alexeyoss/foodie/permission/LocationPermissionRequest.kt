@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.location
+package ru.alexeyoss.foodie.permission
 
 import android.Manifest
 import ru.alexeyoss.foodie.R
@@ -19,7 +19,8 @@ class LocationPermissionRequest : PermissionRequest() {
 
     override val permissions: Array<String>
         get() = arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
         )
 
 }

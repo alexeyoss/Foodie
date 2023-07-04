@@ -3,8 +3,10 @@ package ru.alexeyoss.foodie.mediators.dishes.mappers
 import ru.alexeyoss.core.common.BaseMapper
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.network.dishes.models.DishDTO
+import javax.inject.Inject
 
-class DishesMapper : BaseMapper<UiDishDTO, DishDTO> {
+class DishesMapper
+@Inject constructor() : BaseMapper<UiDishDTO, DishDTO> {
     override fun mapToDomainModel(foreignModel: DishDTO): UiDishDTO {
         return UiDishDTO(
             id = foreignModel.id,

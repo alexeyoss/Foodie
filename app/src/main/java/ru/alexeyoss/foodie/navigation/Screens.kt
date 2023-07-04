@@ -11,7 +11,7 @@ import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.features.dishes.presentation.dish_details.DishDetailsDialogFragment
 import ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment
 import ru.alexeyoss.foodie.BuildConfig
-import ru.alexeyoss.foodie.location.DefaultPermissionRationalFragment
+import ru.alexeyoss.foodie.permission.DefaultPermissionRationalFragment
 
 object Screens {
 
@@ -36,6 +36,8 @@ object Screens {
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
             Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
         ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+
     }
 
     // TODO implement Dialog fragments support in Cicerone https://github.com/terrakok/Cicerone/discussions/136

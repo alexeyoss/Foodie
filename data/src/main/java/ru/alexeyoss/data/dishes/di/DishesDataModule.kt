@@ -2,17 +2,18 @@ package ru.alexeyoss.data.dishes.di
 
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import ru.alexeyoss.data.DishesDataRepository
+import ru.alexeyoss.data.dishes.RealDishesDataRepository
 import ru.alexeyoss.data.dishes.sources.DishesDataSource
 import ru.alexeyoss.data.dishes.sources.DishesDataSourceImpl
 
-
 @Module
-@InstallIn(SingletonComponent::class)
-interface DishesDataSourcesModule {
+interface DishesDataModule {
+
 
     @Binds
     fun bindDishesDataSource(impl: DishesDataSourceImpl): DishesDataSource
 
+    @Binds
+    fun bindDishesDataRepository(impl: RealDishesDataRepository): DishesDataRepository
 }

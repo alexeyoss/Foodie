@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import dagger.hilt.android.AndroidEntryPoint
+import ru.alexeyoss.core.common.BackButtonListener
 import ru.alexeyoss.core.presentation.ARG_SCREEN
+import ru.alexeyoss.core.presentation.ToolbarStateHandler
+import ru.alexeyoss.core.presentation.ToolbarStates
 import ru.alexeyoss.core.presentation.collectOnLifecycle
 import ru.alexeyoss.core.presentation.dp
 import ru.alexeyoss.core.presentation.itemDecorators.GridLayoutMarginItemDecoration
@@ -22,9 +24,9 @@ import ru.alexeyoss.features.dishes.presentation.DishesSideEffects
 import ru.alexeyoss.features.dishes.presentation.dish_details.DishDetailsDialogFragment
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.DishesAdapter
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
+import timber.log.Timber
 
-@AndroidEntryPoint
-class DishesFragment : Fragment(R.layout.fragment_dishes) {
+class DishesFragment : Fragment(R.layout.fragment_dishes), ToolbarStateHandler, BackButtonListener {
 
     private val binding by viewBinding<FragmentDishesBinding>()
 
@@ -32,6 +34,11 @@ class DishesFragment : Fragment(R.layout.fragment_dishes) {
 
     private val dishAdapter = DishesAdapter(::onDishClick)
     private val filterAdapter = FiltersAdapter(::onFilterSelected)
+
+    private val args: String
+        get() = arguments?.getString(ARG_SCREEN) ?: throw NullPointerException().also { throwable ->
+            Timber.e(throwable, "Args $throwable")
+        }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,6 +92,7 @@ class DishesFragment : Fragment(R.layout.fragment_dishes) {
     }
 
     private fun onDishClick(uiDish: UiDishDTO) {
+        // TODO get rid of it use router class. Disputable
         DishDetailsDialogFragment.getNewInstance(uiDish).show(parentFragmentManager, null)
     }
 
@@ -103,5 +111,10 @@ class DishesFragment : Fragment(R.layout.fragment_dishes) {
         const val GRID_SPAN_COUNT = 3
         const val GRID_SPACING = 8
         const val FILTERS_MARGIN = 8
+    }
+
+    override fun getToolbarState(): ToolbarStates = ToolbarStates.CustomTitle(args)
+    override fun onBackPressed(): Boolean {
+        TODO("Not yet implemented")
     }
 }

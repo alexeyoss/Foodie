@@ -1,12 +1,17 @@
 package ru.alexeyoss.foodie.app
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import android.content.Context
+import ru.alexeyoss.features.categories.di.CategoriesDeps
+import ru.alexeyoss.features.categories.di.provider.CategoriesComponentDepsProvider
 import ru.alexeyoss.foodie.BuildConfig
 import timber.log.Timber
 
-@HiltAndroidApp
-class FoodieApp : Application() {
+class FoodieApp : Application(), CategoriesComponentDepsProvider {
+
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.builder().application(this).build()
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -18,4 +23,12 @@ class FoodieApp : Application() {
             Timber.plant(Timber.DebugTree())
         }
     }
+
+    override fun getCategoriesDeps(): CategoriesDeps = appComponent
 }
+
+val Context.appComponent: AppComponent
+    get() = when (this) {
+        is FoodieApp -> appComponent
+        else -> applicationContext.appComponent
+    }

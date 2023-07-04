@@ -14,8 +14,9 @@ buildscript {
         cardView_version = "1.0.0"
 
         /* Google libs */
-        material_version = "1.9.0"
+        material_version = "1.8.0"
         hilt_version = "2.46.1"
+        dagger_version = "2.46.1"
 
         /* SquareUp */
         retrofit_version = "2.9.0"
@@ -31,6 +32,10 @@ buildscript {
         glide_version = "4.15.1"
         cicerone_version = "7.1"
 
+        /* Test features*/
+        bottomNavViewEx_version = "2.0.4"
+
+
         libs = [
                 android        : [
                         coreKtx              : "androidx.core:core-ktx:$coreKtx_version",
@@ -44,9 +49,11 @@ buildscript {
                 ],
 
                 google         : [
-                        material    : "com.google.android.material:material:$material_version",
-                        hilt        : "com.google.dagger:hilt-android:$hilt_version",
-                        hiltCompiler: "com.google.dagger:hilt-compiler:$hilt_version",
+                        material      : "com.google.android.material:material:$material_version",
+                        hilt          : "com.google.dagger:hilt-android:$hilt_version",
+                        hiltCompiler  : "com.google.dagger:hilt-compiler:$hilt_version",
+                        dagger        : "com.google.dagger:dagger:$dagger_version",
+                        daggerCompiler: "com.google.dagger:dagger-compiler:$dagger_version",
                 ],
 
                 squareup       : [
@@ -83,9 +90,10 @@ buildscript {
                 ],
 
                 Services: [
-                        location   : ":services:location",
-                        dataStore  : ":services:dataStore",
-                        permission: ":services:permission"
+                        location  : ":services:location",
+                        dataStore : ":services:dataStore",
+                        permission: ":services:permission",
+                        navigation: ":services:navigation"
                 ]
         ]
     }
