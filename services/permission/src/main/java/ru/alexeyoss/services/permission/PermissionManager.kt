@@ -28,7 +28,7 @@ package ru.alexeyoss.services.permission
 //import kotlinx.coroutines.suspendCancellableCoroutine
 //import kotlinx.coroutines.withContext
 //import ru.alexeyoss.core.common.ActiveActivityHolder
-//import ru.alexeyoss.core.common.CoroutinesModule
+//import ru.alexeyoss.core.common.di.CoroutinesModule
 //import ru.alexeyoss.services.permission.exceptions.PermissionsRationalIsNotProvidedException
 //import timber.log.Timber
 //

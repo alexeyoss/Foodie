@@ -50,8 +50,6 @@ buildscript {
 
                 google         : [
                         material      : "com.google.android.material:material:$material_version",
-                        hilt          : "com.google.dagger:hilt-android:$hilt_version",
-                        hiltCompiler  : "com.google.dagger:hilt-compiler:$hilt_version",
                         dagger        : "com.google.dagger:dagger:$dagger_version",
                         daggerCompiler: "com.google.dagger:dagger-compiler:$dagger_version",
                 ],
@@ -87,6 +85,7 @@ buildscript {
                         cart      : ":features:cart",
                         categories: ":features:categories",
                         dishes    : ":features:dishes",
+                        mainScreen    : ":features:mainScreen",
                 ],
 
                 Services: [
@@ -101,7 +100,6 @@ buildscript {
 
 
 plugins {
-    id "com.google.dagger.hilt.android" version "$hilt_version" apply false
     id "com.android.application" version "7.4.2" apply false
     id "com.android.library" version "7.4.2" apply false
     id "org.jetbrains.kotlin.android" version "1.8.0" apply false

@@ -2,7 +2,6 @@ plugins {
     id "com.android.library"
     id "org.jetbrains.kotlin.android"
     id "kotlin-kapt"
-    id "com.google.dagger.hilt.android"
 }
 
 android {
@@ -39,8 +38,6 @@ dependencies {
     implementation libs.android.lifecycleRuntimeKtx
 
     implementation libs.google.material
-    implementation libs.google.hilt
-    kapt libs.google.hiltCompiler
 
     api project(Modules.Core.theme)
 

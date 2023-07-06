@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.Lazy
 import ru.alexeyoss.core.common.BackButtonListener
 import ru.alexeyoss.core.presentation.ToolbarStateHandler
 import ru.alexeyoss.core.presentation.ToolbarStates
@@ -15,7 +18,7 @@ import ru.alexeyoss.core.presentation.itemDecorators.LinearVerticalMarginItemDec
 import ru.alexeyoss.core.presentation.viewBinding
 import ru.alexeyoss.features.categories.R
 import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
-import ru.alexeyoss.features.categories.di.DaggerCategoriesComponent
+import ru.alexeyoss.features.categories.di.CategoriesComponentViewModel
 import ru.alexeyoss.features.categories.di.provider.CategoriesComponentDepsProvider
 import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import ru.alexeyoss.features.categories.presentation.CategoryRouter
@@ -23,22 +26,23 @@ import javax.inject.Inject
 
 class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateHandler, BackButtonListener {
 
+    @Inject
+    internal lateinit var categoriesViewModelFactory: Lazy<CategoriesViewModel.Factory>
+    private val viewModel by viewModels<CategoriesViewModel> {
+        categoriesViewModelFactory.get()
+    }
 
     @Inject
-    lateinit var categoryRouter: CategoryRouter
+    internal lateinit var categoryRouter: CategoryRouter
     private val binding by viewBinding<FragmentCategoriesBinding>()
-    private val viewModel by viewModels<CategoriesViewModel>()
     private val categoryAdapter = CategoriesAdapter(::onCategoryClick)
 
 
     override fun onAttach(context: Context) {
-        val deps = (context.applicationContext as CategoriesComponentDepsProvider)
-            .getCategoriesDeps()
+        val categoriesDeps = (context.applicationContext as CategoriesComponentDepsProvider).getCategoryDeps()
 
-        DaggerCategoriesComponent.builder()
-            .deps(deps)
-            .build()
-            .inject(this)
+        ViewModelProvider(this).get<CategoriesComponentViewModel>().initCategoriesComponent(categoriesDeps)
+            .inject(this@CategoriesFragment)
 
         super.onAttach(context)
     }
@@ -89,7 +93,6 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
         categoryRouter.goBack()
         return true
     }
-
 
     companion object {
         const val ITEM_VERTICAL_MARGIN = 8

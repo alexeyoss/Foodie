@@ -35,5 +35,6 @@ dependencies {
     implementation libs.google.dagger
     kapt libs.google.daggerCompiler
 
+    implementation project(Modules.Core.common)
     implementation project(Modules.Network)
 }

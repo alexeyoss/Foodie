@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.alexeyoss.core.common.Container
-import ru.alexeyoss.core.common.CoroutinesModule
+import ru.alexeyoss.core.common.di.CoroutinesModule
 import ru.alexeyoss.features.dishes.domain.ChangeFilterUseCase
 import ru.alexeyoss.features.dishes.domain.GenerateDishListStateUseCase
 import ru.alexeyoss.features.dishes.domain.GetDishesUseCase

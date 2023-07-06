@@ -17,6 +17,7 @@ android {
     buildTypes {
 
         debug {
+            // TODO Extract from data module and provide aas a dependency from appComponent
             buildConfigField("String", "BASE_URL", "\"https://run.mocky.io/\"")
             buildConfigField("String", "API_VERSION", "\"v3/\"")
         }

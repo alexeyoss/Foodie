@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Foodie"
-include ':app'
+include ':injector'
 include ':core'
 include ':core:presentation'
 include ':core:theme'
@@ -29,3 +29,4 @@ include ':network'
 include ':services:dataStore'
 include ':services:permission'
 include ':services:navigation'
+include ':features:mainScreen'

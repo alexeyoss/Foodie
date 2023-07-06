@@ -1,7 +1,7 @@
 package ru.alexeyoss.data.categories.sources
 
-import ru.alexeyoss.network.ResponseStates
-import ru.alexeyoss.network.categories.models.CategoryListDTO
+import ru.alexeyoss.network.models.CategoryListDTO
+import ru.alexeyoss.network.utils.ResponseStates
 
 interface CategoriesDataSource {
 

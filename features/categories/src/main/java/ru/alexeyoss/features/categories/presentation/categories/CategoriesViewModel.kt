@@ -1,6 +1,7 @@
 package ru.alexeyoss.features.categories.presentation.categories
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -8,11 +9,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.alexeyoss.core.common.Container
-import ru.alexeyoss.core.common.CoroutinesModule
+import ru.alexeyoss.core.common.di.CoroutinesModule
 import ru.alexeyoss.features.categories.domain.GetCategoriesUseCase
 import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Provider
 
 class CategoriesViewModel
 @Inject constructor(
@@ -47,6 +49,17 @@ class CategoriesViewModel
                     }
                 }
             }
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory @Inject constructor(
+        @CoroutinesModule.IoDispatcher private val ioDispatcher: Provider<CoroutineDispatcher>,
+        private val getCategoriesUseCase: Provider<GetCategoriesUseCase>
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            require(modelClass == CategoriesViewModel::class.java)
+            return CategoriesViewModel(ioDispatcher.get(), getCategoriesUseCase.get()) as T
         }
     }
 }

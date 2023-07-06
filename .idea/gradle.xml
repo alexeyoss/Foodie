@@ -10,7 +10,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/common" />
             <option value="$PROJECT_DIR$/core/presentation" />
@@ -20,6 +19,8 @@
             <option value="$PROJECT_DIR$/features/cart" />
             <option value="$PROJECT_DIR$/features/categories" />
             <option value="$PROJECT_DIR$/features/dishes" />
+            <option value="$PROJECT_DIR$/features/mainScreen" />
+            <option value="$PROJECT_DIR$/injector" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/services" />
             <option value="$PROJECT_DIR$/services/dataStore" />

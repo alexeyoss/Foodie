@@ -1,9 +1,9 @@
 package ru.alexeyoss.data.dishes.sources
 
 import ru.alexeyoss.network.MainApiService
-import ru.alexeyoss.network.ResponseStates
-import ru.alexeyoss.network.dishes.models.DishesListDTO
-import ru.alexeyoss.network.safeApiCall
+import ru.alexeyoss.network.models.DishesListDTO
+import ru.alexeyoss.network.utils.ResponseStates
+import ru.alexeyoss.network.utils.safeApiCall
 import javax.inject.Inject
 
 class DishesDataSourceImpl

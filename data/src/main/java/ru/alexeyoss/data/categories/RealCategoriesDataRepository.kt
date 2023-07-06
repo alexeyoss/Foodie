@@ -1,9 +1,8 @@
 package ru.alexeyoss.data.categories
 
-import ru.alexeyoss.data.CategoriesDataRepository
 import ru.alexeyoss.data.categories.sources.CategoriesDataSource
-import ru.alexeyoss.network.ResponseStates
-import ru.alexeyoss.network.categories.models.CategoryListDTO
+import ru.alexeyoss.network.models.CategoryListDTO
+import ru.alexeyoss.network.utils.ResponseStates
 import javax.inject.Inject
 
 class RealCategoriesDataRepository

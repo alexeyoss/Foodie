@@ -1,26 +1,27 @@
 package ru.alexeyoss.features.categories.di
 
-import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Component
 import dagger.Module
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
+import ru.alexeyoss.core.common.di.CoroutinesModule
+import ru.alexeyoss.core.common.di.scope.PerScreen
+import ru.alexeyoss.features.categories.domain.repositories.CategoriesRepository
 import ru.alexeyoss.features.categories.presentation.CategoryRouter
 import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment
 import ru.alexeyoss.features.categories.presentation.categories.CategoriesViewModel
-import javax.inject.Scope
 
-@Scope
-@MustBeDocumented
-@Retention(AnnotationRetention.BINARY)
-annotation class CategoriesFeatureScope
 
-@[CategoriesFeatureScope
-Component(
-    modules = [CategoriesModule::class],
-    dependencies = [CategoriesDeps::class]
+/**
+ * Scope of [CategoriesFragment] feature
+ * */
+
+@[PerScreen Component(
+    modules = [
+        CategoriesModule::class,
+    ], dependencies = [CategoriesDeps::class]
 )]
 interface CategoriesComponent {
 
@@ -35,16 +36,21 @@ interface CategoriesComponent {
 
 }
 
-@Module
+@Module(
+    includes = [CoroutinesModule::class]
+)
 interface CategoriesModule {
 
     @Binds
+    @PerScreen
     @[IntoMap ClassKey(CategoriesViewModel::class)]
     fun bindCategoriesViewModel(categoriesViewModel: CategoriesViewModel): ViewModel
 }
 
+
 interface CategoriesDeps {
-    fun categoryRouter(): CategoryRouter
+    val categoryRouter: CategoryRouter
+    val categoriesRepository: CategoriesRepository
 }
 
 

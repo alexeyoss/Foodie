@@ -18,6 +18,7 @@ class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_
 
     private val binding by viewBinding<FragmentDishDetailsDialogBinding>()
     override fun getTheme(): Int = ru.alexeyoss.core.theme.R.style.Theme_Foodie_Dialog_CustomSize
+    @Suppress("DEPRECATION")
     private val args: UiDishDTO
         get() = arguments?.getParcelable(ARG_SCREEN) ?: throw NullPointerException().also { throwable ->
             Timber.e(
