@@ -1,12 +1,16 @@
 package ru.alexeyoss.features.dishes.presentation.dishes
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.Lazy
 import ru.alexeyoss.core.common.BackButtonListener
 import ru.alexeyoss.core.presentation.ARG_SCREEN
 import ru.alexeyoss.core.presentation.ToolbarStateHandler
@@ -18,19 +22,30 @@ import ru.alexeyoss.core.presentation.itemDecorators.LinearHorizontalMarginItemD
 import ru.alexeyoss.core.presentation.viewBinding
 import ru.alexeyoss.features.dishes.R
 import ru.alexeyoss.features.dishes.databinding.FragmentDishesBinding
+import ru.alexeyoss.features.dishes.di.DishesComponentViewModel
+import ru.alexeyoss.features.dishes.di.provider.DishesComponentDepsProvider
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
+import ru.alexeyoss.features.dishes.presentation.DishesRouter
 import ru.alexeyoss.features.dishes.presentation.DishesSideEffects
 import ru.alexeyoss.features.dishes.presentation.dish_details.DishDetailsDialogFragment
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.DishesAdapter
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
 import timber.log.Timber
+import javax.inject.Inject
 
 class DishesFragment : Fragment(R.layout.fragment_dishes), ToolbarStateHandler, BackButtonListener {
 
-    private val binding by viewBinding<FragmentDishesBinding>()
+    @Inject
+    internal lateinit var dishesViewModelFactory: Lazy<DishesViewModel.Factory>
+    private val viewModel by viewModels<DishesViewModel> {
+        dishesViewModelFactory.get()
+    }
 
-    private val viewModel by viewModels<DishesViewModel>()
+    @Inject
+    lateinit var dishesRouter: DishesRouter
+
+    private val binding by viewBinding<FragmentDishesBinding>()
 
     private val dishAdapter = DishesAdapter(::onDishClick)
     private val filterAdapter = FiltersAdapter(::onFilterSelected)
@@ -40,6 +55,14 @@ class DishesFragment : Fragment(R.layout.fragment_dishes), ToolbarStateHandler, 
             Timber.e(throwable, "Args $throwable")
         }
 
+    override fun onAttach(context: Context) {
+        val dishesDeps = (context.applicationContext as DishesComponentDepsProvider).getDishesDeps()
+
+        ViewModelProvider(this).get<DishesComponentViewModel>().initDishesComponent(dishesDeps)
+            .inject(this@DishesFragment)
+
+        super.onAttach(context)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initRecyclerViews()
@@ -115,6 +138,7 @@ class DishesFragment : Fragment(R.layout.fragment_dishes), ToolbarStateHandler, 
 
     override fun getToolbarState(): ToolbarStates = ToolbarStates.CustomTitle(args)
     override fun onBackPressed(): Boolean {
-        TODO("Not yet implemented")
+        dishesRouter.goBack()
+        return true
     }
 }

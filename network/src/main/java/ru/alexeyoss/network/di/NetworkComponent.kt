@@ -17,6 +17,11 @@ interface NetworkProvider {
     fun provideApiService(): MainApiService
 }
 
+@Component(
+    modules = [NetworkModule::class]
+)
+interface NetworkComponent : NetworkProvider
+
 @Module
 internal object NetworkModule {
 
@@ -53,7 +58,4 @@ internal object NetworkModule {
 
 }
 
-@Component(
-    modules = [NetworkModule::class]
-)
-interface NetworkComponent : NetworkProvider
+

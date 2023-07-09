@@ -34,4 +34,8 @@ dependencies {
     implementation libs.additionalstuff.timber
     implementation libs.additionalstuff.cicerone
 
+    implementation libs.google.dagger
+    kapt libs.google.daggerCompiler
+
+    implementation project(Modules.Core.common)
 }

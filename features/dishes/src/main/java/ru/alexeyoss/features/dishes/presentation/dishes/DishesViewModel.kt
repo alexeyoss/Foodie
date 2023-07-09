@@ -3,6 +3,7 @@ package ru.alexeyoss.features.dishes.presentation.dishes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -81,5 +82,28 @@ class DishesViewModel
             }
         }
     }
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory @Inject constructor(
+        @CoroutinesModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+        @CoroutinesModule.DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
+        @CoroutinesModule.MainDispatcher private val mainDispatcher: CoroutineDispatcher,
+        private val getDishesUseCase: GetDishesUseCase,
+        private val generateDishListStateUseCase: GenerateDishListStateUseCase,
+        private val changeFilterUseCase: ChangeFilterUseCase
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            require(modelClass == DishesViewModel::class.java)
+            return DishesViewModel(
+                ioDispatcher,
+                defaultDispatcher,
+                mainDispatcher,
+                getDishesUseCase,
+                generateDishListStateUseCase,
+                changeFilterUseCase
+            ) as T
+        }
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package ru.alexeyoss.data.di
 
 import dagger.Component
+import ru.alexeyoss.core.common.di.scope.PerApplication
 import ru.alexeyoss.data.categories.CategoriesDataRepository
 import ru.alexeyoss.data.categories.di.CategoriesDataModule
 import ru.alexeyoss.data.dishes.DishesDataRepository
@@ -13,10 +14,10 @@ interface DataProvider {
     fun getDishesDataRepository(): DishesDataRepository
 }
 
-@Component(
-    modules = [CategoriesDataModule::class, DishesDataModule::class], dependencies = [NetworkProvider::class]
-)
-
+@[PerApplication Component(
+    modules = [CategoriesDataModule::class, DishesDataModule::class],
+    dependencies = [NetworkProvider::class]
+)]
 interface DataComponent : DataProvider {
 
     class Initializer private constructor() {

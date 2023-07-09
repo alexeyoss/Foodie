@@ -13,11 +13,6 @@ import ru.alexeyoss.features.categories.presentation.CategoryRouter
 import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment
 import ru.alexeyoss.features.categories.presentation.categories.CategoriesViewModel
 
-
-/**
- * Scope of [CategoriesFragment] feature
- * */
-
 @[PerScreen Component(
     modules = [
         CategoriesModule::class,
