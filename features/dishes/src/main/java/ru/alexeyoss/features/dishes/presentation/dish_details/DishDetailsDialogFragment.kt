@@ -5,19 +5,19 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
-import ru.alexeyoss.core.common.BackButtonListener
-import ru.alexeyoss.core.presentation.ARG_SCREEN
-import ru.alexeyoss.core.presentation.viewBinding
+import ru.alexeyoss.core_ui.presentation.ARG_SCREEN
+import ru.alexeyoss.core_ui.presentation.BackButtonListener
+import ru.alexeyoss.core_ui.presentation.viewBinding
 import ru.alexeyoss.features.dishes.R
 import ru.alexeyoss.features.dishes.databinding.FragmentDishDetailsDialogBinding
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import timber.log.Timber
 
-
 class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_dialog), BackButtonListener {
 
     private val binding by viewBinding<FragmentDishDetailsDialogBinding>()
-    override fun getTheme(): Int = ru.alexeyoss.core.theme.R.style.Theme_Foodie_Dialog_CustomSize
+    override fun getTheme(): Int = ru.alexeyoss.core_ui.theme.R.style.Theme_Foodie_Dialog_CustomSize
+
     @Suppress("DEPRECATION")
     private val args: UiDishDTO
         get() = arguments?.getParcelable(ARG_SCREEN) ?: throw NullPointerException().also { throwable ->
@@ -38,9 +38,9 @@ class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_
         with(dishInfo) {
             dishTitle.text = uiDish.name
             dishPrice.text =
-                resources.getString(ru.alexeyoss.core.presentation.R.string.valuedDishPrice, uiDish.price.toString())
+                resources.getString(ru.alexeyoss.core_ui.presentation.R.string.valuedDishPrice, uiDish.price.toString())
             dishWeight.text =
-                resources.getString(ru.alexeyoss.core.presentation.R.string.valuedDishWeight, uiDish.weight.toString())
+                resources.getString(ru.alexeyoss.core_ui.presentation.R.string.valuedDishWeight, uiDish.weight.toString())
         }
         dishDescription.text = uiDish.description
 

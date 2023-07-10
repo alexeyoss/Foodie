@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace "ru.alexeyoss.core.theme"
+    namespace "ru.alexeyoss.core_ui.theme"
     compileSdk targetAndroidSdk
 
     defaultConfig {
@@ -28,9 +28,7 @@ android {
 }
 
 dependencies {
-
     implementation libs.android.coreKtx
     implementation libs.android.appCompat
     implementation libs.google.material
-
 }

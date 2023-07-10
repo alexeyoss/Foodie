@@ -1,4 +1,4 @@
-package ru.alexeyoss.core.presentation
+package ru.alexeyoss.core_ui.presentation
 
 interface ToolbarStateHandler {
 

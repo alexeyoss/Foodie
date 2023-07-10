@@ -26,7 +26,9 @@ interface DataComponent : DataProvider {
             fun init(): DataProvider {
                 val networkComponent = DaggerNetworkComponent.builder().build()
 
-                return DaggerDataComponent.builder().networkProvider(networkComponent).build()
+                return DaggerDataComponent.builder()
+                    .networkProvider(networkComponent)
+                    .build()
             }
         }
     }

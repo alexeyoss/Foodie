@@ -75,9 +75,11 @@ buildscript {
 
         Modules = [
                 Core    : [
-                        common      : ":core:common",
-                        presentation: ":core:presentation",
-                        theme       : ":core:theme",
+                        common: ":core:common",
+                ],
+                CoreUi  : [
+                        presentation: ":core_ui:presentation",
+                        theme       : ":core_ui:theme",
                 ],
                 Data    : ":data",
                 Network : ":network",
@@ -85,7 +87,7 @@ buildscript {
                         cart      : ":features:cart",
                         categories: ":features:categories",
                         dishes    : ":features:dishes",
-                        mainScreen    : ":features:mainScreen",
+                        mainScreen: ":features:mainScreen",
                 ],
 
                 Services: [

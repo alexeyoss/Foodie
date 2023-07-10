@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION", "UNCHECKED_CAST")
 
-package ru.alexeyoss.core.presentation
+package ru.alexeyoss.core_ui.presentation
 
 import androidx.fragment.app.Fragment
 

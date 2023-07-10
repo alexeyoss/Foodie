@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    namespace "ru.alexeyoss.core.presentation"
+    namespace "ru.alexeyoss.core_ui.presentation"
     compileSdk targetAndroidSdk
 
     defaultConfig {
         minSdk minAndroidSdk
         targetSdk targetAndroidSdk
-
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -32,13 +32,11 @@ android {
 }
 
 dependencies {
-
     implementation libs.android.coreKtx
     implementation libs.android.appCompat
     implementation libs.android.lifecycleRuntimeKtx
 
     implementation libs.google.material
 
-    api project(Modules.Core.theme)
-
+    api project(Modules.CoreUi.theme)
 }

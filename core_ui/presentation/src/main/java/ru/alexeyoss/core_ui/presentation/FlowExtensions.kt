@@ -1,4 +1,4 @@
-package ru.alexeyoss.core.presentation
+package ru.alexeyoss.core_ui.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

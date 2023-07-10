@@ -1,4 +1,4 @@
-package ru.alexeyoss.core.presentation
+package ru.alexeyoss.core_ui.presentation
 
 import android.content.res.Resources
 import kotlin.math.roundToInt

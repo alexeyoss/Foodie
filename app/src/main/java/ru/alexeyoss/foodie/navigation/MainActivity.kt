@@ -10,13 +10,12 @@ import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import ru.alexeyoss.core.common.BackButtonListener
-import ru.alexeyoss.core.presentation.ToolbarStateHandler
-import ru.alexeyoss.core.presentation.ToolbarStates
+import ru.alexeyoss.core_ui.presentation.BackButtonListener
+import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
+import ru.alexeyoss.core_ui.presentation.ToolbarStates
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -32,20 +31,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var navigatorHolder: NavigatorHolder
 
     private val navigator = AppNavigator(
-        activity = this,
-        containerId = R.id.navHostFragment,
-        fragmentManager = supportFragmentManager
+        activity = this, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
     )
 
     private val locationPermissionsLauncher = registerForActivityResult(
         RequestMultiplePermissions(), ::onPermissionsResult
     )
 
-    private val permissionList =
-        arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        )
+    private val permissionList = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     private val backStackListener = FragmentManager.OnBackStackChangedListener { checkToolbarState() }
 
@@ -63,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.apply {
                     subtitle = ""
                     title = toolbarState.title
-                    setIcon(ru.alexeyoss.core.theme.R.drawable.ic_pinpoint)
+                    setIcon(ru.alexeyoss.core_ui.theme.R.drawable.ic_pinpoint)
                 }
 
             }
@@ -86,40 +81,26 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.customToolbar)
 
         if (savedInstanceState == null) {
+            binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))
+        } else {
+//             savedInstanceState.getString()
         }
+
         locationPermissionsLauncher.launch(permissionList)
         initListeners()
-    }
-
-    // TODO Remove after debugging
-    private fun fragmentsStackListener() {
-        supportFragmentManager.addOnBackStackChangedListener {
-            Timber.tag("FRAG").i(
-                "${supportFragmentManager.backStackEntryCount} - ${
-                    supportFragmentManager.findFragmentById(
-                        R.id.navHostFragment
-                    )
-                }"
-            )
-        }
     }
 
     private fun initListeners() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.categoriesFragment -> router.newRootScreen(Screens.categories())
+                R.id.categoriesFragment -> router.replaceScreen(Screens.categories())
                 R.id.searchFragment -> Unit
-                R.id.cartFragment -> router.newRootScreen(Screens.cart())
+                R.id.cartFragment -> router.replaceScreen(Screens.cart())
                 R.id.accountFragment -> Unit
             }
             true
         }
-
-        supportFragmentManager.addOnBackStackChangedListener(backStackListener)
-
-        // TODO Remove after debugging
-        fragmentsStackListener()
     }
 
     override fun onResumeFragments() {
@@ -147,8 +128,7 @@ class MainActivity : AppCompatActivity() {
             // TODO set permission location to toolbar
         } else {
             if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
+                    this, Manifest.permission.ACCESS_FINE_LOCATION
                 )
             ) {
                 locationPermissionsLauncher.launch(permissionList)
@@ -160,7 +140,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        supportFragmentManager.removeOnBackStackChangedListener(backStackListener)
         binding.bottomNavigationView.setOnItemSelectedListener(null)
     }
 }

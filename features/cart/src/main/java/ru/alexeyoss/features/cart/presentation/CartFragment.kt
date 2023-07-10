@@ -2,9 +2,9 @@ package ru.alexeyoss.features.cart.presentation
 
 import android.content.Context
 import androidx.fragment.app.Fragment
-import ru.alexeyoss.core.presentation.ToolbarStateHandler
-import ru.alexeyoss.core.presentation.ToolbarStates
-import ru.alexeyoss.core.presentation.viewBinding
+import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
+import ru.alexeyoss.core_ui.presentation.ToolbarStates
+import ru.alexeyoss.core_ui.presentation.viewBinding
 import ru.alexeyoss.features.cart.R
 import ru.alexeyoss.features.cart.databinding.FragmentCartBinding
 

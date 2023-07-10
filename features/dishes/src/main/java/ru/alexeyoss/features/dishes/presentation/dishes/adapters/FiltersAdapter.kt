@@ -7,7 +7,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.alexeyoss.core.theme.R.color
+import ru.alexeyoss.core_ui.theme.R.color
 import ru.alexeyoss.features.dishes.databinding.ItemFiltersFragmentBinding
 import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
 

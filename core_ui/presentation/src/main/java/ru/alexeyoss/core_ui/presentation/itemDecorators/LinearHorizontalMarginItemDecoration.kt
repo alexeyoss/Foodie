@@ -1,4 +1,4 @@
-package ru.alexeyoss.core.presentation.itemDecorators
+package ru.alexeyoss.core_ui.presentation.itemDecorators
 
 import android.graphics.Rect
 import android.view.View
