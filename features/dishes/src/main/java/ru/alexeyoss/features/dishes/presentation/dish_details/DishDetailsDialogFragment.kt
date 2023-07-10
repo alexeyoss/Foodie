@@ -13,7 +13,9 @@ import ru.alexeyoss.features.dishes.databinding.FragmentDishDetailsDialogBinding
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import timber.log.Timber
 
-class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_dialog), BackButtonListener {
+class DishDetailsDialogFragment :
+    DialogFragment(R.layout.fragment_dish_details_dialog),
+    BackButtonListener {
 
     private val binding by viewBinding<FragmentDishDetailsDialogBinding>()
     override fun getTheme(): Int = ru.alexeyoss.core_ui.theme.R.style.Theme_Foodie_Dialog_CustomSize
@@ -40,7 +42,10 @@ class DishDetailsDialogFragment : DialogFragment(R.layout.fragment_dish_details_
             dishPrice.text =
                 resources.getString(ru.alexeyoss.core_ui.presentation.R.string.valuedDishPrice, uiDish.price.toString())
             dishWeight.text =
-                resources.getString(ru.alexeyoss.core_ui.presentation.R.string.valuedDishWeight, uiDish.weight.toString())
+                resources.getString(
+                    ru.alexeyoss.core_ui.presentation.R.string.valuedDishWeight,
+                    uiDish.weight.toString()
+                )
         }
         dishDescription.text = uiDish.description
 

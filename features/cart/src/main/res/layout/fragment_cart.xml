@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.Foodie"
-    tools:context="ru.alexeyoss.features.cart.presentation.CartFragment">
+    tools:context="ru.alexeyoss.features.cart.presentation.cart.CartFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView

@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    implementation libs.android.fragmentKtx
 
     implementation libs.additionalstuff.timber
     implementation libs.additionalstuff.cicerone

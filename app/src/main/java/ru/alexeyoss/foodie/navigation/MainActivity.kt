@@ -2,6 +2,7 @@ package ru.alexeyoss.foodie.navigation
 
 import android.Manifest
 import android.os.Bundle
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -13,6 +14,8 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
 import ru.alexeyoss.core_ui.presentation.ToolbarStates
+import ru.alexeyoss.features.cart.presentation.cart.CartFragment
+import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
@@ -31,7 +34,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var navigatorHolder: NavigatorHolder
 
     private val navigator = AppNavigator(
-        activity = this, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
+        activity = this@MainActivity,
+        containerId = R.id.navHostFragment,
+        fragmentManager = supportFragmentManager
     )
 
     private val locationPermissionsLauncher = registerForActivityResult(
@@ -42,7 +47,9 @@ class MainActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    private val backStackListener = FragmentManager.OnBackStackChangedListener { checkToolbarState() }
+    private val backStackListener = FragmentManager.OnBackStackChangedListener {
+        checkToolbarState()
+    }
 
     private fun checkToolbarState() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment)!!
@@ -51,20 +58,23 @@ class MainActivity : AppCompatActivity() {
             updateToolbarView(toolbarState)
         }
     }
-
     private fun updateToolbarView(toolbarState: ToolbarStates) = with(binding) {
         when (toolbarState) {
             is ToolbarStates.CustomTitle -> {
+//                customToolbar.logo.setVisible(false, false)
+                profilePhoto.visibility = View.GONE
+
                 supportActionBar?.apply {
                     subtitle = ""
                     title = toolbarState.title
-                    setIcon(ru.alexeyoss.core_ui.theme.R.drawable.ic_pinpoint)
                 }
 
             }
 
             is ToolbarStates.LocationView -> {
-                binding.customToolbar.logo.setVisible(true, false)
+//                customToolbar.logo.setVisible(true, false)
+                profilePhoto.visibility = View.VISIBLE
+
                 supportActionBar?.apply {
                     subtitle = "12 августа, 2023"
                     title = "Москва"
@@ -101,6 +111,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        supportFragmentManager.addOnBackStackChangedListener(backStackListener)
     }
 
     override fun onResumeFragments() {
@@ -141,5 +153,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         binding.bottomNavigationView.setOnItemSelectedListener(null)
+        supportFragmentManager.removeOnBackStackChangedListener(backStackListener)
     }
 }

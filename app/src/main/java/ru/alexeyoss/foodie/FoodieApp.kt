@@ -2,6 +2,8 @@ package ru.alexeyoss.foodie
 
 import android.app.Application
 import android.content.Context
+import ru.alexeyoss.features.cart.di.CartDeps
+import ru.alexeyoss.features.cart.di.provider.CartComponentDepsProvider
 import ru.alexeyoss.features.categories.di.CategoriesDeps
 import ru.alexeyoss.features.categories.di.provider.CategoriesComponentDepsProvider
 import ru.alexeyoss.features.dishes.di.DishesDeps
@@ -11,7 +13,8 @@ import timber.log.Timber
 
 class FoodieApp : Application(),
     CategoriesComponentDepsProvider,
-    DishesComponentDepsProvider {
+    DishesComponentDepsProvider,
+    CartComponentDepsProvider {
 
     val appComponent: AppComponent by lazy {
         AppComponent.Initializer.init()
@@ -32,6 +35,7 @@ class FoodieApp : Application(),
     // HelpMe The best way how provide deps without boilerplate code
     override fun getCategoryDeps(): CategoriesDeps = appComponent
     override fun getDishesDeps(): DishesDeps = appComponent
+    override fun getCartDeps(): CartDeps = appComponent
 }
 
 val Context.appComponent: AppComponent

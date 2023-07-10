@@ -6,7 +6,7 @@ import ru.alexeyoss.core.common.Container
 import ru.alexeyoss.data.dishes.DishesDataRepository
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.features.dishes.domain.repositories.DishesRepository
-import ru.alexeyoss.foodie.mediators.buildMediatorFlow
+import ru.alexeyoss.foodie.mediators.buildNetworkFlow
 import ru.alexeyoss.foodie.mediators.dishes.mappers.DishesMapper
 import javax.inject.Inject
 
@@ -17,7 +17,7 @@ class AdapterDishesRepository
 ) : DishesRepository {
 
     override suspend fun getDishes(): Flow<Container<List<UiDishDTO>>> {
-        return buildMediatorFlow {
+        return buildNetworkFlow {
             dishesDataRepository.getDishes()
         }.map { container ->
             container.convert { dishesListDTO ->

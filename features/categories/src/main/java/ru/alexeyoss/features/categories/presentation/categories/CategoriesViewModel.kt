@@ -29,7 +29,6 @@ class CategoriesViewModel
     private val _categoriesFlow: MutableStateFlow<CategoriesUiState> = MutableStateFlow(CategoriesUiState.Initial)
     val categoriesFlow = _categoriesFlow.asStateFlow()
 
-
     fun getCategories() {
         viewModelScope.launch(ioDispatcher + exceptionHandler) {
             getCategoriesUseCase.invoke().collect { container ->

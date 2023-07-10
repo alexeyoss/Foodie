@@ -11,7 +11,7 @@ import ru.alexeyoss.network.utils.ResponseStates
 /**
  * Flow wrapper for matching [ResponseStates] with [Container] states
  * */
-fun <NetworkData> buildMediatorFlow(
+fun <NetworkData> buildNetworkFlow(
     block: suspend () -> ResponseStates<NetworkData>
 ): Flow<Container<NetworkData>> {
     return flow {

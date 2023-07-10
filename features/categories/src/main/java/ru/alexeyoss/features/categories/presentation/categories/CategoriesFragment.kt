@@ -41,7 +41,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
     override fun onAttach(context: Context) {
         val categoriesDeps = (context.applicationContext as CategoriesComponentDepsProvider).getCategoryDeps()
 
-        ViewModelProvider(this).get<CategoriesComponentViewModel>().initCategoriesComponent(categoriesDeps)
+        ViewModelProvider(this@CategoriesFragment).get<CategoriesComponentViewModel>().initCategoriesComponent(categoriesDeps)
             .inject(this@CategoriesFragment)
 
         super.onAttach(context)

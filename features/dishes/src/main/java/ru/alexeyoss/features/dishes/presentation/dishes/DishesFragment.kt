@@ -115,7 +115,6 @@ class DishesFragment : Fragment(R.layout.fragment_dishes), ToolbarStateHandler, 
     }
 
     private fun onDishClick(uiDish: UiDishDTO) {
-        // TODO get rid of it use router class. Disputable
         DishDetailsDialogFragment.getNewInstance(uiDish).show(parentFragmentManager, null)
     }
 

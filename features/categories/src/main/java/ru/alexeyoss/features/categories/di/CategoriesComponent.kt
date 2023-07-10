@@ -14,9 +14,8 @@ import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragme
 import ru.alexeyoss.features.categories.presentation.categories.CategoriesViewModel
 
 @[PerScreen Component(
-    modules = [
-        CategoriesModule::class,
-    ], dependencies = [CategoriesDeps::class]
+    modules = [CategoriesModule::class],
+    dependencies = [CategoriesDeps::class]
 )]
 interface CategoriesComponent {
 

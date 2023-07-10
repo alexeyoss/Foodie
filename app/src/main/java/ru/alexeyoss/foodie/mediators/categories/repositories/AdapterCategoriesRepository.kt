@@ -6,7 +6,7 @@ import ru.alexeyoss.core.common.Container
 import ru.alexeyoss.data.categories.CategoriesDataRepository
 import ru.alexeyoss.features.categories.domain.entities.UiCategory
 import ru.alexeyoss.features.categories.domain.repositories.CategoriesRepository
-import ru.alexeyoss.foodie.mediators.buildMediatorFlow
+import ru.alexeyoss.foodie.mediators.buildNetworkFlow
 
 import ru.alexeyoss.foodie.mediators.categories.mappers.CategoryMapper
 import javax.inject.Inject
@@ -19,7 +19,7 @@ AdapterCategoriesRepository
 ) : CategoriesRepository {
 
     override suspend fun getCategories(): Flow<Container<List<UiCategory>>> {
-        return buildMediatorFlow {
+        return buildNetworkFlow {
             categoriesDataRepository.getCategories()
         }.map { container ->
             container.convert { categoriesListDTO ->

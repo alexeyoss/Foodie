@@ -11,6 +11,7 @@ import ru.alexeyoss.core.common.di.scope.PerApplication
 interface NavigationProvider {
     fun provideMainRouter(): Router
     fun provideNavigatorHolder(): NavigatorHolder
+
 }
 
 @[PerApplication Component(
@@ -19,7 +20,6 @@ interface NavigationProvider {
 interface NavigationComponent : NavigationProvider {
     class Initializer private constructor() {
         companion object {
-
             fun init(): NavigationProvider = DaggerNavigationComponent.builder().build()
         }
     }
