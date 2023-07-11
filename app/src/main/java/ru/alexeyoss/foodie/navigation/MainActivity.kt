@@ -14,8 +14,6 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
 import ru.alexeyoss.core_ui.presentation.ToolbarStates
-import ru.alexeyoss.features.cart.presentation.cart.CartFragment
-import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
@@ -43,10 +41,6 @@ class MainActivity : AppCompatActivity() {
         RequestMultiplePermissions(), ::onPermissionsResult
     )
 
-    private val permissionList = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-    )
-
     private val backStackListener = FragmentManager.OnBackStackChangedListener {
         checkToolbarState()
     }
@@ -58,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             updateToolbarView(toolbarState)
         }
     }
+
     private fun updateToolbarView(toolbarState: ToolbarStates) = with(binding) {
         when (toolbarState) {
             is ToolbarStates.CustomTitle -> {
@@ -93,8 +88,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))
-        } else {
-//             savedInstanceState.getString()
         }
 
         locationPermissionsLauncher.launch(permissionList)
@@ -133,6 +126,12 @@ class MainActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
+
+
+    // TODO extract logic to [ViewModel] -> [PermissionManager]
+    private val permissionList = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     // TODO extract logic to [ViewModel] -> [PermissionManager]
     private fun onPermissionsResult(grantResult: Map<String, Boolean>) {
