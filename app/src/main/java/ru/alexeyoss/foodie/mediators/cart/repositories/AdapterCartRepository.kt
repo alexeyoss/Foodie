@@ -2,7 +2,7 @@ package ru.alexeyoss.foodie.mediators.cart.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import ru.alexeyoss.core.common.Container
+import ru.alexeyoss.core.common.data.Container
 import ru.alexeyoss.features.cart.domain.entities.UiCartItem
 import ru.alexeyoss.features.cart.domain.repositories.CartRepository
 import javax.inject.Inject

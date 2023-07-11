@@ -1,7 +1,7 @@
 package ru.alexeyoss.features.dishes.domain.repositories
 
 import kotlinx.coroutines.flow.Flow
-import ru.alexeyoss.core.common.Container
+import ru.alexeyoss.core.common.data.Container
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 
 

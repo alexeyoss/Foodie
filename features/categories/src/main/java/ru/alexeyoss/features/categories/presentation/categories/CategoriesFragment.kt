@@ -10,8 +10,8 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
-import ru.alexeyoss.core_ui.presentation.ToolbarStates
+import ru.alexeyoss.core_ui.presentation.toolbar.FragmentToolbarStateHandler
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
@@ -24,7 +24,7 @@ import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import ru.alexeyoss.features.categories.presentation.CategoryRouter
 import javax.inject.Inject
 
-class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateHandler, BackButtonListener {
+class CategoriesFragment : Fragment(R.layout.fragment_categories), FragmentToolbarStateHandler, BackButtonListener {
 
     @Inject
     internal lateinit var categoriesViewModelFactory: Lazy<CategoriesViewModel.Factory>

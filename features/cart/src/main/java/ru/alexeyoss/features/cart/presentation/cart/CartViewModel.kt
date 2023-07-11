@@ -7,6 +7,12 @@ import javax.inject.Inject
 class CartViewModel : ViewModel() {
 
 
+    fun updateCartState(){
+        /**
+         * IDEA Get lastCartState from Local Persistent Storage and validate product state
+         * */
+    }
+
     @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(
     ) : ViewModelProvider.Factory {

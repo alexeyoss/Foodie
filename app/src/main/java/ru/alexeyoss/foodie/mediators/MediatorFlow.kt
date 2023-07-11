@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import ru.alexeyoss.core.common.CommonException
 import ru.alexeyoss.core.common.ConnectionException
-import ru.alexeyoss.core.common.Container
+import ru.alexeyoss.core.common.data.Container
 import ru.alexeyoss.network.utils.ErrorState
 import ru.alexeyoss.network.utils.ResponseStates
 

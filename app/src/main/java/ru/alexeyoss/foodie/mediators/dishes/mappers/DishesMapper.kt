@@ -1,6 +1,6 @@
 package ru.alexeyoss.foodie.mediators.dishes.mappers
 
-import ru.alexeyoss.core.common.BaseMapper
+import ru.alexeyoss.core.common.data.BaseMapper
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.network.models.DishDTO
 import javax.inject.Inject

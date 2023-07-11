@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.ARG_SCREEN
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
-import ru.alexeyoss.core_ui.presentation.ToolbarStates
+import ru.alexeyoss.core_ui.presentation.toolbar.FragmentToolbarStateHandler
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.GridLayoutMarginItemDecoration
@@ -34,7 +34,7 @@ import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
 import timber.log.Timber
 import javax.inject.Inject
 
-class DishesFragment : Fragment(R.layout.fragment_dishes), ToolbarStateHandler, BackButtonListener {
+class DishesFragment : Fragment(R.layout.fragment_dishes), FragmentToolbarStateHandler, BackButtonListener {
 
     @Inject
     internal lateinit var dishesViewModelFactory: Lazy<DishesViewModel.Factory>

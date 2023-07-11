@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
-import ru.alexeyoss.core_ui.presentation.ToolbarStates
+import ru.alexeyoss.core_ui.presentation.toolbar.FragmentToolbarStateHandler
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.presentation.viewBinding
 import ru.alexeyoss.features.cart.R
 import ru.alexeyoss.features.cart.databinding.FragmentCartBinding
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class CartFragment : Fragment(R.layout.fragment_cart),
     BackButtonListener,
-    ToolbarStateHandler {
+    FragmentToolbarStateHandler {
     private val binding by viewBinding<FragmentCartBinding>()
 
     @Inject
