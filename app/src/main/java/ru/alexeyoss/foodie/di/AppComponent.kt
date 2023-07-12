@@ -11,7 +11,7 @@ import ru.alexeyoss.foodie.FoodieApp
 import ru.alexeyoss.foodie.mediators.cart.di.CartMediatorModule
 import ru.alexeyoss.foodie.mediators.categories.di.CategoriesMediatorModule
 import ru.alexeyoss.foodie.mediators.dishes.di.DishesMediatorModule
-import ru.alexeyoss.foodie.navigation.MainActivity
+import ru.alexeyoss.foodie.activity.MainActivity
 import ru.alexeyoss.services.navigation.di.NavigationComponent
 import ru.alexeyoss.services.navigation.di.NavigationProvider
 

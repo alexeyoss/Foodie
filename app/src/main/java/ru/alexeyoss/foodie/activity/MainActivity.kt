@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.navigation
+package ru.alexeyoss.foodie.activity
 
 import android.Manifest
 import android.os.Bundle
@@ -9,12 +9,12 @@ import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import ru.alexeyoss.ActivityToolbarStateHandler
 import ru.alexeyoss.core.common.activity.ActiveActivityHolder
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
+import ru.alexeyoss.foodie.navigation.Screens
 import javax.inject.Inject
 
 class MainActivity :
@@ -33,10 +33,13 @@ class MainActivity :
     @Inject
     lateinit var activeActivityHolder: ActiveActivityHolder
 
-    private val toolbarStateHandler = ActivityToolbarStateHandler(
-        activity = this@MainActivity,
-        containerId = R.id.navHostFragment
-    )
+
+    private val toolbarHandler by lazy {
+        MainActivityToolbarHandler(
+            activity = this@MainActivity,
+            containerId = R.id.navHostFragment
+        )
+    }
 
     private val navigator = AppNavigator(
         activity = this@MainActivity,
@@ -56,7 +59,6 @@ class MainActivity :
         setSupportActionBar(binding.customToolbar)
 
         activeActivityHolder.registerActiveActivity(this@MainActivity)
-        toolbarStateHandler.registerToolbarStateHandler()
 
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
@@ -77,6 +79,8 @@ class MainActivity :
             }
             true
         }
+
+        toolbarHandler.addToolbarStateListener()
     }
 
     override fun onResumeFragments() {
@@ -125,8 +129,7 @@ class MainActivity :
     override fun onDestroy() {
         super.onDestroy()
         activeActivityHolder.removeActiveActivity()
-        toolbarStateHandler.removeToolbarStateHandler()
-
+        toolbarHandler.removeToolbarStateListener()
         binding.bottomNavigationView.setOnItemSelectedListener(null)
     }
 }

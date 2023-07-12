@@ -10,11 +10,11 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.toolbar.FragmentToolbarStateHandler
-import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateHolder
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.presentation.viewBinding
 import ru.alexeyoss.features.categories.R
 import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
@@ -24,7 +24,7 @@ import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import ru.alexeyoss.features.categories.presentation.CategoryRouter
 import javax.inject.Inject
 
-class CategoriesFragment : Fragment(R.layout.fragment_categories), FragmentToolbarStateHandler, BackButtonListener {
+class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateHolder, BackButtonListener {
 
     @Inject
     internal lateinit var categoriesViewModelFactory: Lazy<CategoriesViewModel.Factory>
@@ -41,16 +41,17 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), FragmentToolb
     override fun onAttach(context: Context) {
         val categoriesDeps = (context.applicationContext as CategoriesComponentDepsProvider).getCategoryDeps()
 
-        ViewModelProvider(this@CategoriesFragment).get<CategoriesComponentViewModel>().initCategoriesComponent(categoriesDeps)
+        ViewModelProvider(this@CategoriesFragment).get<CategoriesComponentViewModel>()
+            .initCategoriesComponent(categoriesDeps)
             .inject(this@CategoriesFragment)
 
         super.onAttach(context)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initRecyclerView()
         initListeners()
-
         viewModel.getCategories()
     }
 

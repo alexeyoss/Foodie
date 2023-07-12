@@ -11,9 +11,9 @@ import androidx.lifecycle.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
-import ru.alexeyoss.core_ui.presentation.ARG_SCREEN
+import ru.alexeyoss.core_ui.presentation.fragment.ARG_SCREEN
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.toolbar.FragmentToolbarStateHandler
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateHolder
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
@@ -34,7 +34,7 @@ import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
 import timber.log.Timber
 import javax.inject.Inject
 
-class DishesFragment : Fragment(R.layout.fragment_dishes), FragmentToolbarStateHandler, BackButtonListener {
+class DishesFragment : Fragment(R.layout.fragment_dishes), ToolbarStateHolder, BackButtonListener {
 
     @Inject
     internal lateinit var dishesViewModelFactory: Lazy<DishesViewModel.Factory>
