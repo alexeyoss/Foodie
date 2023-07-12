@@ -2,7 +2,7 @@ package ru.alexeyoss.foodie.mediators.dishes.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ru.alexeyoss.core.common.Container
+import ru.alexeyoss.core.common.data.Container
 import ru.alexeyoss.data.dishes.DishesDataRepository
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.features.dishes.domain.repositories.DishesRepository

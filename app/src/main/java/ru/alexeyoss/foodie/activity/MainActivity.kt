@@ -1,29 +1,26 @@
-package ru.alexeyoss.foodie.navigation
+package ru.alexeyoss.foodie.activity
 
 import android.Manifest
 import android.os.Bundle
-import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.FragmentManager
 import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import ru.alexeyoss.core.common.activity.ActiveActivityHolder
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.ToolbarStateHandler
-import ru.alexeyoss.core_ui.presentation.ToolbarStates
-import ru.alexeyoss.features.cart.presentation.cart.CartFragment
-import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
+import ru.alexeyoss.foodie.navigation.Screens
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity :
+    AppCompatActivity() {
 
-    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+    val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
@@ -32,6 +29,17 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
+
+    @Inject
+    lateinit var activeActivityHolder: ActiveActivityHolder
+
+
+    private val toolbarHandler by lazy {
+        MainActivityToolbarHandler(
+            activity = this@MainActivity,
+            containerId = R.id.navHostFragment
+        )
+    }
 
     private val navigator = AppNavigator(
         activity = this@MainActivity,
@@ -43,46 +51,6 @@ class MainActivity : AppCompatActivity() {
         RequestMultiplePermissions(), ::onPermissionsResult
     )
 
-    private val permissionList = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-    )
-
-    private val backStackListener = FragmentManager.OnBackStackChangedListener {
-        checkToolbarState()
-    }
-
-    private fun checkToolbarState() {
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment)!!
-        if (currentFragment is ToolbarStateHandler) {
-            val toolbarState = currentFragment.getToolbarState()
-            updateToolbarView(toolbarState)
-        }
-    }
-    private fun updateToolbarView(toolbarState: ToolbarStates) = with(binding) {
-        when (toolbarState) {
-            is ToolbarStates.CustomTitle -> {
-//                customToolbar.logo.setVisible(false, false)
-                profilePhoto.visibility = View.GONE
-
-                supportActionBar?.apply {
-                    subtitle = ""
-                    title = toolbarState.title
-                }
-
-            }
-
-            is ToolbarStates.LocationView -> {
-//                customToolbar.logo.setVisible(true, false)
-                profilePhoto.visibility = View.VISIBLE
-
-                supportActionBar?.apply {
-                    subtitle = "12 августа, 2023"
-                    title = "Москва"
-                }
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this@MainActivity)
@@ -90,11 +58,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.customToolbar)
 
+        activeActivityHolder.registerActiveActivity(this@MainActivity)
+
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))
-        } else {
-//             savedInstanceState.getString()
         }
 
         locationPermissionsLauncher.launch(permissionList)
@@ -112,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        supportFragmentManager.addOnBackStackChangedListener(backStackListener)
+        toolbarHandler.addToolbarStateListener()
     }
 
     override fun onResumeFragments() {
@@ -126,6 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        // TODO fix BottomNavigationView Selected State when onBackPressed
         val fragment = supportFragmentManager.findFragmentById(R.id.navHostFragment)
         if (fragment != null && fragment is BackButtonListener && (fragment as BackButtonListener).onBackPressed()) {
             return
@@ -133,6 +102,12 @@ class MainActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
+
+
+    // TODO extract logic to [ViewModel] -> [PermissionManager]
+    private val permissionList = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     // TODO extract logic to [ViewModel] -> [PermissionManager]
     private fun onPermissionsResult(grantResult: Map<String, Boolean>) {
@@ -150,9 +125,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
+        activeActivityHolder.removeActiveActivity()
+        toolbarHandler.removeToolbarStateListener()
         binding.bottomNavigationView.setOnItemSelectedListener(null)
-        supportFragmentManager.removeOnBackStackChangedListener(backStackListener)
     }
 }

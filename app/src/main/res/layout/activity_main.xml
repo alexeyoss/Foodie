@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.alexeyoss.foodie.navigation.MainActivity">
+    tools:context="ru.alexeyoss.foodie.activity.MainActivity">
 
     <!-- TODO Amend the Toolbar layout -->
 
@@ -18,12 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-<!--        app:logo="@drawable/ic_pinpoint"-->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/customToolbar"
             style="?attr/toolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            tools:logo="@drawable/ic_pinpoint"
             tools:subtitle="12 Августа, 2023"
             tools:title="Санкт-Петербург">
 

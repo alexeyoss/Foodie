@@ -1,4 +1,4 @@
-package ru.alexeyoss.core.common
+package ru.alexeyoss.core.common.data
 
 interface BaseMapper<DomainModel, ForeignModel> {
     fun mapToDomainModel(foreignModel: ForeignModel): DomainModel

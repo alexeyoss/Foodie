@@ -1,8 +1,9 @@
-@file:Suppress("DEPRECATION", "UNCHECKED_CAST")
+@file:Suppress("DEPRECATION")
 
-package ru.alexeyoss.core_ui.presentation
+package ru.alexeyoss.core_ui.presentation.fragment
 
 import androidx.fragment.app.Fragment
+import ru.alexeyoss.core_ui.presentation.BaseScreen
 
 /**
  * Default arg name for holding screen args in fragments

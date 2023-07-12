@@ -30,6 +30,8 @@ android {
 }
 
 dependencies {
+    implementation libs.android.fragmentKtx
+
     implementation libs.jetbrains.coroutinesCore
 
     implementation libs.google.dagger

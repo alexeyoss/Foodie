@@ -9,11 +9,12 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="148dp"
         android:contentDescription="@string/category_picture_desc"
-        tools:background="@drawable/background_fish"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_fish"
         tools:layout_height="148dp"
-        tools:layout_marginBottom="@dimen/small_margin"/>
+        tools:layout_marginBottom="@dimen/small_margin" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/categoryTitle"

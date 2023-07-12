@@ -3,7 +3,7 @@ package ru.alexeyoss.foodie.permission
 import android.content.Context
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import ru.alexeyoss.core_ui.presentation.ARG_SCREEN
+import ru.alexeyoss.core_ui.presentation.fragment.ARG_SCREEN
 import ru.alexeyoss.core_ui.presentation.viewBinding
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.databinding.FragmentDefaultPermissionRationalBinding
