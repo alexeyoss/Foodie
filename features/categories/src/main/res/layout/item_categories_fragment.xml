@@ -12,9 +12,9 @@
         android:layout_height="148dp"
         android:contentDescription="@string/category_picture_desc"
         android:scaleType="fitXY"
-        android:src="@drawable/background_fish"
         tools:layout_height="148dp"
-        tools:layout_marginBottom="@dimen/small_margin" />
+        tools:layout_marginBottom="@dimen/small_margin"
+        tools:src="@drawable/background_fish" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/categoryTitle"
