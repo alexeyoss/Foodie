@@ -52,7 +52,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         initRecyclerView()
         initListeners()
-
+        binding.shimmerLayout
         shimmerLayout.startShimmer()
 
         viewModel.getCategories()

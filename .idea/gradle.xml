@@ -16,16 +16,15 @@
             <option value="$PROJECT_DIR$/core_ui" />
             <option value="$PROJECT_DIR$/core_ui/presentation" />
             <option value="$PROJECT_DIR$/core_ui/theme" />
-            <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/cart" />
             <option value="$PROJECT_DIR$/features/categories" />
             <option value="$PROJECT_DIR$/features/dishes" />
-            <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/services" />
-            <option value="$PROJECT_DIR$/services/dataStore" />
+            <option value="$PROJECT_DIR$/services/data" />
             <option value="$PROJECT_DIR$/services/location" />
             <option value="$PROJECT_DIR$/services/navigation" />
+            <option value="$PROJECT_DIR$/services/network" />
             <option value="$PROJECT_DIR$/services/permission" />
           </set>
         </option>

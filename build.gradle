@@ -87,8 +87,6 @@ buildscript {
                         presentation: ":core_ui:presentation",
                         theme       : ":core_ui:theme",
                 ],
-                Data    : ":data",
-                Network : ":network",
                 Features: [
                         cart      : ":features:cart",
                         categories: ":features:categories",
@@ -100,7 +98,9 @@ buildscript {
                         location  : ":services:location",
                         dataStore : ":services:dataStore",
                         permission: ":services:permission",
-                        navigation: ":services:navigation"
+                        navigation: ":services:navigation",
+                        network   : ":services:network",
+                        data   : ":services:data"
                 ]
         ]
     }

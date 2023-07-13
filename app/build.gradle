@@ -65,15 +65,14 @@ dependencies {
     implementation project(Modules.Core.common)
     implementation project(Modules.CoreUi.presentation)
 
-    implementation project(Modules.Data)
-    implementation project(Modules.Network)
+    implementation project(Modules.Services.data)
+    implementation project(Modules.Services.network)
 
     implementation project(Modules.Features.cart)
     implementation project(Modules.Features.categories)
     implementation project(Modules.Features.dishes)
 
     implementation project(Modules.Services.location)
-    implementation project(Modules.Services.dataStore)
     implementation project(Modules.Services.permission)
     implementation project(Modules.Services.navigation)
 }

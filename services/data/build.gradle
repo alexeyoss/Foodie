@@ -1,20 +1,21 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id "kotlin-kapt"
 }
 
 android {
-    namespace 'ru.alexeyoss.services.datastore'
-    compileSdk targetAndroidSdk
+    namespace 'ru.alexeyoss.data'
+    compileSdk 33
 
     defaultConfig {
-        minSdk minAndroidSdk
-        targetSdk targetAndroidSdk
+        minSdk 24
+        targetSdk 33
 
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -31,4 +32,9 @@ android {
 
 dependencies {
 
+    implementation libs.google.dagger
+    kapt libs.google.daggerCompiler
+
+    implementation project(Modules.Core.common)
+    implementation project(Modules.Services.network)
 }
