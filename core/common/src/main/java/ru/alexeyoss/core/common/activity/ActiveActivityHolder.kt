@@ -1,5 +1,6 @@
 package ru.alexeyoss.core.common.activity
 
+import androidx.activity.ComponentActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import kotlinx.coroutines.flow.Flow

@@ -1,5 +1,7 @@
 package ru.alexeyoss.services.permission
 
+import kotlinx.coroutines.flow.Flow
+
 /**
  * Статус разрешения.
  *

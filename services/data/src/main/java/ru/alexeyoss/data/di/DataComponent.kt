@@ -15,7 +15,10 @@ interface DataProvider {
 }
 
 @[PerApplication Component(
-    modules = [CategoriesDataModule::class, DishesDataModule::class],
+    modules = [
+        CategoriesDataModule::class,
+        DishesDataModule::class
+    ],
     dependencies = [NetworkProvider::class]
 )]
 interface DataComponent : DataProvider {

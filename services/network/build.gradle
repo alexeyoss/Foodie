@@ -47,4 +47,6 @@ dependencies {
     kapt libs.google.daggerCompiler
 
     implementation libs.additionalstuff.timber
+
+    implementation project(Modules.Core.common)
 }

@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/services/navigation" />
             <option value="$PROJECT_DIR$/services/network" />
             <option value="$PROJECT_DIR$/services/permission" />
+            <option value="$PROJECT_DIR$/services/preference" />
           </set>
         </option>
       </GradleProjectSettings>

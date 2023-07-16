@@ -33,7 +33,7 @@ interface CategoriesComponent {
 @Module(
     includes = [CoroutinesModule::class]
 )
-interface CategoriesModule {
+internal interface CategoriesModule {
 
     @Binds
     @PerScreen

@@ -1,6 +1,16 @@
 package ru.alexeyoss.foodie.di
 
+import androidx.lifecycle.ViewModel
+import dagger.Binds
 import dagger.Component
+import dagger.Module
+import dagger.Provides
+import dagger.multibindings.ClassKey
+import dagger.multibindings.IntoMap
+import ru.alexeyoss.core.common.activity.ActiveActivityHolder
+import ru.alexeyoss.core.common.di.MainToolsComponent
+import ru.alexeyoss.core.common.di.MainToolsProvider
+import ru.alexeyoss.core.common.di.scope.PerActivity
 import ru.alexeyoss.core.common.di.scope.PerApplication
 import ru.alexeyoss.data.di.DataComponent
 import ru.alexeyoss.data.di.DataProvider
@@ -8,16 +18,20 @@ import ru.alexeyoss.features.cart.di.CartDeps
 import ru.alexeyoss.features.categories.di.CategoriesDeps
 import ru.alexeyoss.features.dishes.di.DishesDeps
 import ru.alexeyoss.foodie.FoodieApp
+import ru.alexeyoss.foodie.activity.MainActivity
+import ru.alexeyoss.foodie.activity.MainActivityViewModel
 import ru.alexeyoss.foodie.mediators.cart.di.CartMediatorModule
 import ru.alexeyoss.foodie.mediators.categories.di.CategoriesMediatorModule
 import ru.alexeyoss.foodie.mediators.dishes.di.DishesMediatorModule
-import ru.alexeyoss.foodie.activity.MainActivity
 import ru.alexeyoss.services.navigation.di.NavigationComponent
 import ru.alexeyoss.services.navigation.di.NavigationProvider
+import ru.alexeyoss.services.permission.di.PermissionComponent
+import ru.alexeyoss.services.permission.di.PermissionProvider
 
 interface AppComponentProvider :
     DataProvider,
     NavigationProvider,
+    PermissionProvider,
     CategoriesDeps,
     DishesDeps,
     CartDeps
@@ -25,14 +39,16 @@ interface AppComponentProvider :
 
 @[PerApplication Component(
     modules = [
-        // HelpMe is it correct to have some mediators in inject section? Is it a bottleneck?
+        AppModule::class,
         CategoriesMediatorModule::class,
         DishesMediatorModule::class,
         CartMediatorModule::class,
     ],
     dependencies = [
+        MainToolsProvider::class,
         DataProvider::class,
-        NavigationProvider::class
+        NavigationProvider::class,
+        PermissionProvider::class,
     ]
 )]
 
@@ -44,22 +60,48 @@ interface AppComponent : AppComponentProvider {
     class Initializer private constructor() {
         companion object {
 
-            fun init(): AppComponent {
-                val dataProvider = DataComponent.Initializer
+            fun init(app: FoodieApp): AppComponent {
+
+                val mainToolsProvider = MainToolsComponent.Initializer
+                    .init(app)
+
+                val permissionComponent = PermissionComponent.Initializer
+                    .init(mainToolsProvider)
+
+                val dataComponent = DataComponent.Initializer
                     .init()
 
                 val navigationProvider = NavigationComponent.Initializer
                     .init()
 
                 return DaggerAppComponent.builder()
-                    .dataProvider(dataProvider)
+                    .mainToolsProvider(mainToolsProvider)
+                    .dataProvider(dataComponent)
                     .navigationProvider(navigationProvider)
+                    .permissionProvider(permissionComponent)
                     .build()
 
             }
         }
     }
+}
 
+@Module(
+    includes = [AppModuleBinds::class]
+)
+internal class AppModule {
+
+    @Provides
+    @PerApplication
+    internal fun provideActiveActivityHolder(): ActiveActivityHolder = ActiveActivityHolder()
+}
+
+@Module
+internal interface AppModuleBinds {
+    @Binds
+    @PerActivity
+    @[IntoMap ClassKey(MainActivityViewModel::class)]
+    fun bindMainActivityViewModel(mainActivityViewModel: MainActivityViewModel): ViewModel
 }
 
 

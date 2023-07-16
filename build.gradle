@@ -12,6 +12,7 @@ buildscript {
         recyclerView_version = "1.3.0"
         lifecycle_version = "2.5.1"
         cardView_version = "1.0.0"
+        datastorePref_version = "1.0.0"
 
         /* Google libs */
         material_version = "1.8.0"
@@ -22,6 +23,7 @@ buildscript {
         retrofit_version = "2.9.0"
         okhttp_version = "4.11.0"
         fragmentKtx_version = "1.6.0"
+        leakCanary_version = "2.12"
 
         /* JetBrains */
         coroutinesCore_Version = "1.7.1"
@@ -49,6 +51,7 @@ buildscript {
                         recyclerView         : "androidx.recyclerview:recyclerview:$recyclerView_version",
                         lifecycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
                         lifecycleViewModelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
+                        datastorePreferences : "androidx.datastore:datastore-preferences:$datastorePref_version",
                 ],
 
                 google         : [
@@ -62,6 +65,7 @@ buildscript {
                         gsonConverter     : "com.squareup.retrofit2:converter-gson:$retrofit_version",
                         okhttp            : "com.squareup.okhttp3:okhttp:$okhttp_version",
                         loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp_version",
+                        leakCanary        : "com.squareup.leakcanary:leakcanary-android:$leakCanary_version",
                 ],
 
                 jetbrains      : [
@@ -100,7 +104,8 @@ buildscript {
                         permission: ":services:permission",
                         navigation: ":services:navigation",
                         network   : ":services:network",
-                        data   : ":services:data"
+                        data      : ":services:data",
+                        preference: ":services:preference",
                 ]
         ]
     }

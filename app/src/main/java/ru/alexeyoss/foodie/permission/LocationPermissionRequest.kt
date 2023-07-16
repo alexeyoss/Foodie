@@ -12,7 +12,7 @@ class LocationPermissionRequest : PermissionRequest() {
         permissionsRationalRoute = Screens.categories()
         permissionsRationalStr = R.string.premissionRationalText.toString()
 
-        showSettingsRational = true
+        showSettingsRational = false
         settingsRationalRoute = Screens.settingsActivity()
         settingsRationalStr = R.string.settingsRationalText.toString()
     }

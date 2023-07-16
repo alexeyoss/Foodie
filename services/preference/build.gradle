@@ -5,13 +5,12 @@ plugins {
 }
 
 android {
-    namespace "ru.alexeyoss.services.premissions"
+    namespace "ru.alexeyoss.services.preference"
     compileSdk targetAndroidSdk
 
     defaultConfig {
         minSdk minAndroidSdk
         targetSdk targetAndroidSdk
-
     }
 
     buildTypes {
@@ -30,17 +29,11 @@ android {
 }
 
 dependencies {
-    implementation libs.android.coreKtx
-    implementation libs.android.fragmentKtx
+    implementation libs.android.datastorePreferences
+    implementation libs.additionalstuff.timber
 
     implementation libs.google.dagger
     kapt libs.google.daggerCompiler
 
-    implementation libs.additionalstuff.cicerone
-    implementation libs.additionalstuff.timber
-
-    implementation libs.jetbrains.coroutinesCore
-
     implementation project(Modules.Core.common)
-    implementation project(Modules.Services.preference)
 }

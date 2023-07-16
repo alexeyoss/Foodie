@@ -49,15 +49,18 @@ kapt {
 
 dependencies {
     implementation libs.android.coreKtx
-    implementation libs.android.coreKtx
     implementation libs.android.appCompat
     implementation libs.android.constraintLayout
+    implementation libs.android.lifecycleViewModelKtx
+    implementation libs.android.fragmentKtx
 
     implementation libs.google.material
 
     implementation libs.additionalstuff.timber
     implementation libs.additionalstuff.cicerone
     implementation libs.additionalstuff.circleImageView
+
+    debugImplementation libs.squareup.leakCanary
 
     implementation libs.google.dagger
     kapt libs.google.daggerCompiler
@@ -75,4 +78,6 @@ dependencies {
     implementation project(Modules.Services.location)
     implementation project(Modules.Services.permission)
     implementation project(Modules.Services.navigation)
+
+
 }
