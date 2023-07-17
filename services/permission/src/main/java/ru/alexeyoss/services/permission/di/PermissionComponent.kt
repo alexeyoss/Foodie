@@ -26,15 +26,13 @@ interface PermissionComponent : PermissionProvider {
         companion object {
 
             fun init(mainToolsProvider: MainToolsProvider): PermissionProvider {
-                val preferenceComponent = DaggerPreferenceComponent.builder()
-                    .mainToolsProvider(mainToolsProvider)
-                    .build()
+                val preferenceComponent =
+                    DaggerPreferenceComponent.builder().mainToolsProvider(mainToolsProvider).build()
 
-                return DaggerPermissionComponent.builder()
-                    .mainToolsProvider(mainToolsProvider)
-                    .preferenceProvider(preferenceComponent)
-                    .build()
+                return DaggerPermissionComponent.builder().mainToolsProvider(mainToolsProvider)
+                    .preferenceProvider(preferenceComponent).build()
             }
         }
     }
 }
+

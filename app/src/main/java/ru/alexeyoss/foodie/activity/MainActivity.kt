@@ -1,11 +1,8 @@
 package ru.alexeyoss.foodie.activity
 
 import android.Manifest
-import android.app.Activity
-import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -16,13 +13,12 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.Lazy
-import ru.alexeyoss.core.common.activity.DefaultActivityLifecycleCallbacks
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import ru.alexeyoss.foodie.navigation.Screens
-import ru.alexeyoss.services.permission.PermissionManager
+import ru.alexeyoss.foodie.permission.LocationPermissionRequest
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -33,20 +29,13 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<MainActivityViewModel.Factory>
-
-    private val viewModel by viewModels<MainActivityViewModel> {
-        viewModelFactory.get()
-    }
+    private val viewModel by viewModels<MainActivityViewModel> { viewModelFactory.get() }
 
     @Inject
     lateinit var router: Router
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
-
-    @Inject
-    lateinit var permissionManager: PermissionManager
-
 
     private val toolbarHandler by lazy {
         MainActivityToolbarHandler(
@@ -58,9 +47,6 @@ class MainActivity : AppCompatActivity() {
         activity = this@MainActivity, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
     )
 
-    private val locationPermissionsLauncher = registerForActivityResult(
-        RequestMultiplePermissions(), ::onPermissionsResult
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,34 +60,24 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))
         }
-
         registerToolbarHandler()
+
+        viewModel.requestPermission(LocationPermissionRequest())
 //        locationPermissionsLauncher.launch(permissionList)
+
         initListeners()
     }
 
     private fun registerToolbarHandler() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            registerActivityLifecycleCallbacks(object : DefaultActivityLifecycleCallbacks {
-                override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
-                    toolbarHandler.addToolbarStateListener()
-                }
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onCreate(owner: LifecycleOwner) {
+                toolbarHandler.addToolbarStateListener()
+            }
 
-                override fun onActivityDestroyed(activity: Activity) {
-                    toolbarHandler.removeToolbarStateListener()
-                }
-            })
-        } else {
-            lifecycle.addObserver(object : DefaultLifecycleObserver {
-                override fun onCreate(owner: LifecycleOwner) {
-                    toolbarHandler.addToolbarStateListener()
-                }
-
-                override fun onDestroy(owner: LifecycleOwner) {
-                    toolbarHandler.removeToolbarStateListener()
-                }
-            })
-        }
+            override fun onDestroy(owner: LifecycleOwner) {
+                toolbarHandler.removeToolbarStateListener()
+            }
+        })
     }
 
 
@@ -116,8 +92,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        viewModel.permStatus.observe(this@MainActivity) {
-            Toast.makeText(this@MainActivity, "asdfsadfas", Toast.LENGTH_SHORT).show()
+        viewModel.permissionStatus.observe(this@MainActivity) {
+            // TODO Test
+            Toast.makeText(this@MainActivity, "It's work!!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -155,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                     this, Manifest.permission.ACCESS_FINE_LOCATION
                 )
             ) {
-                locationPermissionsLauncher.launch(permissionList)
+//                locationPermissionsLauncher.launch(permissionList)
             } else {
                 // TODO Set default value to User location into Toolbar
             }

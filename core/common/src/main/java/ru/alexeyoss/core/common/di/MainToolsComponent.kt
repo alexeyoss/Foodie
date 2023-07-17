@@ -1,19 +1,20 @@
 package ru.alexeyoss.core.common.di
 
-import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Module
+import dagger.Provides
+import ru.alexeyoss.core.common.activity.ActiveActivityHolder
 import ru.alexeyoss.core.common.di.scope.PerApplication
-
-interface App {
-    fun getApplicationContext(): Context
-}
 
 interface MainToolsProvider {
     fun provideContext(): App
+    fun provideActiveActivityHolder(): ActiveActivityHolder
 }
 
-@[PerApplication Component]
+@[PerApplication Component(
+    modules = [MainToolsModule::class]
+)]
 interface MainToolsComponent : MainToolsProvider {
 
     @Component.Builder
@@ -26,10 +27,14 @@ interface MainToolsComponent : MainToolsProvider {
 
     class Initializer private constructor() {
         companion object {
-
-            fun init(app: App): MainToolsProvider = DaggerMainToolsComponent.builder()
-                .app(app)
-                .build()
+            fun init(app: App): MainToolsProvider = DaggerMainToolsComponent.builder().app(app).build()
         }
     }
+}
+
+@Module
+internal class MainToolsModule {
+    @Provides
+    @PerApplication
+    fun provideActiveActivityHolder(): ActiveActivityHolder = ActiveActivityHolder()
 }

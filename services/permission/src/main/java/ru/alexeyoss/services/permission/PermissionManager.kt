@@ -1,10 +1,11 @@
 package ru.alexeyoss.services.permission
 
 import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts.*
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker.*
 import androidx.fragment.app.FragmentActivity
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -13,13 +14,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import ru.alexeyoss.core.common.activity.ActiveActivityHolder
@@ -28,6 +26,7 @@ import ru.alexeyoss.services.preference.prefs.PermissionsPrefs
 import timber.log.Timber
 import javax.inject.Inject
 
+// TODO REFACTOR
 /**
  * Класс для проверки и запросов разрешений.
  */
@@ -36,22 +35,30 @@ class PermissionManager
     @CoroutinesModule.MainDispatcher private val mainDispatcher: CoroutineDispatcher,
     @CoroutinesModule.IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     private val activeActivityHolder: ActiveActivityHolder,
-    private val permissionsPrefs: PermissionsPrefs,
+    private val permissionsPrefs: PermissionsPrefs
 ) {
-
     private val mainJob = Job()
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable -> Timber.i(throwable) }
     private val uiScope = CoroutineScope(mainDispatcher + mainJob + exceptionHandler)
-
-    private suspend fun performPermissionRequest(permissionRequest: PermissionRequest): Flow<Boolean> {
-        return callbackFlow {
-            safeGetActivity().registerForActivityResult(
-                RequestMultiplePermissions()
-            ) { grantResult ->
-                // TODO implement correct workflow
-                if (grantResult.all { perm -> perm.value }) trySend(true) else trySend(false)
-            }.launch(permissionRequest.permissions)
+    fun activityResultCallback(result: Map<String, Boolean>) {
+        val locationPermissions = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && result.keys.toTypedArray()
+                .contentEquals(locationPermissions)
+        ) {
+            result.values.any { it }
+        } else {
+            result.values.all { it }
         }
+    }
+
+    private fun performPermissionRequest(permissionRequest: PermissionRequest): Flow<Boolean> {
+//        registerActivityResultContract.registerActivityResult(
+//            RequestMultiplePermissions(),
+//            permissionRequest.permissions
+//        )
+        return flowOf(false)
     }
 
     /**
@@ -62,10 +69,10 @@ class PermissionManager
      * @return Статус разрешения [PermissionStatus].
      */
     suspend fun check(permissionRequest: PermissionRequest): PermissionStatus {
-        return checkInternal(permissionRequest).single()
+        return checkInternal(permissionRequest).first()
     }
 
-    /**1
+    /**
      * Запросить разрешение.
      *
      * @param permissionRequest Выполняемый [PermissionRequest].
@@ -74,28 +81,25 @@ class PermissionManager
      */
 
     suspend fun request(permissionRequest: PermissionRequest): Flow<Boolean> {
-//        cancelAllJobs()
-        return checkInternal(permissionRequest).flatMapMerge { permissionRequestStatus ->
+        return checkInternal(permissionRequest).flatMapLatest { permissionRequestStatus ->
             if (permissionRequestStatus.isGranted) {
                 flowOf(true)
             } else {
-                showPermissionRequestRationalIfNeeded(permissionRequest)
-                    .flatMapMerge {
-                        performPermissionRequestByDialogOrSettings(
-                            permissionRequest, permissionRequestStatus
-                        )
-                    }.onEach { isGranted ->
-                        // TODO not working
-                        setPermissionRequestIsRequested(permissionRequest)
-                        setPermissionRequestIsGranted(permissionRequest, isGranted)
-                    }
+                showPermissionRequestRationalIfNeeded(permissionRequest).flatMapLatest {
+                    performPermissionRequestByDialogOrSettings(
+                        permissionRequest, permissionRequestStatus
+                    )
+                }.onEach { isGranted ->
+                    setPermissionRequestIsRequested(permissionRequest)
+                    setPermissionRequestIsGranted(permissionRequest, isGranted)
+                }
             }
         }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun checkInternal(permissionRequest: PermissionRequest): Flow<PermissionStatus> {
-        return isPermissionRequestGranted(permissionRequest).flatMapMerge { isGranted ->
+        return isPermissionRequestGranted(permissionRequest).flatMapLatest { isGranted ->
             val status = when {
                 isGranted -> PermissionStatus.GRANTED
                 !isPermissionRequestRequested(permissionRequest) -> PermissionStatus.NOT_REQUESTED
@@ -104,14 +108,6 @@ class PermissionManager
                 else -> PermissionStatus.DENIED_FOREVER
             }
             flowOf(status)
-        }
-    }
-
-    private suspend fun onPermissionResult(results: Map<String, Boolean>) {
-        if (results.all { permission -> permission.value }) {
-            // TODO set permission location to toolbar
-        } else {
-
         }
     }
 //
@@ -134,45 +130,44 @@ class PermissionManager
 //        permissionDisposable = screenResultObserver.observeScreenResult(route).firstOrError().subscribe({}, {})
 //    }
 
+    // TODO check is it useful?
     private fun cancelAllJobs() {
         uiScope.coroutineContext.cancelChildren()
     }
 
 
-    private suspend fun isPermissionRequestGranted(permissionRequest: PermissionRequest): Flow<Boolean> {
+    private fun isPermissionRequestGranted(permissionRequest: PermissionRequest): Flow<Boolean> {
         val requestPermissions = permissionRequest.permissions
         val locationPermissions = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
         )
         val checkedPermissions = requestPermissions.map { permission -> isPermissionGranted(permission) }
-        return flow {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && requestPermissions.contentEquals(locationPermissions)) {
-                checkedPermissions.any { it }
-            } else {
-                checkedPermissions.all { it }
-            }
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && requestPermissions.contentEquals(
+                locationPermissions
+            )
+        ) {
+            flowOf(checkedPermissions.any { it })
+        } else {
+            flowOf(checkedPermissions.all { it })
         }
     }
 
 
     private fun showPermissionRequestRationalIfNeeded(permissionRequest: PermissionRequest): Flow<Boolean> {
-        return callbackFlow {
-            if (needToShowPermissionRequestRational(permissionRequest)) trySend(true) else trySend(false)
+        return if (needToShowPermissionRequestRational(permissionRequest)) flowOf(true) else flowOf(false)
 //            showPermissionRequestRational(permissionRequest)
-        }
     }
 
     private fun needToShowPermissionRequestRational(permissionRequest: PermissionRequest): Boolean =
         permissionRequest.showPermissionsRational && shouldShowRequestPermissionRationale(permissionRequest)
 
-    private suspend fun performPermissionRequestByDialogOrSettings(
-        permissionRequest: PermissionRequest,
-        permissionStatus: PermissionStatus
-    ): Flow<Boolean> = callbackFlow {
-        when {
+    private fun performPermissionRequestByDialogOrSettings(
+        permissionRequest: PermissionRequest, permissionStatus: PermissionStatus
+    ): Flow<Boolean> {
+        return when {
             permissionStatus != PermissionStatus.DENIED_FOREVER -> performPermissionRequest(permissionRequest)
-            permissionRequest.showSettingsRational -> Unit// TODO performPermissionRequestBySettings(permissionRequest)
-            else -> trySend(false)
+            permissionRequest.showSettingsRational -> flowOf(false) // TODO performPermissionRequestBySettings(permissionRequest)
+            else -> flowOf(false)
         }
     }
 
@@ -211,16 +206,14 @@ class PermissionManager
     private suspend fun isPermissionRequestRequested(permissionRequest: PermissionRequest): Boolean =
         permissionRequest.permissions.all { permission -> isPermissionRequested(permission) }
 
-    private suspend fun isPermissionGranted(permission: String): Boolean = with(mainDispatcher) {
-        // TODO not working
-        return false
-        // safeGetActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
-
-    }
-
-
     private suspend fun isPermissionRequested(permission: String) = withContext(ioDispatcher) {
         permissionsPrefs.isPermissionRequested(permission)
+    }
+
+    private fun isPermissionGranted(permission: String): Boolean = safeGetActivity().let { fragmentActivity ->
+        ContextCompat.checkSelfPermission(
+            fragmentActivity, permission
+        ) == PERMISSION_GRANTED
     }
 
     private suspend fun isPermissionRequestLastGranted(permissionRequest: PermissionRequest): Boolean =
@@ -300,8 +293,9 @@ class PermissionManager
 //            .doOnSubscribe { commandExecutor.execute(StartForResult(route)) }
 //    }
 
-    private suspend fun safeGetActivity(): FragmentActivity = withContext(mainDispatcher) {
-        activeActivityHolder.activityFlow.first()
+    private fun safeGetActivity(): FragmentActivity {
+        if (activeActivityHolder.isActivityExist) return activeActivityHolder.activity!!
+        else throw NullPointerException()
     }
 
     private companion object {

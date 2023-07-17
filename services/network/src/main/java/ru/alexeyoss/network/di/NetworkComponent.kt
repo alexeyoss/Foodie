@@ -11,7 +11,6 @@ import ru.alexeyoss.core.common.di.scope.PerApplication
 import ru.alexeyoss.network.BuildConfig
 import ru.alexeyoss.network.MainApiService
 import timber.log.Timber
-import java.util.concurrent.TimeUnit
 
 
 interface NetworkProvider {
@@ -38,7 +37,6 @@ internal object NetworkModule {
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .callTimeout(30, TimeUnit.SECONDS)
             .build()
     }
 

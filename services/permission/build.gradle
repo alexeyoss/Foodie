@@ -32,6 +32,7 @@ android {
 dependencies {
     implementation libs.android.coreKtx
     implementation libs.android.fragmentKtx
+    implementation libs.android.activityKtx
 
     implementation libs.google.dagger
     kapt libs.google.daggerCompiler

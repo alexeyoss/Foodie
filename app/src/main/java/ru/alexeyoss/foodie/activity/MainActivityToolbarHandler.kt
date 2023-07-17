@@ -10,12 +10,13 @@ import javax.inject.Inject
 
 class MainActivityToolbarHandler
 @Inject constructor(
-    private val activity: MainActivity,
-    containerId: Int
+    private val activity: MainActivity, containerId: Int
 ) : ToolbarHandler<MainActivity, ToolbarStates>(activity, containerId) {
 
     init {
-        activity.binding.customToolbar.setNavigationOnClickListener { activity.onBackPressed() }
+        activity.binding.customToolbar.setNavigationOnClickListener {
+            @Suppress("DEPRECATION") activity.onBackPressed()
+        }
     }
 
     override val binding: ActivityMainBinding = activity.binding

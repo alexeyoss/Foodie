@@ -33,9 +33,9 @@ class FoodieApp : Application(), App,
         super.onCreate()
         appComponent.inject(this@FoodieApp)
         registerActiveActivityListener()
-
         setDebugLogging()
     }
+
 
     private fun registerActiveActivityListener() {
         registerActivityLifecycleCallbacks(object : DefaultActivityLifecycleCallbacks {
@@ -56,7 +56,7 @@ class FoodieApp : Application(), App,
         }
     }
 
-    // HelpMe The best way how provide deps without boilerplate code
+    // TODO build common AppComponentProvider interface for providing AppComponent
     override fun getCategoryDeps(): CategoriesDeps = appComponent
     override fun getDishesDeps(): DishesDeps = appComponent
     override fun getCartDeps(): CartDeps = appComponent

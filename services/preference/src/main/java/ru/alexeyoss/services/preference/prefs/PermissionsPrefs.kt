@@ -10,17 +10,13 @@ import ru.alexeyoss.core.common.di.App
 import ru.alexeyoss.services.preference.saveOperation
 import javax.inject.Inject
 
+// TODO DEBUG
 class PermissionsPrefs
 @Inject constructor(app: App) {
-
     // TODO check MemoryLeak
     private val context: Context = app.getApplicationContext()
 
     private val Context.dataStore by preferencesDataStore(name = PERMISSION_PREFERENCE_NAME)
-
-    private object PreferencesKeys {
-        val isGranted = booleanPreferencesKey(name = IS_GRANTED)
-    }
 
     suspend fun setPermissionIsRequested(permission: String, isRequested: Boolean): Boolean {
         return saveOperation(PERMISSION_PREFERENCE_NAME) {
@@ -51,8 +47,7 @@ class PermissionsPrefs
     }
 
     companion object {
-        const val PERMISSION_PREFERENCE_NAME = "PERMISSION_PREFERENCE"
-        const val IS_GRANTED = "isGranted"
+        const val PERMISSION_PREFERENCE_NAME = "permission_preference"
     }
 
 }
