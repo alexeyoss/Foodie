@@ -52,7 +52,6 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         initRecyclerView()
         initListeners()
-        binding.shimmerLayout
         shimmerLayout.startShimmer()
 
         viewModel.getCategories()
@@ -109,6 +108,11 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
     override fun onBackPressed(): Boolean {
         categoryRouter.goBack()
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.shimmerLayout.removeAllViews()
     }
 
     companion object {

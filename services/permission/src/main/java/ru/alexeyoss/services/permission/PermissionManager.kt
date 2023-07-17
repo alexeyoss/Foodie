@@ -206,8 +206,8 @@ class PermissionManager
     private suspend fun isPermissionRequestRequested(permissionRequest: PermissionRequest): Boolean =
         permissionRequest.permissions.all { permission -> isPermissionRequested(permission) }
 
-    private suspend fun isPermissionRequested(permission: String) = withContext(ioDispatcher) {
-        permissionsPrefs.isPermissionRequested(permission)
+    private suspend fun isPermissionRequested(permission: String): Boolean = withContext(ioDispatcher) {
+        return@withContext permissionsPrefs.isPermissionRequested(permission)
     }
 
     private fun isPermissionGranted(permission: String): Boolean = safeGetActivity().let { fragmentActivity ->
@@ -219,8 +219,8 @@ class PermissionManager
     private suspend fun isPermissionRequestLastGranted(permissionRequest: PermissionRequest): Boolean =
         permissionRequest.permissions.all { permission -> isPermissionLastGranted(permission) }
 
-    private suspend fun isPermissionLastGranted(permission: String) = withContext(ioDispatcher) {
-        permissionsPrefs.isPermissionLastGranted(GRANTED_PREFIX + permission)
+    private suspend fun isPermissionLastGranted(permission: String) : Boolean = withContext(ioDispatcher) {
+        return@withContext permissionsPrefs.isPermissionLastGranted(GRANTED_PREFIX + permission)
     }
 
 
@@ -277,7 +277,7 @@ class PermissionManager
      * пользователь выбрал опцию "Don't ask again".
      */
     private suspend fun shouldShowPermissionRationale(permission: String): Boolean = withContext(mainDispatcher) {
-        safeGetActivity().let { activity ->
+        return@withContext safeGetActivity().let { activity ->
             ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)
         }
     }
