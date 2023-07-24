@@ -22,6 +22,9 @@
         <!-- Shapes. -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Foodie.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Foodie.MediumComponent</item>
+        <!--Dialogs-->
+        <item name="materialAlertDialogTheme">@style/Theme.Foodie.AlertDialog.Light</item>
+        <item name="dialogTheme">@style/Theme.Foodie.Dialog.CustomSize</item>
         <!-- Typography. -->
         <item name="textAppearanceHeadline1">@style/TextAppearance.Foodie.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.Foodie.Headline2</item>

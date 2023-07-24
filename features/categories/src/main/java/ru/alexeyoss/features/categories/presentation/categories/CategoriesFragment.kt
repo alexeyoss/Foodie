@@ -110,11 +110,6 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
         return true
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.shimmerLayout.removeAllViews()
-    }
-
     companion object {
         const val ITEM_VERTICAL_MARGIN = 8
 

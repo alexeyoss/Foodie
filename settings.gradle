@@ -7,6 +7,7 @@ pluginManagement {
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+
     repositories {
         google()
         mavenCentral()
@@ -22,9 +23,8 @@ include ':services'
 include ':services:data'
 include ':services:network'
 include ':services:location'
-include ':services:permission'
 include ':services:navigation'
-include ':services:preference'
+//include ':services:preference'
 include ':core'
 include ':core_ui'
 include ':core:common'

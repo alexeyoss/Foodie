@@ -5,4 +5,7 @@
     <string name="default_dishWeight">• - г</string>
     <string name="valuedDishWeight">• %1$sг</string>
     <string name="dishes_picture_desc">Dishes picture</string>
+    <string name="defaultPositiveBtnText">Да</string>
+    <string name="defaultRationalText">Для корректной работы нашего приложения мы используем ряд
+        пользовательских разрешений.</string>
 </resources>

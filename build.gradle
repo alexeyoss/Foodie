@@ -37,11 +37,34 @@ buildscript {
         circleImageView_version = "3.1.0"
         glide_version = "4.15.1"
         cicerone_version = "7.1"
+        permissions_versions = "1.0.0"
 
         /* Test features*/
         bottomNavViewEx_version = "2.0.4"
 
 
+        Modules = [
+                Core    : [
+                        common: ":core:common",
+                ],
+                CoreUi  : [
+                        presentation: ":core_ui:presentation",
+                        theme       : ":core_ui:theme",
+                ],
+                Features: [
+                        cart      : ":features:cart",
+                        categories: ":features:categories",
+                        dishes    : ":features:dishes"
+                ],
+
+                Services: [
+                        data      : ":services:data",
+                        location  : ":services:location",
+                        navigation: ":services:navigation",
+                        network   : ":services:network",
+                        preference: ":services:preference",
+                ]
+        ]
         libs = [
                 android        : [
                         coreKtx              : "androidx.core:core-ktx:$coreKtx_version",
@@ -78,37 +101,14 @@ buildscript {
                 ],
 
                 additionalstuff: [
-                        timber         : "com.jakewharton.timber:timber:$timber_version",
-                        circleImageView: "de.hdodenhof:circleimageview:$circleImageView_version",
-                        glide          : "com.github.bumptech.glide:glide:$glide_version",
-                        cicerone       : "com.github.terrakok:cicerone:$cicerone_version"
+                        timber              : "com.jakewharton.timber:timber:$timber_version",
+                        circleImageView     : "de.hdodenhof:circleimageview:$circleImageView_version",
+                        glide               : "com.github.bumptech.glide:glide:$glide_version",
+                        cicerone            : "com.github.terrakok:cicerone:$cicerone_version",
+                        permissions         : "com.vmadalin:easypermissions-ktx:$permissions_versions",
                 ],
         ]
 
-        Modules = [
-                Core    : [
-                        common: ":core:common",
-                ],
-                CoreUi  : [
-                        presentation: ":core_ui:presentation",
-                        theme       : ":core_ui:theme",
-                ],
-                Features: [
-                        cart      : ":features:cart",
-                        categories: ":features:categories",
-                        dishes    : ":features:dishes"
-                ],
-
-                Services: [
-                        location  : ":services:location",
-                        dataStore : ":services:dataStore",
-                        permission: ":services:permission",
-                        navigation: ":services:navigation",
-                        network   : ":services:network",
-                        data      : ":services:data",
-                        preference: ":services:preference",
-                ]
-        ]
     }
 }
 

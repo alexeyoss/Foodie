@@ -15,7 +15,8 @@ class MainActivityToolbarHandler
 
     init {
         activity.binding.customToolbar.setNavigationOnClickListener {
-            @Suppress("DEPRECATION") activity.onBackPressed()
+            @Suppress("DEPRECATION")
+            activity.onBackPressed()
         }
     }
 

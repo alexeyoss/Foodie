@@ -16,23 +16,15 @@ import ru.alexeyoss.features.cart.di.CartDeps
 import ru.alexeyoss.features.categories.di.CategoriesDeps
 import ru.alexeyoss.features.dishes.di.DishesDeps
 import ru.alexeyoss.foodie.FoodieApp
+import ru.alexeyoss.foodie.activity.MainActivity
+import ru.alexeyoss.foodie.activity.MainActivityViewModel
 import ru.alexeyoss.foodie.mediators.cart.di.CartMediatorModule
 import ru.alexeyoss.foodie.mediators.categories.di.CategoriesMediatorModule
 import ru.alexeyoss.foodie.mediators.dishes.di.DishesMediatorModule
-import ru.alexeyoss.foodie.activity.MainActivity
-import ru.alexeyoss.foodie.activity.MainActivityViewModel
 import ru.alexeyoss.services.navigation.di.NavigationComponent
 import ru.alexeyoss.services.navigation.di.NavigationProvider
-import ru.alexeyoss.services.permission.di.PermissionComponent
-import ru.alexeyoss.services.permission.di.PermissionProvider
 
-interface AppComponentProvider :
-    MainToolsProvider,
-    DataProvider,
-    NavigationProvider,
-    PermissionProvider,
-    CategoriesDeps,
-    DishesDeps,
+interface AppComponentProvider : MainToolsProvider, DataProvider, NavigationProvider, CategoriesDeps, DishesDeps,
     CartDeps
 
 
@@ -47,7 +39,6 @@ interface AppComponentProvider :
         MainToolsProvider::class,
         DataProvider::class,
         NavigationProvider::class,
-        PermissionProvider::class,
     ]
 )]
 
@@ -62,24 +53,15 @@ interface AppComponent : AppComponentProvider {
 
             fun init(app: FoodieApp): AppComponent {
 
-                val mainToolsProvider = MainToolsComponent.Initializer
-                    .init(app)
+                val mainToolsProvider = MainToolsComponent.Initializer.init(app)
 
-                val permissionComponent = PermissionComponent.Initializer
-                    .init(mainToolsProvider)
 
-                val dataComponent = DataComponent.Initializer
-                    .init()
+                val dataComponent = DataComponent.Initializer.init()
 
-                val navigationProvider = NavigationComponent.Initializer
-                    .init()
+                val navigationProvider = NavigationComponent.Initializer.init()
 
-                return DaggerAppComponent.builder()
-                    .mainToolsProvider(mainToolsProvider)
-                    .dataProvider(dataComponent)
-                    .navigationProvider(navigationProvider)
-                    .permissionProvider(permissionComponent)
-                    .build()
+                return DaggerAppComponent.builder().mainToolsProvider(mainToolsProvider).dataProvider(dataComponent)
+                    .navigationProvider(navigationProvider).build()
 
             }
         }

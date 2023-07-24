@@ -13,7 +13,6 @@ import javax.inject.Inject
 // TODO DEBUG
 class PermissionsPrefs
 @Inject constructor(app: App) {
-    // TODO check MemoryLeak
     private val context: Context = app.getApplicationContext()
 
     private val Context.dataStore by preferencesDataStore(name = PERMISSION_PREFERENCE_NAME)

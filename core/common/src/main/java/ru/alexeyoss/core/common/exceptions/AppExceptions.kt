@@ -1,4 +1,4 @@
-package ru.alexeyoss.core.common
+package ru.alexeyoss.core.common.exceptions
 
 
 /**

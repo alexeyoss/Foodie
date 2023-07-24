@@ -13,7 +13,7 @@
 
     <style name="Widget.Foodie.Button.Primary.LargeSize" parent="Widget.MaterialComponents.Button">
         <item name="android:paddingTop">@dimen/specific_padding</item>
-        <item name="android:colorButtonNormal">?attr/colorPrimaryVariant</item>
+        <item name="colorButtonNormal">?attr/colorPrimaryVariant</item>
         <item name="android:paddingBottom">@dimen/specific_padding</item>
         <item name="backgroundTint">?attr/colorPrimaryVariant</item>
         <item name="android:letterSpacing">0.1</item>
@@ -52,13 +52,29 @@
         <item name="android:background">?selectableItemBackgroundBorderless</item>
     </style>
 
-    <!-- Dialogs. -->
+    <!-- Dialogs.-->
+
     <style name="Theme.Foodie.Dialog" parent="Theme.MaterialComponents.Dialog">
         <item name="theme">@style/Theme.Foodie</item>
     </style>
 
     <style name="Theme.Foodie.Dialog.CustomSize" parent="Theme.Foodie.Dialog">
         <item name="android:windowBackground">@drawable/dish_details_background</item>
+    </style>
+
+    <!--Alert Dialog.-->
+    <style name="Theme.Foodie.AlertDialog.Light" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        // TODO windowBackground isn't applied
+        <item name="android:windowBackground">@drawable/dish_details_background</item>
+        <item name="android:textColorPrimary">?attr/itemTextColor</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Foodie.AlertDialog.ButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Foodie.AlertDialog.ButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Foodie.AlertDialog.ButtonStyle</item>
+    </style>
+
+    <style name="Widget.Foodie.AlertDialog.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">?attr/itemTextColor</item>
+        <item name="android:letterSpacing">0.0</item>
     </style>
 
 </resources>

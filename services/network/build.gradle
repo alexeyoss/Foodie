@@ -9,30 +9,8 @@ android {
     compileSdk targetAndroidSdk
 
     defaultConfig {
-        minSdk minAndroidSdk
-        targetSdk targetAndroidSdk
-
-    }
-
-    buildTypes {
-
-        debug {
-            // TODO Extract from data module and provide aas a dependency from appComponent
-            buildConfigField("String", "BASE_URL", "\"https://run.mocky.io/\"")
-            buildConfigField("String", "API_VERSION", "\"v3/\"")
-        }
-
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
+        buildConfigField("String", "BASE_URL", "\"https://run.mocky.io/\"")
+        buildConfigField("String", "API_VERSION", "\"v3/\"")
     }
 }
 

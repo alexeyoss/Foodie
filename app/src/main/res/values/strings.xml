@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Foodie</string>
-    <string name="premissionRationalText">Разрешение требуется для корректно отображения продуктовой линейки</string>
-    <string name="settingsRationalText">Разрешение требуется для корректно отображения продуктовой линейки</string>
+
+    <string name="locationRationalText">Для корректной работы продуктовых предложений мы используем местоположение
+        пользователя.</string>
+    <string name="appSettingsBtnText"> Перейти в настройки</string>
 </resources>

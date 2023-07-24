@@ -1,7 +1,7 @@
 package ru.alexeyoss.services.preference.di
 
 import dagger.Component
-import dagger.Module
+import ru.alexeyoss.core.common.di.MainToolsComponent
 import ru.alexeyoss.core.common.di.MainToolsProvider
 import ru.alexeyoss.core.common.di.scope.PerApplication
 import ru.alexeyoss.services.preference.prefs.PermissionsPrefs
@@ -12,11 +12,14 @@ interface PreferenceProvider {
 }
 
 @[PerApplication Component(
-    modules = [PreferenceModule::class],
     dependencies = [MainToolsProvider::class]
 )]
-interface PreferenceComponent : PreferenceProvider
+interface PreferenceComponent : PreferenceProvider {
 
-@Module
-internal class PreferenceModule
+    @Component.Builder
+    interface Builder {
+        fun deps(mainToolsComponent: MainToolsComponent): Builder
+        fun build(): PreferenceComponent
+    }
+}
 

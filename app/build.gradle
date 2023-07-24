@@ -48,6 +48,8 @@ kapt {
 }
 
 dependencies {
+    // Uncomment if you want to run with leak canary
+    //    debugImplementation libs.squareup.leakCanary
 
     implementation libs.android.coreKtx
     implementation libs.android.appCompat
@@ -60,7 +62,7 @@ dependencies {
     implementation libs.additionalstuff.cicerone
     implementation libs.additionalstuff.circleImageView
 
-    debugImplementation libs.squareup.leakCanary
+    implementation libs.additionalstuff.permissions
 
     implementation libs.google.material
 
@@ -79,5 +81,4 @@ dependencies {
 
     implementation project(Modules.Services.location)
     implementation project(Modules.Services.navigation)
-    implementation project(Modules.Services.permission)
 }
