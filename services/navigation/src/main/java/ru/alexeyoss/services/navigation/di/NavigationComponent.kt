@@ -26,16 +26,16 @@ interface NavigationComponent : NavigationProvider {
 }
 
 @Module
-object NavigationModule {
+internal object NavigationModule {
     private val cicerone: Cicerone<Router> = Cicerone.create()
 
     @Provides
-    fun provideRouter(): Router {
+    internal fun provideRouter(): Router {
         return cicerone.router
     }
 
     @Provides
-    fun provideNavigatorHolder(): NavigatorHolder {
+    internal fun provideNavigatorHolder(): NavigatorHolder {
         return cicerone.getNavigatorHolder()
     }
 }

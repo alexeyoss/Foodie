@@ -1,0 +1,30 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "kotlin-kapt"
+}
+
+android {
+    namespace "ru.alexeyoss.network"
+    compileSdk targetAndroidSdk
+
+    defaultConfig {
+        buildConfigField("String", "BASE_URL", "\"https://run.mocky.io/\"")
+        buildConfigField("String", "API_VERSION", "\"v3/\"")
+    }
+}
+
+dependencies {
+
+    implementation libs.squareup.retrofit
+    implementation libs.squareup.gsonConverter
+    implementation libs.squareup.okhttp
+    implementation libs.squareup.loggingInterceptor
+
+    implementation libs.google.dagger
+    kapt libs.google.daggerCompiler
+
+    implementation libs.additionalstuff.timber
+
+    implementation project(Modules.Core.common)
+}

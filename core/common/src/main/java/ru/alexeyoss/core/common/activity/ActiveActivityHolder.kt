@@ -2,8 +2,6 @@ package ru.alexeyoss.core.common.activity
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
 import javax.inject.Inject
 
 class ActiveActivityHolder
@@ -11,8 +9,9 @@ class ActiveActivityHolder
 
     var activity: FragmentActivity? = null
 
-    val activityFlow: Flow<FragmentActivity> = listOfNotNull(activity).asFlow()
-
+    /**
+     * Check does activity exist
+     * */
     val isActivityExist: Boolean
         get() = activity != null
 

@@ -1,28 +1,36 @@
 package ru.alexeyoss.foodie.activity
 
-import android.Manifest
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import ru.alexeyoss.core.common.activity.ActiveActivityHolder
+import dagger.Lazy
+import ru.alexeyoss.core_ui.presentation.AlertDialogBuilder
 import ru.alexeyoss.core_ui.presentation.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import ru.alexeyoss.foodie.navigation.Screens
+import ru.alexeyoss.foodie.permission.LocationPermissionRequest
+import ru.alexeyoss.foodie.permission.LocationPermissionRequest.permissions
 import javax.inject.Inject
 
-class MainActivity :
-    AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     val binding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityMainBinding.inflate(layoutInflater)
     }
+
+    @Inject
+    internal lateinit var viewModelFactory: Lazy<MainActivityViewModel.Factory>
+    private val viewModel by viewModels<MainActivityViewModel> { viewModelFactory.get() }
 
     @Inject
     lateinit var router: Router
@@ -30,25 +38,18 @@ class MainActivity :
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    @Inject
-    lateinit var activeActivityHolder: ActiveActivityHolder
-
-
     private val toolbarHandler by lazy {
         MainActivityToolbarHandler(
-            activity = this@MainActivity,
-            containerId = R.id.navHostFragment
+            activity = this@MainActivity, containerId = R.id.navHostFragment
         )
     }
 
-    private val navigator = AppNavigator(
-        activity = this@MainActivity,
-        containerId = R.id.navHostFragment,
-        fragmentManager = supportFragmentManager
-    )
+    private val locationPermissionLauncher by lazy {
+        registerForActivityResult(RequestMultiplePermissions(), ::onLocationPermissionResult)
+    }
 
-    private val locationPermissionsLauncher = registerForActivityResult(
-        RequestMultiplePermissions(), ::onPermissionsResult
+    private val navigator = AppNavigator(
+        activity = this@MainActivity, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,15 +59,28 @@ class MainActivity :
         setContentView(binding.root)
         setSupportActionBar(binding.customToolbar)
 
-        activeActivityHolder.registerActiveActivity(this@MainActivity)
 
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))
         }
 
-        locationPermissionsLauncher.launch(permissionList)
+        locationPermissionLauncher.launch(permissions)
+
+        registerToolbarHandler()
         initListeners()
+    }
+
+    private fun registerToolbarHandler() {
+        lifecycle.addObserver(object : DefaultLifecycleObserver {
+            override fun onCreate(owner: LifecycleOwner) {
+                toolbarHandler.addToolbarStateListener()
+            }
+
+            override fun onDestroy(owner: LifecycleOwner) {
+                toolbarHandler.removeToolbarStateListener()
+            }
+        })
     }
 
     private fun initListeners() {
@@ -79,8 +93,6 @@ class MainActivity :
             }
             true
         }
-
-        toolbarHandler.addToolbarStateListener()
     }
 
     override fun onResumeFragments() {
@@ -103,33 +115,32 @@ class MainActivity :
         }
     }
 
-
-    // TODO extract logic to [ViewModel] -> [PermissionManager]
-    private val permissionList = arrayOf(
-        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
-    )
-
-    // TODO extract logic to [ViewModel] -> [PermissionManager]
-    private fun onPermissionsResult(grantResult: Map<String, Boolean>) {
-        if (grantResult.all { permission -> permission.value }) {
-            // TODO set permission location to toolbar
+    // HelpMe is it correct to build independent Permission Manager ?
+    private fun onLocationPermissionResult(result: Map<String, Boolean>) {
+        if (result.all { permission -> permission.value }) {
+            // TODO start location service  OR set locationInfo into Toolbar
         } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this, Manifest.permission.ACCESS_FINE_LOCATION
+            if (shouldShowRequestPermissionRationale(
+                    this@MainActivity, permissions.first()
                 )
             ) {
-                locationPermissionsLauncher.launch(permissionList)
+                locationPermissionLauncher.launch(permissions)
             } else {
-                // TODO Set default value to User location into Toolbar
+                // TODO set default position
+                if (LocationPermissionRequest.showPermissionsRational) {
+                    AlertDialogBuilder.createPermissionDialog(
+                        this@MainActivity,
+                        message = LocationPermissionRequest.permissionsRationalStr,
+                        positiveBtnText = R.string.appSettingsBtnText,
+                        onPositive = { router.navigateTo(LocationPermissionRequest.settingsRationalRoute!!) },
+                    ).show()
+                }
             }
         }
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
-        activeActivityHolder.removeActiveActivity()
-        toolbarHandler.removeToolbarStateListener()
         binding.bottomNavigationView.setOnItemSelectedListener(null)
     }
 }

@@ -49,23 +49,38 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         initRecyclerView()
         initListeners()
+        shimmerLayout.startShimmer()
+
         viewModel.getCategories()
+    }
+
+    override fun onPause() {
+        shimmerEffectGone()
+        super.onPause()
     }
 
     private fun initListeners() {
         viewModel.categoriesFlow.collectOnLifecycle(this@CategoriesFragment) { categoriesUiState ->
             when (categoriesUiState) {
-                // TODO implement other States
                 is CategoriesUiState.Error -> Unit
                 is CategoriesUiState.Initial -> Unit
                 is CategoriesUiState.Loading -> Unit
-                is CategoriesUiState.Success -> categoryAdapter.submitList(categoriesUiState.data)
+                is CategoriesUiState.Success -> {
+                    shimmerEffectGone()
+                    categoryAdapter.submitList(categoriesUiState.data)
+                }
             }
 
         }
+    }
+
+    private fun shimmerEffectGone() {
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE
+        binding.recyclerView.visibility = View.VISIBLE
     }
 
     private fun initRecyclerView() = with(binding) {

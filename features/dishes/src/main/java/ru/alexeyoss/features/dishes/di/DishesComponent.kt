@@ -32,7 +32,7 @@ interface DishesComponent {
 @Module(
     includes = [CoroutinesModule::class]
 )
-interface DishesModule {
+internal interface DishesModule {
 
     @Binds
     @PerScreen
