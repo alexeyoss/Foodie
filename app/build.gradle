@@ -20,6 +20,10 @@ android {
     buildTypes {
 
         debug {
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher_debug"
+            ]
+
             applicationIdSuffix ".beta"
             ext.enableCrashlytics = false
             minifyEnabled false
@@ -27,6 +31,10 @@ android {
         }
 
         release {
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher_prod"
+            ]
+
             minifyEnabled true
             shrinkResources true
         }
@@ -79,6 +87,5 @@ dependencies {
     implementation project(Modules.Features.categories)
     implementation project(Modules.Features.dishes)
 
-    implementation project(Modules.Services.location)
     implementation project(Modules.Services.navigation)
 }

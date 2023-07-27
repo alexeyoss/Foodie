@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
-import ru.alexeyoss.core_ui.presentation.BackButtonListener
+import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
@@ -33,7 +33,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
     }
 
     @Inject
-    internal lateinit var categoryRouter: CategoryRouter
+    internal lateinit var categoryRouter: Lazy<CategoryRouter>
     private val binding by viewBinding<FragmentCategoriesBinding>()
     private val categoryAdapter = CategoriesAdapter(::onCategoryClick)
 
@@ -101,12 +101,12 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
     }
 
     private fun onCategoryClick(categoryName: String) {
-        categoryRouter.launchDishesScreen(categoryName)
+        categoryRouter.get().launchDishesScreen(categoryName)
     }
 
     override fun getToolbarState(): ToolbarStates = ToolbarStates.LocationView
     override fun onBackPressed(): Boolean {
-        categoryRouter.goBack()
+        categoryRouter.get().goBack()
         return true
     }
 

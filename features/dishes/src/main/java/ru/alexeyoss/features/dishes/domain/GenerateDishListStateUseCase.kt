@@ -13,7 +13,7 @@ class GenerateDishListStateUseCase
     @CoroutinesModule.DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(dishList: List<UiDishDTO>): DishListState {
-        // Extract unique tags from Api response [UiDishDTO] /Build common [Set] of [UiFilterDTO]s
+        // Extract unique tags from Api response [UiDishDTO] Build common [Set] of [UiFilterDTO]s
         val filtersSet = withContext(defaultDispatcher) {
             dishList
                 .flatMap { uiDish -> uiDish.tegs }

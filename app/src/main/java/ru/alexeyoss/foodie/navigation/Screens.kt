@@ -12,6 +12,10 @@ import ru.alexeyoss.foodie.BuildConfig
 
 object Screens {
 
+    /**
+     * [CategoriesFragment] is the start screen and exit from the app. If local backstack on BottomNavigationView
+     * sections is empty then goBack operation return to start screen [CategoriesFragment]
+     * */
     fun categories() = FragmentScreen {
         CategoriesFragment.getNewInstance()
     }

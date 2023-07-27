@@ -1,4 +1,4 @@
-package ru.alexeyoss.core_ui.presentation
+package ru.alexeyoss.core_ui.presentation.listeners
 
 /**
  * Base interface for BackButtonClicks handling

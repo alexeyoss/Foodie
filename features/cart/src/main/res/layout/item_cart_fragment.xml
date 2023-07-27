@@ -19,6 +19,7 @@
     <include
         android:id="@+id/titleWithPriceAndWeight"
         layout="@layout/dish_title_with_price_and_weight"
+        android:layout_marginStart="@dimen/small_margin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

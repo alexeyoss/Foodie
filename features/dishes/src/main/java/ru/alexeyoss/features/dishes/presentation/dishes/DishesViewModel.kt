@@ -48,12 +48,7 @@ class DishesViewModel
         viewModelScope.launch(ioDispatcher + exceptionHandler) {
             getDishesUseCase.invoke().collect { container ->
                 when (container) {
-                    is Container.Error -> {
-                        _sideEffects.emit(
-                            DishesSideEffects.Error(container.exception)
-                        )
-                    }
-
+                    is Container.Error -> _sideEffects.emit(DishesSideEffects.Error(container.exception))
                     is Container.Loading -> _sideEffects.emit(DishesSideEffects.Loading)
                     is Container.Success -> {
                         val newDishListState = generateDishListStateUseCase.invoke(container.extract())
@@ -67,7 +62,6 @@ class DishesViewModel
     }
 
     fun newFilterSelected(uiFilterDTO: UiFilterDTO) {
-
         // TODO use viewmodel savedstatehandle for prevent process kill by Android OS
         val lastDishListState = dishListState.value
 
