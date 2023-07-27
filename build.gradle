@@ -20,6 +20,7 @@ buildscript {
         material_version = "1.8.0"
         hilt_version = "2.46.1"
         dagger_version = "2.46.1"
+        locationService_version = "21.0.1"
 
         /* SquareUp */
         retrofit_version = "2.9.0"
@@ -80,9 +81,10 @@ buildscript {
                 ],
 
                 google         : [
-                        material      : "com.google.android.material:material:$material_version",
-                        dagger        : "com.google.dagger:dagger:$dagger_version",
-                        daggerCompiler: "com.google.dagger:dagger-compiler:$dagger_version",
+                        material       : "com.google.android.material:material:$material_version",
+                        dagger         : "com.google.dagger:dagger:$dagger_version",
+                        daggerCompiler : "com.google.dagger:dagger-compiler:$dagger_version",
+                        locationService: "com.google.android.gms:play-services-location:$locationService_version",
                 ],
 
                 squareup       : [
@@ -101,11 +103,11 @@ buildscript {
                 ],
 
                 additionalstuff: [
-                        timber              : "com.jakewharton.timber:timber:$timber_version",
-                        circleImageView     : "de.hdodenhof:circleimageview:$circleImageView_version",
-                        glide               : "com.github.bumptech.glide:glide:$glide_version",
-                        cicerone            : "com.github.terrakok:cicerone:$cicerone_version",
-                        permissions         : "com.vmadalin:easypermissions-ktx:$permissions_versions",
+                        timber         : "com.jakewharton.timber:timber:$timber_version",
+                        circleImageView: "de.hdodenhof:circleimageview:$circleImageView_version",
+                        glide          : "com.github.bumptech.glide:glide:$glide_version",
+                        cicerone       : "com.github.terrakok:cicerone:$cicerone_version",
+                        permissions    : "com.vmadalin:easypermissions-ktx:$permissions_versions",
                 ],
         ]
 

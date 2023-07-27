@@ -24,6 +24,9 @@ dependencies {
 
     implementation libs.google.material
 
+    implementation libs.additionalstuff.glide
+    implementation libs.additionalstuff.timber
+
     implementation libs.google.dagger
     kapt libs.google.daggerCompiler
 

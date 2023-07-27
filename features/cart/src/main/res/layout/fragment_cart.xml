@@ -17,6 +17,7 @@
         tools:listitem="@layout/item_cart_fragment" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/payBtnWithSum"
         style="?attr/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

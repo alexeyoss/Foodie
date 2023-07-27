@@ -26,4 +26,6 @@ data class DishDTO(
     @SerializedName("tegs")
     @Expose
     val tegs: ArrayList<String>
+
+    // TODO add additional filed "balance" for handling purchase operations
 )

@@ -13,7 +13,7 @@ import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.AlertDialogBuilder
-import ru.alexeyoss.core_ui.presentation.BackButtonListener
+import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding

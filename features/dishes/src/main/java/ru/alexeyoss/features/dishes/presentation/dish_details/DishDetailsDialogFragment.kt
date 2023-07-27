@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import ru.alexeyoss.core_ui.presentation.fragment.ARG_SCREEN
-import ru.alexeyoss.core_ui.presentation.BackButtonListener
+import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.viewBinding
 import ru.alexeyoss.features.dishes.R
 import ru.alexeyoss.features.dishes.databinding.FragmentDishDetailsDialogBinding
@@ -55,7 +55,7 @@ class DishDetailsDialogFragment :
     private fun initListeners() = with(binding) {
         favCloseButtons.closeBtn.setOnClickListener { dismiss() }
         // TODO logic with liked
-        favCloseButtons.favoriteBtn.setOnClickListener { Unit }
+        favCloseButtons.favoriteBtn.setOnClickListener {  }
     }
 
     companion object {

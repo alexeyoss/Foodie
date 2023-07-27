@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.fragment.ARG_SCREEN
-import ru.alexeyoss.core_ui.presentation.BackButtonListener
+import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateHolder
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle

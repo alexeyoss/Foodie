@@ -21,7 +21,7 @@
             app:srcCompat="@drawable/ic_minus" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/quantityTextView"
+            android:id="@+id/amountText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
