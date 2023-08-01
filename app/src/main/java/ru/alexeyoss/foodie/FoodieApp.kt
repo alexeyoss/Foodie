@@ -17,7 +17,8 @@ import ru.alexeyoss.foodie.di.AppComponent
 import timber.log.Timber
 import javax.inject.Inject
 
-class FoodieApp : Application(), App,
+class FoodieApp : Application(),
+    App,
     CategoriesComponentDepsProvider,
     DishesComponentDepsProvider,
     CartComponentDepsProvider {

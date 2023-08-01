@@ -3,6 +3,7 @@ package ru.alexeyoss.core_ui.presentation.toolbar
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener
+import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.viewbinding.ViewBinding
 
 /**
@@ -15,6 +16,8 @@ abstract class ToolbarHandler<A : FragmentActivity, T : BaseToolbarState>
 protected constructor(
     private val activity: A, @IdRes private val containerId: Int
 ) {
+
+    abstract val lifeCycleObserver : DefaultLifecycleObserver
 
     abstract val binding: ViewBinding
 

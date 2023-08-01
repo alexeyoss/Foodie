@@ -70,8 +70,6 @@ dependencies {
     implementation libs.additionalstuff.cicerone
     implementation libs.additionalstuff.circleImageView
 
-    implementation libs.additionalstuff.permissions
-
     implementation libs.google.material
 
     implementation libs.google.dagger
@@ -82,6 +80,7 @@ dependencies {
 
     implementation project(Modules.Services.data)
     implementation project(Modules.Services.network)
+    implementation project(Modules.Services.location)
 
     implementation project(Modules.Features.cart)
     implementation project(Modules.Features.categories)

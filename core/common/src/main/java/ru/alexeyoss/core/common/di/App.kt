@@ -9,6 +9,6 @@ interface App {
     fun getApplicationContext(): Context
 
     // TODO implement to get rid of boilerplate deps providing for features
-//    fun getApplicationComponent(): AppComponent
+    // fun getApplicationComponent(): AppComponent
 }
 

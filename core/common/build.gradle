@@ -5,6 +5,10 @@ plugins {
 }
 
 android {
+    defaultConfig {
+        minSdk minAndroidSdk
+    }
+
     namespace "ru.alexeyoss.core.common"
     compileSdk targetAndroidSdk
 }

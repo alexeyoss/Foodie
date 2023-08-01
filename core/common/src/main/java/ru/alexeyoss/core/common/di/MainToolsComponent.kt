@@ -32,7 +32,7 @@ interface MainToolsComponent : MainToolsProvider {
     }
 }
 
-@Module
+@Module()
 internal class MainToolsModule {
     @Provides
     @PerApplication

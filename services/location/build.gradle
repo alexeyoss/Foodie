@@ -5,6 +5,9 @@ plugins {
 }
 
 android {
+    defaultConfig {
+        minSdk minAndroidSdk
+    }
     namespace "ru.alexeyoss.services.location"
     compileSdk targetAndroidSdk
 }
@@ -14,6 +17,8 @@ dependencies {
 
     implementation libs.google.dagger
     implementation libs.google.locationService
+    api libs.google.locationService
+
     kapt libs.google.daggerCompiler
 
     implementation project(Modules.Core.common)

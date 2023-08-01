@@ -5,8 +5,6 @@ import androidx.activity.result.contract.ActivityResultContracts.RequestMultiple
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
@@ -15,6 +13,7 @@ import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.AlertDialogBuilder
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.foodie.R
+import ru.alexeyoss.foodie.activity.toolbar.MainActivityToolbarHandler
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import ru.alexeyoss.foodie.navigation.Screens
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<MainActivityViewModel.Factory>
-    private val viewModel by viewModels<MainActivityViewModel> { viewModelFactory.get() }
+    val viewModel by viewModels<MainActivityViewModel> { viewModelFactory.get() }
 
     @Inject
     lateinit var router: Router
@@ -40,7 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     private val toolbarHandler by lazy {
         MainActivityToolbarHandler(
-            activity = this@MainActivity, containerId = R.id.navHostFragment
+            activity = this@MainActivity,
+            containerId = R.id.navHostFragment
         )
     }
 
@@ -49,7 +49,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val navigator = AppNavigator(
-        activity = this@MainActivity, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
+        activity = this@MainActivity,
+        containerId = R.id.navHostFragment,
+        fragmentManager = supportFragmentManager
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,20 +69,9 @@ class MainActivity : AppCompatActivity() {
 
         locationPermissionLauncher.launch(permissions)
 
-        registerToolbarHandler()
+        lifecycle.addObserver(toolbarHandler.lifeCycleObserver)
+
         initListeners()
-    }
-
-    private fun registerToolbarHandler() {
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onCreate(owner: LifecycleOwner) {
-                toolbarHandler.addToolbarStateListener()
-            }
-
-            override fun onDestroy(owner: LifecycleOwner) {
-                toolbarHandler.removeToolbarStateListener()
-            }
-        })
     }
 
     private fun initListeners() {
@@ -115,18 +106,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // HelpMe is it correct to build independent Permission Manager ?
+    // TODO debug scenario with default location
     private fun onLocationPermissionResult(result: Map<String, Boolean>) {
         if (result.all { permission -> permission.value }) {
-            // TODO start location service  OR set locationInfo into Toolbar
+            viewModel.getLastKnownLocation()
         } else {
-            if (shouldShowRequestPermissionRationale(
-                    this@MainActivity, permissions.first()
-                )
+            if (shouldShowRequestPermissionRationale(this@MainActivity, permissions.first())
             ) {
                 locationPermissionLauncher.launch(permissions)
             } else {
-                // TODO set default position
                 if (LocationPermissionRequest.showPermissionsRational) {
                     AlertDialogBuilder.createPermissionDialog(
                         this@MainActivity,

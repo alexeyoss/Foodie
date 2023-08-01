@@ -38,10 +38,6 @@ buildscript {
         circleImageView_version = "3.1.0"
         glide_version = "4.15.1"
         cicerone_version = "7.1"
-        permissions_versions = "1.0.0"
-
-        /* Test features*/
-        bottomNavViewEx_version = "2.0.4"
 
 
         Modules = [
@@ -107,7 +103,6 @@ buildscript {
                         circleImageView: "de.hdodenhof:circleimageview:$circleImageView_version",
                         glide          : "com.github.bumptech.glide:glide:$glide_version",
                         cicerone       : "com.github.terrakok:cicerone:$cicerone_version",
-                        permissions    : "com.vmadalin:easypermissions-ktx:$permissions_versions",
                 ],
         ]
 

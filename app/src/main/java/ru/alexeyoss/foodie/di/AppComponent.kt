@@ -12,6 +12,8 @@ import ru.alexeyoss.core.common.di.scope.PerActivity
 import ru.alexeyoss.core.common.di.scope.PerApplication
 import ru.alexeyoss.data.di.DataComponent
 import ru.alexeyoss.data.di.DataProvider
+import ru.alexeyoss.di.DaggerLocationComponent
+import ru.alexeyoss.di.LocationProvider
 import ru.alexeyoss.features.cart.di.CartDeps
 import ru.alexeyoss.features.categories.di.CategoriesDeps
 import ru.alexeyoss.features.dishes.di.DishesDeps
@@ -24,7 +26,12 @@ import ru.alexeyoss.foodie.mediators.dishes.di.DishesMediatorModule
 import ru.alexeyoss.services.navigation.di.NavigationComponent
 import ru.alexeyoss.services.navigation.di.NavigationProvider
 
-interface AppComponentProvider : MainToolsProvider, DataProvider, NavigationProvider, CategoriesDeps, DishesDeps,
+interface AppComponentProvider : MainToolsProvider,
+    DataProvider,
+    NavigationProvider,
+    LocationProvider,
+    CategoriesDeps,
+    DishesDeps,
     CartDeps
 
 
@@ -33,12 +40,13 @@ interface AppComponentProvider : MainToolsProvider, DataProvider, NavigationProv
         AppModule::class,
         CategoriesMediatorModule::class,
         DishesMediatorModule::class,
-        CartMediatorModule::class,
+        CartMediatorModule::class
     ],
     dependencies = [
         MainToolsProvider::class,
         DataProvider::class,
         NavigationProvider::class,
+        LocationProvider::class
     ]
 )]
 
@@ -55,13 +63,20 @@ interface AppComponent : AppComponentProvider {
 
                 val mainToolsProvider = MainToolsComponent.Initializer.init(app)
 
-
-                val dataComponent = DataComponent.Initializer.init()
+                val dataProvider = DataComponent.Initializer.init()
 
                 val navigationProvider = NavigationComponent.Initializer.init()
 
-                return DaggerAppComponent.builder().mainToolsProvider(mainToolsProvider).dataProvider(dataComponent)
-                    .navigationProvider(navigationProvider).build()
+                val locationProvider = DaggerLocationComponent.builder()
+                    .deps(app)
+                    .build()
+
+                return DaggerAppComponent.builder()
+                    .mainToolsProvider(mainToolsProvider)
+                    .dataProvider(dataProvider)
+                    .navigationProvider(navigationProvider)
+                    .locationProvider(locationProvider)
+                    .build()
 
             }
         }
