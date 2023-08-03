@@ -1,8 +1,9 @@
 package ru.alexeyoss.location.interactor
 
-import android.annotation.SuppressLint
+import androidx.annotation.RequiresPermission
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import ru.alexeyoss.core.common.data.Container
 import ru.alexeyoss.location.LocationService
 import ru.alexeyoss.location.exceptions.LocationNullPointerException
@@ -20,14 +21,15 @@ class DefaultLocationInteractor
      * Scenario for providing DEFAULT location when the [LocationNullPointerException] occur
      * @return [DefaultLocationStates]
      * */
-    @SuppressLint("MissingPermission")
-    suspend fun getLastKnownLocation(): Flow<DefaultLocationStates> {
+    @RequiresPermission(
+        anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"]
+    )
+    suspend fun getLastKnownLocation(): Flow<DefaultLocationStates>  {
         return flow {
-            emit(DefaultLocationStates.Loading)
             val locationState = when (val container = locationService.getLastKnownLocation()) {
-                is Container.Error -> DefaultLocationStates.SuccessWithDefaultLocation()
                 is Container.Loading -> DefaultLocationStates.Loading
-                is Container.Success -> DefaultLocationStates.SuccessWithCurrentLocation(container.value)
+                is Container.Error -> DefaultLocationStates.Error(container.exception)
+                is Container.Success -> DefaultLocationStates.Success(container.value)
             }
             emit(locationState)
         }

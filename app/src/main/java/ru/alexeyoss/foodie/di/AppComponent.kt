@@ -20,6 +20,7 @@ import ru.alexeyoss.features.dishes.di.DishesDeps
 import ru.alexeyoss.foodie.FoodieApp
 import ru.alexeyoss.foodie.activity.MainActivity
 import ru.alexeyoss.foodie.activity.MainActivityViewModel
+import ru.alexeyoss.foodie.activity.di.MainActivityModule
 import ru.alexeyoss.foodie.mediators.cart.di.CartMediatorModule
 import ru.alexeyoss.foodie.mediators.categories.di.CategoriesMediatorModule
 import ru.alexeyoss.foodie.mediators.dishes.di.DishesMediatorModule
@@ -37,7 +38,7 @@ interface AppComponentProvider : MainToolsProvider,
 
 @[PerApplication Component(
     modules = [
-        AppModule::class,
+        MainActivityModule::class,
         CategoriesMediatorModule::class,
         DishesMediatorModule::class,
         CartMediatorModule::class
@@ -59,6 +60,8 @@ interface AppComponent : AppComponentProvider {
     class Initializer private constructor() {
         companion object {
 
+            // HelpMe is it correct to init bunch of Components into init method ?
+            // HelpMe can i mitigate the cold start time?
             fun init(app: FoodieApp): AppComponent {
 
                 val mainToolsProvider = MainToolsComponent.Initializer.init(app)
@@ -81,14 +84,6 @@ interface AppComponent : AppComponentProvider {
             }
         }
     }
-}
-
-@Module
-internal interface AppModule {
-    @Binds
-    @PerActivity
-    @[IntoMap ClassKey(MainActivityViewModel::class)]
-    fun bindMainActivityViewModel(mainActivityViewModel: MainActivityViewModel): ViewModel
 }
 
 

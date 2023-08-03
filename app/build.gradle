@@ -57,7 +57,7 @@ kapt {
 
 dependencies {
     // Uncomment if you want to run with leak canary
-    //    debugImplementation libs.squareup.leakCanary
+    debugImplementation libs.squareup.leakCanary
 
     implementation libs.android.coreKtx
     implementation libs.android.appCompat

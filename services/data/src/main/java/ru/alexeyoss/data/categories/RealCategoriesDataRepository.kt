@@ -1,7 +1,7 @@
 package ru.alexeyoss.data.categories
 
 import ru.alexeyoss.data.categories.sources.CategoriesDataSource
-import ru.alexeyoss.network.models.CategoryListDTO
+import ru.alexeyoss.network.models.responses.CategoryListDTO
 import ru.alexeyoss.network.utils.ResponseStates
 import javax.inject.Inject
 

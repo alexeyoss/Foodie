@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
 
+// TODO provide coroutines deps into modules
 @Module
 object CoroutinesModule {
 

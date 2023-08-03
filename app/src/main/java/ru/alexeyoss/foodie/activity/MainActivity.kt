@@ -1,5 +1,6 @@
 package ru.alexeyoss.foodie.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.viewModels
@@ -107,6 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // TODO debug scenario with default location
+    @SuppressLint("MissingPermission")
     private fun onLocationPermissionResult(result: Map<String, Boolean>) {
         if (result.all { permission -> permission.value }) {
             viewModel.getLastKnownLocation()

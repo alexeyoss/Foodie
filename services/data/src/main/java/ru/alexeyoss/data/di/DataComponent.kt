@@ -6,18 +6,22 @@ import ru.alexeyoss.data.categories.CategoriesDataRepository
 import ru.alexeyoss.data.categories.di.CategoriesDataModule
 import ru.alexeyoss.data.dishes.DishesDataRepository
 import ru.alexeyoss.data.dishes.di.DishesDataModule
+import ru.alexeyoss.data.location.LocationDataRepository
+import ru.alexeyoss.data.location.di.LocationDataModule
 import ru.alexeyoss.network.di.DaggerNetworkComponent
 import ru.alexeyoss.network.di.NetworkProvider
 
 interface DataProvider {
     fun getCategoriesDataRepository(): CategoriesDataRepository
     fun getDishesDataRepository(): DishesDataRepository
+    fun getLocationDataRepository(): LocationDataRepository
 }
 
 @[PerApplication Component(
     modules = [
         CategoriesDataModule::class,
-        DishesDataModule::class
+        DishesDataModule::class,
+        LocationDataModule::class
     ],
     dependencies = [NetworkProvider::class]
 )]

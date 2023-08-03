@@ -1,6 +1,5 @@
 package ru.alexeyoss.foodie.activity.toolbar
 
-import android.location.Location
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.DefaultLifecycleObserver
@@ -11,11 +10,11 @@ import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarHandler
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.theme.R.drawable
 import ru.alexeyoss.foodie.activity.MainActivity
+import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import java.util.Calendar
 import javax.inject.Inject
 
-// TODO Refactor
 class MainActivityToolbarHandler
 @Inject constructor(
     private val activity: MainActivity, containerId: Int
@@ -23,12 +22,15 @@ class MainActivityToolbarHandler
 
     init {
         activity.binding.customToolbar.setNavigationOnClickListener {
-            @Suppress("DEPRECATION")
             activity.onBackPressed()
         }
     }
 
-    private val locationData = MutableLiveData<Pair<String, String>>()
+    private val lastDate: String? = null
+        get() = field ?: Calendar.getInstance().time.toString()
+
+
+    private val locationData = MutableLiveData<UiLocationInfo>()
 
     override val lifeCycleObserver: DefaultLifecycleObserver = object : DefaultLifecycleObserver {
         override fun onCreate(owner: LifecycleOwner) {
@@ -42,15 +44,24 @@ class MainActivityToolbarHandler
     }
 
     private fun initToolbarListeners() {
-        activity.viewModel.toolbarLocationStateFlow.collectOnLifecycle(activity) { mainActivityUiStates ->
-            when (mainActivityUiStates) {
+        activity.viewModel.toolbarLocationStateFlow.collectOnLifecycle(activity) { locationUiStates ->
+            when (locationUiStates) {
                 is MainActivityLocationUiStates.Error -> Unit
                 is MainActivityLocationUiStates.Initial -> Unit
                 is MainActivityLocationUiStates.Loading -> Unit
                 is MainActivityLocationUiStates.Success -> {
-                    locationData.value = formatTitleAnSubtitle(mainActivityUiStates.location)
+
+                    setCityName(locationUiStates.uiLocationInfo)
+
+                    locationData.value = locationUiStates.uiLocationInfo
                 }
             }
+        }
+    }
+
+    private fun setCityName(uiLocationInfo: UiLocationInfo) {
+        activity.supportActionBar?.apply {
+            title = uiLocationInfo.cityName
         }
     }
 
@@ -74,10 +85,10 @@ class MainActivityToolbarHandler
         }
     }
 
-    private fun setLocationView(newLocation: Pair<String, String>? = null) = with(binding) {
+    private fun setLocationView() = with(binding) {
         activity.supportActionBar?.apply {
-            title = locationData.value?.first ?: newLocation?.first
-            subtitle = locationData.value?.second ?: newLocation?.second
+            subtitle = lastDate
+            title = locationData.value?.cityName ?: EMPTY_CITY_NAME
 
             setLogo(drawable.ic_pinpoint)
             setDisplayHomeAsUpEnabled(false)
@@ -85,13 +96,9 @@ class MainActivityToolbarHandler
         }
     }
 
-
-    private fun formatTitleAnSubtitle(location: Location): Pair<String, String> {
-        val title = location.longitude.toString() + " " + location.latitude.toString()
-        val subtitle = Calendar.getInstance().time.toString()
-        return title to subtitle
+    companion object {
+        const val EMPTY_CITY_NAME = ""
     }
-
 }
 
 

@@ -7,6 +7,8 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
+import ru.alexeyoss.core.common.di.CoroutinesModule
 import ru.alexeyoss.core.common.di.scope.PerActivity
 import ru.alexeyoss.location.interactor.DefaultLocationInteractor
 import ru.alexeyoss.location.LocationService
@@ -30,7 +32,9 @@ interface LocationComponent : LocationProvider {
     }
 }
 
-@Module
+@Module(
+    includes = [CoroutinesModule::class]
+)
 internal object LocationModule {
     @Provides
     fun provideFusedLocationProviderClient(context: Application): FusedLocationProviderClient {

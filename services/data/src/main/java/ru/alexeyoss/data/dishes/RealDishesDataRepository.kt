@@ -1,7 +1,7 @@
 package ru.alexeyoss.data.dishes
 
 import ru.alexeyoss.data.dishes.sources.DishesDataSource
-import ru.alexeyoss.network.models.DishesListDTO
+import ru.alexeyoss.network.models.responses.DishesListDTO
 import ru.alexeyoss.network.utils.ResponseStates
 import javax.inject.Inject
 
@@ -12,6 +12,5 @@ class RealDishesDataRepository
     override suspend fun getDishes(): ResponseStates<DishesListDTO> {
         return dishesDataSource.getDishes()
     }
-
 
 }

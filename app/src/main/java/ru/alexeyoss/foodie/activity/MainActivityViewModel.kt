@@ -1,55 +1,57 @@
 package ru.alexeyoss.foodie.activity
 
-import android.annotation.SuppressLint
+import androidx.annotation.RequiresPermission
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import dagger.Lazy
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ru.alexeyoss.core.common.data.Container
+import ru.alexeyoss.foodie.activity.domain.GetCityNameByCoords
 import ru.alexeyoss.foodie.activity.toolbar.MainActivityLocationUiStates
-import ru.alexeyoss.location.interactor.DefaultLocationInteractor
-import ru.alexeyoss.location.interactor.DefaultLocationStates
 import javax.inject.Inject
 
 class MainActivityViewModel
 @Inject constructor(
-    private val defaultLocationInteractor: DefaultLocationInteractor
+    private val getCityNameByCoords: GetCityNameByCoords
 ) : ViewModel() {
-
     private val _toolbarLocationStateFlow =
         MutableStateFlow<MainActivityLocationUiStates>(MainActivityLocationUiStates.Initial)
     val toolbarLocationStateFlow = _toolbarLocationStateFlow.asStateFlow()
 
-    /**
-     * Init location flow scenario
-     * */
+    @RequiresPermission(
+        anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"]
+    )
     fun getLastKnownLocation() {
-        viewModelScope.launch(Dispatchers.Main) {
-            defaultLocationInteractor.getLastKnownLocation().collect { defaultLocationState ->
-                when (defaultLocationState) {
-                    is DefaultLocationStates.Loading -> _toolbarLocationStateFlow.emit(MainActivityLocationUiStates.Loading)
-                    is DefaultLocationStates.SuccessWithCurrentLocation -> {
-                        _toolbarLocationStateFlow.emit(MainActivityLocationUiStates.Success(defaultLocationState.location))
-                    }
+        viewModelScope.launch {
+            getCityNameByCoords.invoke().collect { container ->
+                when (container) {
+                    is Container.Error -> _toolbarLocationStateFlow.emit(
+                        MainActivityLocationUiStates.Error
+                    )
 
-                    is DefaultLocationStates.SuccessWithDefaultLocation -> {
-                        _toolbarLocationStateFlow.emit(MainActivityLocationUiStates.Success(defaultLocationState.location))
-                    }
+                    is Container.Loading -> _toolbarLocationStateFlow.emit(
+                        MainActivityLocationUiStates.Loading
+                    )
+
+                    is Container.Success -> _toolbarLocationStateFlow.emit(
+                        MainActivityLocationUiStates.Success(container.value)
+                    )
                 }
             }
         }
     }
 
+
     class Factory @Inject constructor(
-        private val defaultLocationInteractor: Lazy<DefaultLocationInteractor>
+        private val getCityNameByCoords: Lazy<GetCityNameByCoords>
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == MainActivityViewModel::class.java)
             return MainActivityViewModel(
-                defaultLocationInteractor.get()
+                getCityNameByCoords.get()
             ) as T
         }
     }

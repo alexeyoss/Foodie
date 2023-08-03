@@ -3,7 +3,10 @@ package ru.alexeyoss.location
 import android.location.Location
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.location.FusedLocationProviderClient
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import ru.alexeyoss.core.common.data.Container
+import ru.alexeyoss.core.common.di.CoroutinesModule
 import ru.alexeyoss.location.exceptions.LocationNullPointerException
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -26,14 +29,14 @@ constructor(
      * - Success() вызывается в случае удачного получения местоположения;
      * - Error() вызывается в случае, если местоположение было получено, но равно null;
      * - resumeWithException() вызывается, если нет возможности получить местоположение.
-     * Приходит [CompositeException], содержащий список из возможных исключений:
+     *  Вызывается [CompositeException],содержащее список возможных исключений:
      * [NoLocationPermissionException], [PlayServicesAreNotAvailableException],
      * [ResolvableApiException].
      */
     @RequiresPermission(
         anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"]
     )
-    suspend fun getLastKnownLocation(): Container<Location> {
+    suspend fun getLastKnownLocation(): Container<Location>  {
         return suspendCoroutine { continuation ->
             fusedLocationClient
                 .lastLocation

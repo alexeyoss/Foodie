@@ -55,7 +55,9 @@ class DishDetailsDialogFragment :
     private fun initListeners() = with(binding) {
         favCloseButtons.closeBtn.setOnClickListener { dismiss() }
         // TODO logic with liked
-        favCloseButtons.favoriteBtn.setOnClickListener {  }
+        favCloseButtons.favoriteBtn.setOnClickListener {
+
+        }
     }
 
     companion object {
