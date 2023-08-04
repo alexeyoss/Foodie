@@ -20,9 +20,7 @@ android {
     buildTypes {
 
         debug {
-            manifestPlaceholders = [
-                    appIcon: "@mipmap/ic_launcher_debug"
-            ]
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
 
             applicationIdSuffix ".beta"
             ext.enableCrashlytics = false
@@ -31,9 +29,7 @@ android {
         }
 
         release {
-            manifestPlaceholders = [
-                    appIcon: "@mipmap/ic_launcher_prod"
-            ]
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_prod"]
 
             minifyEnabled true
             shrinkResources true
@@ -57,9 +53,10 @@ kapt {
 
 dependencies {
     // Uncomment if you want to run with leak canary
-    debugImplementation libs.squareup.leakCanary
+//    debugImplementation libs.squareup.leakCanary
 
     implementation libs.android.coreKtx
+    implementation libs.android.startup
     implementation libs.android.appCompat
     implementation libs.android.fragmentKtx
     implementation libs.android.activityKtx

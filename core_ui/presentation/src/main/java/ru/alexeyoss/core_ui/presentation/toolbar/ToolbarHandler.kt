@@ -17,7 +17,7 @@ protected constructor(
     private val activity: A, @IdRes private val containerId: Int
 ) {
 
-    abstract val lifeCycleObserver : DefaultLifecycleObserver
+    abstract val lifeCycleObserver: DefaultLifecycleObserver
 
     abstract val binding: ViewBinding
 

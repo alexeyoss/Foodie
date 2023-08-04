@@ -39,5 +39,7 @@
         <item name="textAppearanceButton">@style/TextAppearance.Foodie.Button</item>
         <item name="textAppearanceCaption">@style/TextAppearance.Foodie.Caption</item>
         <item name="textAppearanceOverline">@style/TextAppearance.Foodie.Overline</item>
+        <!-- TextViews -->
+        <item name="emojiCompatEnabled">false</item>
     </style>
 </resources>

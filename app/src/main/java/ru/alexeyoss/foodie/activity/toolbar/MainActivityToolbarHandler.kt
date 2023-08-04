@@ -44,15 +44,14 @@ class MainActivityToolbarHandler
     }
 
     private fun initToolbarListeners() {
+
         activity.viewModel.toolbarLocationStateFlow.collectOnLifecycle(activity) { locationUiStates ->
             when (locationUiStates) {
                 is MainActivityLocationUiStates.Error -> Unit
                 is MainActivityLocationUiStates.Initial -> Unit
                 is MainActivityLocationUiStates.Loading -> Unit
                 is MainActivityLocationUiStates.Success -> {
-
                     setCityName(locationUiStates.uiLocationInfo)
-
                     locationData.value = locationUiStates.uiLocationInfo
                 }
             }

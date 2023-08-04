@@ -15,7 +15,7 @@ import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItem
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateHolder
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
-import ru.alexeyoss.core_ui.presentation.viewBinding
+import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
 import ru.alexeyoss.features.cart.R
 import ru.alexeyoss.features.cart.databinding.FragmentCartBinding
 import ru.alexeyoss.features.cart.di.CartComponentViewModel

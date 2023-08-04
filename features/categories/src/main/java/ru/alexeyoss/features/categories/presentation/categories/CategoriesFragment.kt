@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
-import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
+import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateHolder
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
-import ru.alexeyoss.core_ui.presentation.viewBinding
+import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
 import ru.alexeyoss.features.categories.R
 import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
 import ru.alexeyoss.features.categories.di.CategoriesComponentViewModel

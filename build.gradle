@@ -15,6 +15,7 @@ buildscript {
         fragmentKtx_version = "1.6.0"
         activityKtx_version = "1.7.2"
         datastorePref_version = "1.0.0"
+        startup_version = "1.1.1"
 
         /* Google libs */
         material_version = "1.8.0"
@@ -74,6 +75,7 @@ buildscript {
                         lifecycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
                         lifecycleViewModelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
                         datastorePreferences : "androidx.datastore:datastore-preferences:$datastorePref_version",
+                        startup      : "androidx.startup:startup-runtime:$startup_version",
                 ],
 
                 google         : [

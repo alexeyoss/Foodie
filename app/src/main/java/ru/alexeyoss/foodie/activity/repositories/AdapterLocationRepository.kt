@@ -2,8 +2,6 @@ package ru.alexeyoss.foodie.activity.repositories
 
 import android.location.Location
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.map
 import ru.alexeyoss.core.common.data.Container
 import ru.alexeyoss.data.location.LocationDataRepository

@@ -1,6 +1,5 @@
 package ru.alexeyoss.core.common.permission
 
-import androidx.annotation.StringRes
 import com.github.terrakok.cicerone.Screen
 
 

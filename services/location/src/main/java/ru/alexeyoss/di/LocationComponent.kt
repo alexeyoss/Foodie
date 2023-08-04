@@ -7,11 +7,10 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineDispatcher
 import ru.alexeyoss.core.common.di.CoroutinesModule
 import ru.alexeyoss.core.common.di.scope.PerActivity
-import ru.alexeyoss.location.interactor.DefaultLocationInteractor
 import ru.alexeyoss.location.LocationService
+import ru.alexeyoss.location.interactor.DefaultLocationInteractor
 
 
 interface LocationProvider {

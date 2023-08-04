@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:orientation="horizontal"
-    android:theme="@style/Theme.Foodie">
+    tools:theme="@style/Theme.Foodie">
 
     <include
         android:id="@+id/cardImageView"

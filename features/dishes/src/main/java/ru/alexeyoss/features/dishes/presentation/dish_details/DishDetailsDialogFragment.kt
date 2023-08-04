@@ -7,7 +7,7 @@ import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import ru.alexeyoss.core_ui.presentation.fragment.ARG_SCREEN
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.viewBinding
+import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
 import ru.alexeyoss.features.dishes.R
 import ru.alexeyoss.features.dishes.databinding.FragmentDishDetailsDialogBinding
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO

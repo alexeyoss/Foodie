@@ -23,6 +23,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/amountText"
             android:layout_width="wrap_content"
+            app:emojiCompatEnabled="?attr/emojiCompatEnabled"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAppearance="?attr/textAppearanceButton"
