@@ -28,6 +28,9 @@ object Screens {
         CartFragment.getNewInstance()
     }
 
+    /*
+    * Potential Android Hijacking Attack (foreign apps can execute own screens due [Intent.FLAG_ACTIVITY_NEW_TASK])
+    * */
     fun settingsActivity() = ActivityScreen {
         Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,

@@ -2,6 +2,7 @@ package ru.alexeyoss.foodie.activity.repositories
 
 import android.location.Location
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import ru.alexeyoss.core.common.data.Container
 import ru.alexeyoss.data.location.LocationDataRepository
@@ -9,6 +10,7 @@ import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
 import ru.alexeyoss.foodie.activity.domain.repositories.LocationRepository
 import ru.alexeyoss.foodie.activity.mappers.LocationMapper
 import ru.alexeyoss.foodie.mediators.buildNetworkFlow
+import ru.alexeyoss.location.LocationConst
 import ru.alexeyoss.network.models.requests.LocationRequest
 import javax.inject.Inject
 
@@ -29,6 +31,16 @@ constructor(
             container.suspendConvert { locationDTO ->
                 locationMapper.mapToDomainModel(locationDTO)
             }
+        }
+    }
+
+    override suspend fun getDefaultCityName(): Flow<Container<UiLocationInfo>> {
+        return flow {
+            emit(Container.Loading)
+            val defaultUiLocationInfo = UiLocationInfo(
+                cityName = LocationConst.DEFAULT_CITY.cityName
+            )
+            emit(Container.Success(defaultUiLocationInfo))
         }
     }
 }

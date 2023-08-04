@@ -7,4 +7,5 @@ import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
 
 interface LocationRepository {
     suspend fun getCityNameByCoords(location: Location): Flow<Container<UiLocationInfo>>
+    suspend fun getDefaultCityName(): Flow<Container<UiLocationInfo>>
 }

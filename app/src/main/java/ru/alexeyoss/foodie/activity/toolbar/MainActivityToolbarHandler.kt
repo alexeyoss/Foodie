@@ -87,16 +87,12 @@ class MainActivityToolbarHandler
     private fun setLocationView() = with(binding) {
         activity.supportActionBar?.apply {
             subtitle = lastDate
-            title = locationData.value?.cityName ?: EMPTY_CITY_NAME
+            title = locationData.value?.cityName ?: ""
 
             setLogo(drawable.ic_pinpoint)
             setDisplayHomeAsUpEnabled(false)
             profilePhoto.visibility = VISIBLE
         }
-    }
-
-    companion object {
-        const val EMPTY_CITY_NAME = ""
     }
 }
 
