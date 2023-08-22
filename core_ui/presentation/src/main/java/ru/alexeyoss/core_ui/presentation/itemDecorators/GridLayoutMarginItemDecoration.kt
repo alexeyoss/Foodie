@@ -30,7 +30,8 @@ class GridLayoutMarginItemDecoration(
             outRect.right =
                 spacing - (column + 1) * spacing / spanCount
             if (position >= spanCount) {
-                outRect.top = spacing
+                outRect.top = spacing / 2
+                outRect.bottom = spacing / 2
             }
         }
 

@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.alexeyoss.core.common.data.Container
-import ru.alexeyoss.core.common.di.CoroutinesModule
+import ru.alexeyoss.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.features.cart.domain.GetCartItems
 import ru.alexeyoss.features.cart.domain.UpdateUiCartState
 import ru.alexeyoss.features.cart.domain.entities.UiCartState

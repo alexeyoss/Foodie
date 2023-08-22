@@ -2,12 +2,10 @@ package ru.alexeyoss.foodie.activity.toolbar
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
+import ru.alexeyoss.core_ui.presentation.toolbar.FoodieToolbarStates
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarHandler
-import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
 import ru.alexeyoss.core_ui.theme.R.drawable
 import ru.alexeyoss.foodie.activity.MainActivity
 import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
@@ -18,30 +16,25 @@ import javax.inject.Inject
 class MainActivityToolbarHandler
 @Inject constructor(
     private val activity: MainActivity, containerId: Int
-) : ToolbarHandler<MainActivity, ToolbarStates>(activity, containerId) {
+) : ToolbarHandler<MainActivity, FoodieToolbarStates>(activity, containerId) {
 
     init {
         activity.binding.customToolbar.setNavigationOnClickListener {
             activity.onBackPressed()
         }
+
+        initToolbarListeners()
     }
 
-    private val lastDate: String? = null
-        get() = field ?: Calendar.getInstance().time.toString()
-
+    private val lastDate = MutableLiveData<String>()
+        get() {
+            if (field.value == null) {
+                field.value = Calendar.getInstance().time.toString()
+            }
+            return field
+        }
 
     private val locationData = MutableLiveData<UiLocationInfo>()
-
-    override val lifeCycleObserver: DefaultLifecycleObserver = object : DefaultLifecycleObserver {
-        override fun onCreate(owner: LifecycleOwner) {
-            addToolbarStateListener()
-            initToolbarListeners()
-        }
-
-        override fun onDestroy(owner: LifecycleOwner) {
-            removeToolbarStateListener()
-        }
-    }
 
     private fun initToolbarListeners() {
 
@@ -66,10 +59,10 @@ class MainActivityToolbarHandler
 
     override val binding: ActivityMainBinding = activity.binding
 
-    override fun updateToolbarView(toolbarState: ToolbarStates) {
+    override fun updateToolbarView(toolbarState: FoodieToolbarStates) {
         when (toolbarState) {
-            is ToolbarStates.CustomTitle -> setCustomTitleView(toolbarState.title)
-            is ToolbarStates.LocationView -> setLocationView()
+            is FoodieToolbarStates.CustomTitle -> setCustomTitleView(toolbarState.title)
+            is FoodieToolbarStates.LocationView -> setLocationView()
         }
     }
 
@@ -86,7 +79,7 @@ class MainActivityToolbarHandler
 
     private fun setLocationView() = with(binding) {
         activity.supportActionBar?.apply {
-            subtitle = lastDate
+            subtitle = lastDate.value
             title = locationData.value?.cityName ?: ""
 
             setLogo(drawable.ic_pinpoint)

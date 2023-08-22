@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:theme="@style/Theme.Foodie">
 
@@ -15,13 +15,13 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        app:emojiCompatEnabled="?attr/emojiCompatEnabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/extra_small_margin"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="?attr/textAppearanceBody1"
+        app:emojiCompatEnabled="?attr/emojiCompatEnabled"
         tools:text="@tools:sample/last_names" />
 
 </LinearLayout>

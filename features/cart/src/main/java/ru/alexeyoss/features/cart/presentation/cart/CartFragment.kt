@@ -13,8 +13,8 @@ import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateHolder
-import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
+import ru.alexeyoss.core_ui.presentation.toolbar.FoodieToolbarStates
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateOwner
 import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
 import ru.alexeyoss.features.cart.R
 import ru.alexeyoss.features.cart.databinding.FragmentCartBinding
@@ -28,7 +28,9 @@ import javax.inject.Inject
 
 class CartFragment : Fragment(R.layout.fragment_cart),
     BackButtonListener,
-    ToolbarStateHolder {
+    ToolbarStateOwner {
+
+    override fun getToolbarState(): FoodieToolbarStates = FoodieToolbarStates.LocationView
 
     @Inject
     internal lateinit var cartViewModelFactory: Lazy<CartViewModel.Factory>
@@ -103,8 +105,6 @@ class CartFragment : Fragment(R.layout.fragment_cart),
     private fun onQuantityClick(quantityOperation: QuantityOperation) {
         viewModel.updateUiCartState(quantityOperation)
     }
-
-    override fun getToolbarState(): ToolbarStates = ToolbarStates.LocationView
 
     override fun onBackPressed(): Boolean {
         cartRouter.get().goBack()

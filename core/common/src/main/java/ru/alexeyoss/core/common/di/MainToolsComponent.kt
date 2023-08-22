@@ -2,18 +2,31 @@ package ru.alexeyoss.core.common.di
 
 import dagger.BindsInstance
 import dagger.Component
-import dagger.Module
-import dagger.Provides
+import kotlinx.coroutines.CoroutineDispatcher
 import ru.alexeyoss.core.common.activity.ActiveActivityHolder
+import ru.alexeyoss.core.common.di.modules.CoroutinesModule
+import ru.alexeyoss.core.common.di.modules.MainToolsModule
 import ru.alexeyoss.core.common.di.scope.PerApplication
 
 interface MainToolsProvider {
     fun provideContext(): App
     fun provideActiveActivityHolder(): ActiveActivityHolder
+
+    @CoroutinesModule.IoDispatcher
+    fun provideIODispatcher(): CoroutineDispatcher
+
+    @CoroutinesModule.MainDispatcher
+    fun provideMainDispatcher(): CoroutineDispatcher
+
+    @CoroutinesModule.DefaultDispatcher
+    fun provideDefaultDispatcher(): CoroutineDispatcher
 }
 
 @[PerApplication Component(
-    modules = [MainToolsModule::class]
+    modules = [
+        MainToolsModule::class,
+        CoroutinesModule::class
+    ]
 )]
 interface MainToolsComponent : MainToolsProvider {
 
@@ -27,14 +40,9 @@ interface MainToolsComponent : MainToolsProvider {
 
     class Initializer private constructor() {
         companion object {
-            fun init(app: App): MainToolsProvider = DaggerMainToolsComponent.builder().app(app).build()
+            fun init(app: App): MainToolsProvider = DaggerMainToolsComponent.builder()
+                .app(app)
+                .build()
         }
     }
-}
-
-@Module()
-internal class MainToolsModule {
-    @Provides
-    @PerApplication
-    fun provideActiveActivityHolder(): ActiveActivityHolder = ActiveActivityHolder()
 }

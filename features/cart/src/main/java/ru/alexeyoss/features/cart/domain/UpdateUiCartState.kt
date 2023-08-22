@@ -2,7 +2,7 @@ package ru.alexeyoss.features.cart.domain
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.alexeyoss.core.common.di.CoroutinesModule
+import ru.alexeyoss.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.features.cart.domain.entities.UiCartItem
 import ru.alexeyoss.features.cart.domain.entities.UiCartState
 import ru.alexeyoss.features.cart.presentation.cart.adapter.QuantityOperation

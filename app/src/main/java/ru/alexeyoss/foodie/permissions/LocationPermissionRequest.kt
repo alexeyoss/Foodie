@@ -1,4 +1,4 @@
-package ru.alexeyoss.foodie.permission
+package ru.alexeyoss.foodie.permissions
 
 import android.Manifest
 import ru.alexeyoss.core.common.permission.BasePermissionRequest

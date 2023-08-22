@@ -6,7 +6,7 @@ import dagger.Component
 import dagger.Module
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
-import ru.alexeyoss.core.common.di.CoroutinesModule
+import ru.alexeyoss.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.core.common.di.scope.PerScreen
 import ru.alexeyoss.features.categories.domain.repositories.CategoriesRepository
 import ru.alexeyoss.features.categories.presentation.CategoryRouter

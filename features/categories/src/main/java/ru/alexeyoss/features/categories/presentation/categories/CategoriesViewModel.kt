@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.alexeyoss.core.common.data.Container
-import ru.alexeyoss.core.common.di.CoroutinesModule
+import ru.alexeyoss.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.features.categories.domain.GetCategoriesUseCase
 import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import timber.log.Timber

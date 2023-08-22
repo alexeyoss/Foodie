@@ -6,8 +6,7 @@ import ru.alexeyoss.core.common.di.MainToolsProvider
 import ru.alexeyoss.core.common.di.scope.PerApplication
 import ru.alexeyoss.data.di.DataComponent
 import ru.alexeyoss.data.di.DataProvider
-import ru.alexeyoss.di.DaggerLocationComponent
-import ru.alexeyoss.di.LocationProvider
+import ru.alexeyoss.di.LocationModule
 import ru.alexeyoss.features.cart.di.CartDeps
 import ru.alexeyoss.features.categories.di.CategoriesDeps
 import ru.alexeyoss.features.dishes.di.DishesDeps
@@ -17,13 +16,11 @@ import ru.alexeyoss.foodie.activity.di.MainActivityModule
 import ru.alexeyoss.foodie.mediators.cart.di.CartMediatorModule
 import ru.alexeyoss.foodie.mediators.categories.di.CategoriesMediatorModule
 import ru.alexeyoss.foodie.mediators.dishes.di.DishesMediatorModule
-import ru.alexeyoss.services.navigation.di.NavigationComponent
-import ru.alexeyoss.services.navigation.di.NavigationProvider
+import ru.alexeyoss.services.navigation.di.NavigationModule
+
 
 interface AppComponentProvider : MainToolsProvider,
     DataProvider,
-    NavigationProvider,
-    LocationProvider,
     CategoriesDeps,
     DishesDeps,
     CartDeps
@@ -32,45 +29,36 @@ interface AppComponentProvider : MainToolsProvider,
 @[PerApplication Component(
     modules = [
         MainActivityModule::class,
+
         CategoriesMediatorModule::class,
         DishesMediatorModule::class,
-        CartMediatorModule::class
+        CartMediatorModule::class,
+
+        LocationModule::class,
+        NavigationModule::class
     ],
     dependencies = [
         MainToolsProvider::class,
-        DataProvider::class,
-        NavigationProvider::class,
-        LocationProvider::class
+        DataProvider::class
     ]
 )]
 
 interface AppComponent : AppComponentProvider {
-
     fun inject(app: FoodieApp)
 
     fun inject(mainActivity: MainActivity)
 
     class Initializer private constructor() {
         companion object {
-
-            // HelpMe is it correct to init bunch of Components into init method ? Can i mitigate the cold start time?
             fun init(app: FoodieApp): AppComponent {
 
                 val mainToolsProvider = MainToolsComponent.Initializer.init(app)
 
                 val dataProvider = DataComponent.Initializer.init()
 
-                val navigationProvider = NavigationComponent.Initializer.init()
-
-                val locationProvider = DaggerLocationComponent.builder()
-                    .deps(app)
-                    .build()
-
                 return DaggerAppComponent.builder()
                     .mainToolsProvider(mainToolsProvider)
                     .dataProvider(dataProvider)
-                    .navigationProvider(navigationProvider)
-                    .locationProvider(locationProvider)
                     .build()
 
             }

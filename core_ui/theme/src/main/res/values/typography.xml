@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="TextAppearance.Foodie.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="fontFamily">@font/sfp_medium</item>
-        <item name="android:fontFamily">@font/sfp_medium</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/sfp_medium</item>
         <item name="android:textSize">96sp</item>
     </style>
 

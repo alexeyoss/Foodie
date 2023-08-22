@@ -2,7 +2,7 @@ package ru.alexeyoss.features.dishes.domain
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.alexeyoss.core.common.di.CoroutinesModule
+import ru.alexeyoss.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.features.dishes.domain.models.DishListState
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
 import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO

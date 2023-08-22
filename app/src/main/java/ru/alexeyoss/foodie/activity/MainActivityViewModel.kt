@@ -18,14 +18,17 @@ import javax.inject.Inject
 class MainActivityViewModel
 @Inject constructor(
     private val getCityNameByCoords: GetCityNameByCoords,
-    private val getDefaultCityName: GetDefaultCityName
+    private val getDefaultCityName: GetDefaultCityName,
 ) : ViewModel() {
     private val _toolbarLocationStateFlow =
         MutableStateFlow<MainActivityLocationUiStates>(MainActivityLocationUiStates.Initial)
     val toolbarLocationStateFlow = _toolbarLocationStateFlow.asStateFlow()
 
     @RequiresPermission(
-        anyOf = ["android.permission.ACCESS_COARSE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"]
+        anyOf = [
+            "android.permission.ACCESS_COARSE_LOCATION",
+            "android.permission.ACCESS_FINE_LOCATION"
+        ]
     )
     fun getLastKnownLocation() {
         viewModelScope.launch(Dispatchers.IO) {

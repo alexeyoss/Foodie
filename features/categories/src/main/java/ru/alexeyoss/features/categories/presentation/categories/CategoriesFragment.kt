@@ -13,8 +13,8 @@ import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateHolder
-import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStates
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateOwner
+import ru.alexeyoss.core_ui.presentation.toolbar.FoodieToolbarStates
 import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
 import ru.alexeyoss.features.categories.R
 import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
@@ -24,7 +24,12 @@ import ru.alexeyoss.features.categories.presentation.CategoriesUiState
 import ru.alexeyoss.features.categories.presentation.CategoryRouter
 import javax.inject.Inject
 
-class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateHolder, BackButtonListener {
+class CategoriesFragment : Fragment(R.layout.fragment_categories),
+    ToolbarStateOwner,
+    BackButtonListener {
+
+
+    override fun getToolbarState(): FoodieToolbarStates = FoodieToolbarStates.LocationView
 
     @Inject
     internal lateinit var categoriesViewModelFactory: Lazy<CategoriesViewModel.Factory>
@@ -104,7 +109,6 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories), ToolbarStateH
         categoryRouter.get().launchDishesScreen(categoryName)
     }
 
-    override fun getToolbarState(): ToolbarStates = ToolbarStates.LocationView
     override fun onBackPressed(): Boolean {
         categoryRouter.get().goBack()
         return true

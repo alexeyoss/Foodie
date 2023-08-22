@@ -1,6 +1,6 @@
 package ru.alexeyoss.location
 
-enum class LocationConst(
+enum class ConstLocations(
     val cityName: String
 ) {
     DEFAULT_CITY(

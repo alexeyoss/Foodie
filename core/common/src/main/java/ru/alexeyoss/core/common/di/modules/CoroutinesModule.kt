@@ -1,4 +1,4 @@
-package ru.alexeyoss.core.common.di
+package ru.alexeyoss.core.common.di.modules
 
 import dagger.Module
 import dagger.Provides

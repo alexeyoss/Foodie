@@ -20,9 +20,9 @@ import ru.alexeyoss.foodie.activity.toolbar.MainActivityToolbarHandler
 import ru.alexeyoss.foodie.appComponent
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import ru.alexeyoss.foodie.navigation.Screens
-import ru.alexeyoss.foodie.permission.LocationPermissionRequest
-import ru.alexeyoss.foodie.permission.LocationPermissionRequest.permissions
-import ru.alexeyoss.foodie.permission.LocationPermissionRequest.showPermissionsRational
+import ru.alexeyoss.foodie.permissions.LocationPermissionRequest
+import ru.alexeyoss.foodie.permissions.LocationPermissionRequest.permissions
+import ru.alexeyoss.foodie.permissions.LocationPermissionRequest.showPermissionsRational
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         activity = this@MainActivity, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
     )
 
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this@MainActivity)
@@ -70,6 +71,8 @@ class MainActivity : AppCompatActivity() {
 
         if (!checkPermissionsStatus(permissions)) {
             locationPermissionLauncher.launch(permissions)
+        } else {
+            viewModel.getLastKnownLocation()
         }
 
         lifecycle.addObserver(toolbarHandler.lifeCycleObserver)
