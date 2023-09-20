@@ -15,6 +15,9 @@ android {
         targetSdk targetAndroidSdk
         versionCode 1
         versionName "1.0"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -44,6 +47,15 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.3'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
@@ -84,4 +96,5 @@ dependencies {
     implementation project(Modules.Features.dishes)
 
     implementation project(Modules.Services.navigation)
+    implementation project(Modules.Services.compose)
 }

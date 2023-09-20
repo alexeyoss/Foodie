@@ -10,7 +10,7 @@ buildscript {
         appCompat_version = "1.6.1"
         contraintLayout_version = "2.1.4"
         recyclerView_version = "1.3.0"
-        lifecycle_version = "2.5.1"
+        lifecycle_version = "2.6.2"
         cardView_version = "1.0.0"
         fragmentKtx_version = "1.6.0"
         activityKtx_version = "1.7.2"
@@ -33,6 +33,10 @@ buildscript {
 
         /* Facebook*/
         shimmer_version = "0.5.0"
+
+        /* Compose */
+        androidx_compose_bom_version = "2023.03.00"
+        compose_activity_version = "1.7.2"
 
         /* Additional Stuff */
         timber_version = "5.0.1"
@@ -61,6 +65,7 @@ buildscript {
                         navigation: ":services:navigation",
                         network   : ":services:network",
                         preference: ":services:preference",
+                        compose: ":services:compose",
                 ]
         ]
         libs = [
@@ -75,7 +80,7 @@ buildscript {
                         lifecycleRuntimeKtx  : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
                         lifecycleViewModelKtx: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version",
                         datastorePreferences : "androidx.datastore:datastore-preferences:$datastorePref_version",
-                        startup      : "androidx.startup:startup-runtime:$startup_version",
+                        startup              : "androidx.startup:startup-runtime:$startup_version",
                 ],
 
                 google         : [
@@ -106,6 +111,16 @@ buildscript {
                         glide          : "com.github.bumptech.glide:glide:$glide_version",
                         cicerone       : "com.github.terrakok:cicerone:$cicerone_version",
                 ],
+                compose        : [
+                        ui                    : "androidx.compose.ui:ui",
+                        ui_graphics           : "androidx.compose.ui:ui-graphics",
+                        tooling_preview    : "androidx.compose.ui:ui-tooling-preview",
+                        material              : "androidx.compose.material3:material3",
+                        activity              : "androidx.activity:activity-compose:$compose_activity_version",
+                        /* Debug */
+                        debug_ui_tooling      : "androidx.compose.ui:ui-tooling",
+                        debug_ui_test_manifest: "androidx.compose.ui:ui-test-manifest",
+                ]
         ]
 
     }

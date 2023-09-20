@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/features/categories" />
             <option value="$PROJECT_DIR$/features/dishes" />
             <option value="$PROJECT_DIR$/services" />
+            <option value="$PROJECT_DIR$/services/compose" />
             <option value="$PROJECT_DIR$/services/data" />
             <option value="$PROJECT_DIR$/services/location" />
             <option value="$PROJECT_DIR$/services/navigation" />
