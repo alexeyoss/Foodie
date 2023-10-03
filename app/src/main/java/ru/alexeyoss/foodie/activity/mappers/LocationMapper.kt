@@ -1,10 +1,10 @@
 package ru.alexeyoss.foodie.activity.mappers
 
 import android.location.Location
-import ru.alexeyoss.core.common.data.BaseMapper
+import ru.alexeyoss.foodie.core.common.data.BaseMapper
 import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
-import ru.alexeyoss.network.models.requests.LocationRequest
-import ru.alexeyoss.network.models.responses.LocationDTO
+import ru.alexeyoss.foodie.services.network.models.requests.LocationRequest
+import ru.alexeyoss.foodie.services.network.models.responses.LocationDTO
 import javax.inject.Inject
 
 class LocationMapper

@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.alexeyoss.core.common.data.Container
+import ru.alexeyoss.foodie.core.common.data.Container
 import ru.alexeyoss.foodie.activity.domain.GetCityNameByCoords
 import ru.alexeyoss.foodie.activity.domain.GetDefaultCityName
 import ru.alexeyoss.foodie.activity.toolbar.MainActivityLocationUiStates

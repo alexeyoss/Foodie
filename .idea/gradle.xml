@@ -4,6 +4,18 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/build-logic" name="build-logic">
+                <projects>
+                  <project path="$PROJECT_DIR$/build-logic" />
+                  <project path="$PROJECT_DIR$/build-logic/convention-plugin" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -12,11 +24,13 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/build-logic" />
+            <option value="$PROJECT_DIR$/build-logic/convention-plugin" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/common" />
-            <option value="$PROJECT_DIR$/core_ui" />
-            <option value="$PROJECT_DIR$/core_ui/presentation" />
-            <option value="$PROJECT_DIR$/core_ui/theme" />
+            <option value="$PROJECT_DIR$/coreui" />
+            <option value="$PROJECT_DIR$/coreui/presentation" />
+            <option value="$PROJECT_DIR$/coreui/theme" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/cart" />
             <option value="$PROJECT_DIR$/features/categories" />
@@ -27,6 +41,7 @@
             <option value="$PROJECT_DIR$/services/location" />
             <option value="$PROJECT_DIR$/services/navigation" />
             <option value="$PROJECT_DIR$/services/network" />
+            <option value="$PROJECT_DIR$/services/preference" />
           </set>
         </option>
       </GradleProjectSettings>

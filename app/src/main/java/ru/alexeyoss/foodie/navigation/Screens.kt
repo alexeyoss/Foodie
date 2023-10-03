@@ -5,8 +5,8 @@ import android.net.Uri
 import android.provider.Settings
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import ru.alexeyoss.features.cart.presentation.cart.CartFragment
-import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment
+import ru.alexeyoss.foodie.features.cart.presentation.cart.CartFragment
+import ru.alexeyoss.foodie.features.categories.presentation.categories.CategoriesFragment
 import ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment
 import ru.alexeyoss.foodie.BuildConfig
 

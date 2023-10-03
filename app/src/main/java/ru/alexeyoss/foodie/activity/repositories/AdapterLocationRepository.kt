@@ -4,14 +4,14 @@ import android.location.Location
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import ru.alexeyoss.core.common.data.Container
-import ru.alexeyoss.data.location.LocationDataRepository
+import ru.alexeyoss.foodie.core.common.data.Container
+import ru.alexeyoss.foodie.services.data.location.LocationDataRepository
 import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
 import ru.alexeyoss.foodie.activity.domain.repositories.LocationRepository
 import ru.alexeyoss.foodie.activity.mappers.LocationMapper
 import ru.alexeyoss.foodie.mediators.buildNetworkFlow
-import ru.alexeyoss.location.ConstLocations
-import ru.alexeyoss.network.models.requests.LocationRequest
+import ru.alexeyoss.foodie.services.location.ConstLocations
+import ru.alexeyoss.foodie.services.network.models.requests.LocationRequest
 import javax.inject.Inject
 
 class AdapterLocationRepository

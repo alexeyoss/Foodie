@@ -1,7 +1,7 @@
 package ru.alexeyoss.foodie.permissions
 
 import android.Manifest
-import ru.alexeyoss.core.common.permission.BasePermissionRequest
+import ru.alexeyoss.foodie.core.common.permission.BasePermissionRequest
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.navigation.Screens
 

@@ -13,7 +13,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.Lazy
-import ru.alexeyoss.core_ui.presentation.AlertDialogBuilder
+import ru.alexeyoss.foodie.coreui.presentation.AlertDialogBuilder
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.activity.toolbar.MainActivityToolbarHandler
@@ -47,12 +47,15 @@ class MainActivity : AppCompatActivity() {
 
     private val toolbarHandler by lazy {
         MainActivityToolbarHandler(
-            activity = this@MainActivity, containerId = R.id.navHostFragment
+            activity = this@MainActivity,
+            containerId = R.id.navHostFragment
         )
     }
 
     private val navigator = AppNavigator(
-        activity = this@MainActivity, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
+        activity = this@MainActivity,
+        containerId = R.id.navHostFragment,
+        fragmentManager = supportFragmentManager
     )
 
     @SuppressLint("MissingPermission")
@@ -62,7 +65,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         setSupportActionBar(binding.customToolbar)
-
 
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment

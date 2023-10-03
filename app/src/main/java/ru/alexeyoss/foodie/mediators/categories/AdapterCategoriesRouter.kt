@@ -1,7 +1,7 @@
 package ru.alexeyoss.foodie.mediators.categories
 
 import com.github.terrakok.cicerone.Router
-import ru.alexeyoss.features.categories.presentation.CategoryRouter
+import ru.alexeyoss.foodie.features.categories.presentation.CategoryRouter
 import ru.alexeyoss.foodie.navigation.Screens
 import javax.inject.Inject
 

@@ -1,8 +1,8 @@
 package ru.alexeyoss.foodie.mediators.categories.mappers
 
-import ru.alexeyoss.core.common.data.BaseMapper
-import ru.alexeyoss.features.categories.domain.entities.UiCategory
-import ru.alexeyoss.network.models.responses.CategoryDTO
+import ru.alexeyoss.foodie.core.common.data.BaseMapper
+import ru.alexeyoss.foodie.features.categories.domain.entities.UiCategory
+import ru.alexeyoss.foodie.services.network.models.responses.CategoryDTO
 import javax.inject.Inject
 
 class CategoryMapper

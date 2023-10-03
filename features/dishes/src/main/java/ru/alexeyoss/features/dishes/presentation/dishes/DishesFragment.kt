@@ -34,10 +34,10 @@ import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
 import timber.log.Timber
 import javax.inject.Inject
 
-class DishesFragment : Fragment(R.layout.fragment_dishes),
+class DishesFragment :
+    Fragment(R.layout.fragment_dishes),
     ToolbarStateOwner,
     BackButtonListener {
-
 
     override fun getToolbarState(): FoodieToolbarStates = FoodieToolbarStates.CustomTitle(args)
 
@@ -74,7 +74,6 @@ class DishesFragment : Fragment(R.layout.fragment_dishes),
         initListeners()
     }
 
-
     private fun initListeners() {
         viewModel.sideEffects.collectOnLifecycle(this@DishesFragment) { sideEffect ->
             when (sideEffect) {
@@ -83,7 +82,6 @@ class DishesFragment : Fragment(R.layout.fragment_dishes),
                 is DishesSideEffects.Loading -> Unit
             }
         }
-
 
         viewModel.dishListState.observe(viewLifecycleOwner) { dishListState ->
             filterAdapter.submitList(dishListState.filters.toList())
@@ -107,7 +105,6 @@ class DishesFragment : Fragment(R.layout.fragment_dishes),
             )
         }
 
-
         filtersRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -128,7 +125,6 @@ class DishesFragment : Fragment(R.layout.fragment_dishes),
     private fun onFilterSelected(uiFilterDTO: UiFilterDTO) {
         viewModel.newFilterSelected(uiFilterDTO)
     }
-
 
     companion object {
         fun getNewInstance(categoryName: String): DishesFragment {
