@@ -1,4 +1,4 @@
-package ru.alexeyoss.core_ui.presentation
+package ru.alexeyoss.foodie.coreui.presentation
 
 import android.content.Context
 import androidx.annotation.StringRes
