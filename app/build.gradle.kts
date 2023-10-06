@@ -22,6 +22,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose)
 //    debugImplementation(libs.leakCanary)
 
     implementation(project(Modules.core.common))

@@ -13,11 +13,12 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.Lazy
-import ru.alexeyoss.foodie.coreui.presentation.AlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.activity.toolbar.MainActivityToolbarHandler
 import ru.alexeyoss.foodie.appComponent
+import ru.alexeyoss.foodie.coreui.presentation.AlertDialogBuilder
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import ru.alexeyoss.foodie.navigation.Screens
 import ru.alexeyoss.foodie.permissions.LocationPermissionRequest
@@ -66,6 +67,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.customToolbar)
 
+
+        Dispatchers
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))

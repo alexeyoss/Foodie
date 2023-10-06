@@ -27,6 +27,11 @@ gradlePlugin {
             id = "foodie.android.feature"
             implementationClass = "AndroidFeaturePlugin"
         }
+
+        register("androidComposeFeaturePlugin") {
+            id = "foodie.android.feature.compose"
+            implementationClass = "AndroidComposeFeaturePlugin"
+        }
     }
 }
 

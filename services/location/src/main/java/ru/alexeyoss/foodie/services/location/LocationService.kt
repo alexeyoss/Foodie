@@ -3,7 +3,7 @@ package ru.alexeyoss.foodie.services.location
 import android.location.Location
 import androidx.annotation.RequiresPermission
 import com.google.android.gms.location.FusedLocationProviderClient
-import ru.alexeyoss.core.common.data.Container
+import ru.alexeyoss.foodie.core.common.data.Container
 import ru.alexeyoss.foodie.services.location.exceptions.LocationNullPointerException
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -18,7 +18,6 @@ class LocationService
 constructor(
     private val fusedLocationClient: FusedLocationProviderClient
 ) {
-
     /**
      * Запросить последнее известное местоположение.
      *

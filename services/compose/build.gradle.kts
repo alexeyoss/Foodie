@@ -1,7 +1,7 @@
 import ru.alexeyoss.foodie.buildlogic.config.AppConfig
 
 plugins {
-    id("foodie.android.feature")
+    id("foodie.android.feature.compose")
 }
 
 android {
@@ -9,7 +9,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.lifecycle.runtime)
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose)
 }

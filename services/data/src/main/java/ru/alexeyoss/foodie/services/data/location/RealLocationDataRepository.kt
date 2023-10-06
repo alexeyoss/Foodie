@@ -10,6 +10,7 @@ class RealLocationDataRepository
 @Inject constructor(
     private val locationDataSource: LocationDataSource
 ) : LocationDataRepository {
+
     override suspend fun getCityNameByCoords(locationRequest: LocationRequest): ResponseStates<LocationDTO> {
         return locationDataSource.getCityNameByCoords(locationRequest)
     }

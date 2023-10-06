@@ -1,6 +1,6 @@
 package ru.alexeyoss.foodie.features.cart.presentation.cart.adapter
 
-import ru.alexeyoss.features.cart.R
+import ru.alexeyoss.foodie.features.cart.R
 import ru.alexeyoss.foodie.features.cart.domain.entities.UiCartItem
 import ru.alexeyoss.foodie.features.cart.presentation.cart.adapter.QuantityOperation.Minus
 import ru.alexeyoss.foodie.features.cart.presentation.cart.adapter.QuantityOperation.Plus

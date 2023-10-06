@@ -7,19 +7,20 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.alexeyoss.core.common.di.scope.PerApplication
-import ru.alexeyoss.network.BuildConfig
+import ru.alexeyoss.foodie.core.common.di.scope.PerApplication
+import ru.alexeyoss.foodie.services.network.BuildConfig
 import ru.alexeyoss.foodie.services.network.MainApiService
 import timber.log.Timber
-
 
 interface NetworkProvider {
     fun provideApiService(): MainApiService
 }
 
-@[PerApplication Component(
+@[
+PerApplication Component(
     modules = [NetworkModule::class]
-)]
+)
+]
 interface NetworkComponent : NetworkProvider
 
 @Module
@@ -54,7 +55,4 @@ internal object NetworkModule {
     @Provides
     fun provideApiService(retrofit: Retrofit): MainApiService =
         retrofit.create(MainApiService::class.java)
-
 }
-
-

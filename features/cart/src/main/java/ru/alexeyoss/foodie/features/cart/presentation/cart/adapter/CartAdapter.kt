@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.alexeyoss.features.cart.R
-import ru.alexeyoss.features.cart.databinding.ItemCartFragmentBinding
+import ru.alexeyoss.foodie.features.cart.R
+import ru.alexeyoss.foodie.features.cart.databinding.ItemCartFragmentBinding
 import ru.alexeyoss.foodie.features.cart.domain.entities.UiCartItem
 
 class CartAdapter(

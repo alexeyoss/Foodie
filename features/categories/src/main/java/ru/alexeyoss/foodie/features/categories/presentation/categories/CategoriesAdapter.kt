@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.alexeyoss.features.categories.databinding.ItemCategoriesFragmentBinding
+import ru.alexeyoss.foodie.features.categories.databinding.ItemCategoriesFragmentBinding
 import ru.alexeyoss.foodie.features.categories.domain.entities.UiCategory
 
 class CategoriesAdapter(
@@ -22,7 +22,6 @@ class CategoriesAdapter(
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
         holder.onBind(currentList[position])
     }
-
 
     inner class CategoryHolder(
         private val binding: ItemCategoriesFragmentBinding,
@@ -49,13 +48,15 @@ class CategoriesAdapter(
     companion object {
         private val diffUtil = object : DiffUtil.ItemCallback<UiCategory>() {
             override fun areItemsTheSame(
-                oldItem: UiCategory, newItem: UiCategory
+                oldItem: UiCategory,
+                newItem: UiCategory
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: UiCategory, newItem: UiCategory
+                oldItem: UiCategory,
+                newItem: UiCategory
             ): Boolean {
                 return oldItem == newItem
             }

@@ -2,7 +2,6 @@ package ru.alexeyoss.foodie.features.categories.presentation.categories
 
 import android.content.Context
 import android.os.Bundle
-import android.util.SparseArray
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -14,11 +13,11 @@ import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.toolbar.FoodieToolbarStates
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateOwner
 import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
-import ru.alexeyoss.features.categories.R
-import ru.alexeyoss.features.categories.databinding.FragmentCategoriesBinding
+import ru.alexeyoss.foodie.coreui.presentation.toolbar.FoodieToolbarStates
+import ru.alexeyoss.foodie.features.categories.R
+import ru.alexeyoss.foodie.features.categories.databinding.FragmentCategoriesBinding
 import ru.alexeyoss.foodie.features.categories.di.CategoriesComponentViewModel
 import ru.alexeyoss.foodie.features.categories.di.provider.CategoriesComponentDepsProvider
 import ru.alexeyoss.foodie.features.categories.presentation.CategoriesUiState

@@ -9,8 +9,8 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.alexeyoss.core.common.data.Container
-import ru.alexeyoss.core.common.di.modules.CoroutinesModule
+import ru.alexeyoss.foodie.core.common.data.Container
+import ru.alexeyoss.foodie.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.foodie.features.categories.domain.GetCategoriesUseCase
 import ru.alexeyoss.foodie.features.categories.presentation.CategoriesUiState
 import timber.log.Timber

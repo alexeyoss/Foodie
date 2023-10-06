@@ -13,15 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.Lazy
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
-import ru.alexeyoss.core_ui.presentation.fragment.ARG_SCREEN
 import ru.alexeyoss.core_ui.presentation.itemDecorators.GridLayoutMarginItemDecoration
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearHorizontalMarginItemDecoration
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.toolbar.FoodieToolbarStates
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateOwner
 import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
-import ru.alexeyoss.features.dishes.R
-import ru.alexeyoss.features.dishes.databinding.FragmentDishesBinding
 import ru.alexeyoss.features.dishes.di.DishesComponentViewModel
 import ru.alexeyoss.features.dishes.di.provider.DishesComponentDepsProvider
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
@@ -29,8 +25,12 @@ import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
 import ru.alexeyoss.features.dishes.presentation.DishesRouter
 import ru.alexeyoss.features.dishes.presentation.DishesSideEffects
 import ru.alexeyoss.features.dishes.presentation.dish_details.DishDetailsDialogFragment
+import ru.alexeyoss.features.dishes.presentation.dish_details.DishDetailsDialogFragment.Companion.ARG_SCREEN
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.DishesAdapter
 import ru.alexeyoss.features.dishes.presentation.dishes.adapters.FiltersAdapter
+import ru.alexeyoss.foodie.coreui.presentation.toolbar.FoodieToolbarStates
+import ru.alexeyoss.foodie.features.dishes.R
+import ru.alexeyoss.foodie.features.dishes.databinding.FragmentDishesBinding
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -127,6 +127,7 @@ class DishesFragment :
     }
 
     companion object {
+
         fun getNewInstance(categoryName: String): DishesFragment {
             return DishesFragment().apply {
                 arguments = bundleOf(ARG_SCREEN to categoryName)

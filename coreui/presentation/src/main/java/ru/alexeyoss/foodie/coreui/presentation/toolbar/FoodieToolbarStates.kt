@@ -1,11 +1,10 @@
-package ru.alexeyoss.core_ui.presentation.toolbar
+package ru.alexeyoss.foodie.coreui.presentation.toolbar
 
 /**
  * Special Toolbar States defined for application needs
- * @see BaseToolbarState
+ * @see ToolbarState
  * */
-sealed interface FoodieToolbarStates : BaseToolbarState {
+sealed interface FoodieToolbarStates : ToolbarState {
     object LocationView : FoodieToolbarStates
     data class CustomTitle(val title: String) : FoodieToolbarStates
 }
-

@@ -4,7 +4,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.Module
 import dagger.Provides
-import ru.alexeyoss.core.common.di.App
+import ru.alexeyoss.foodie.core.common.di.App
 import ru.alexeyoss.foodie.services.location.LocationService
 import ru.alexeyoss.foodie.services.location.interactor.DefaultLocationInteractor
 

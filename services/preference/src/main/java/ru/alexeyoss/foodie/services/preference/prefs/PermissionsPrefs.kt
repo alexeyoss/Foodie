@@ -6,7 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import ru.alexeyoss.core.common.di.App
+import ru.alexeyoss.foodie.core.common.di.App
 import ru.alexeyoss.foodie.services.preference.saveOperation
 import javax.inject.Inject
 
@@ -48,5 +48,4 @@ class PermissionsPrefs
     companion object {
         const val PERMISSION_PREFERENCE_NAME = "permission_preference"
     }
-
 }

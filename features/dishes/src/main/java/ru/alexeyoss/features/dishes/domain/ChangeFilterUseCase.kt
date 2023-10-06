@@ -2,11 +2,10 @@ package ru.alexeyoss.features.dishes.domain
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.alexeyoss.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.features.dishes.domain.models.DishListState
 import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
+import ru.alexeyoss.foodie.core.common.di.modules.CoroutinesModule
 import javax.inject.Inject
-
 
 /**
  * Use case for filtering [DishListState.dishes]
@@ -17,10 +16,10 @@ class ChangeFilterUseCase
 ) {
 
     suspend operator fun invoke(
-        lastDishListState: DishListState, newFilterState: UiFilterDTO
+        lastDishListState: DishListState,
+        newFilterState: UiFilterDTO
     ): DishListState {
         return withContext(defaultDispatcher) {
-
             // Find the certain filter, remove it and add new one with isChecked = value
             val newFilterSet = lastDishListState.filters.map { oldFilterState ->
                 if (oldFilterState.value == newFilterState.value) {
@@ -41,14 +40,15 @@ class ChangeFilterUseCase
 
             if (activeFiltersValue.isEmpty()) {
                 return@withContext lastDishListState.copy(
-                    filteredDishes = lastDishListState.dishes, filters = newFilterSet
+                    filteredDishes = lastDishListState.dishes,
+                    filters = newFilterSet
                 )
             } else {
                 return@withContext lastDishListState.copy(
-                    filteredDishes = filteredDishes, filters = newFilterSet
+                    filteredDishes = filteredDishes,
+                    filters = newFilterSet
                 )
             }
         }
     }
 }
-

@@ -16,9 +16,7 @@ object NavigationModule {
     }
 
     @Provides
-    internal fun provideNavigatorHolder(): NavigatorHolder {
+    internal fun provideNavilgatorHolder(): NavigatorHolder {
         return cicerone.getNavigatorHolder()
     }
 }
-
-

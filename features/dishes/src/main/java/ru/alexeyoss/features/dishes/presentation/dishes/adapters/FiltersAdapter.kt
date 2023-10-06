@@ -7,9 +7,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.alexeyoss.core_ui.theme.R.color
-import ru.alexeyoss.features.dishes.databinding.ItemFiltersFragmentBinding
 import ru.alexeyoss.features.dishes.domain.models.UiFilterDTO
+import ru.alexeyoss.foodie.core_ui.theme.R.color
+import ru.alexeyoss.foodie.features.dishes.databinding.ItemFiltersFragmentBinding
 
 class FiltersAdapter(
     private val onFilterSelected: (UiFilterDTO) -> Unit
@@ -26,7 +26,8 @@ class FiltersAdapter(
     }
 
     inner class FilterHolder(
-        binding: ItemFiltersFragmentBinding, private val onFilterSelected: (UiFilterDTO) -> Unit
+        binding: ItemFiltersFragmentBinding,
+        private val onFilterSelected: (UiFilterDTO) -> Unit
     ) : BaseViewHolder<ItemFiltersFragmentBinding, UiFilterDTO>(binding) {
 
         init {
@@ -61,7 +62,6 @@ class FiltersAdapter(
             setCardBackgroundColor(backgroundColor)
         }
     }
-
 
     companion object {
         private val diffUtil = object : DiffUtil.ItemCallback<UiFilterDTO>() {

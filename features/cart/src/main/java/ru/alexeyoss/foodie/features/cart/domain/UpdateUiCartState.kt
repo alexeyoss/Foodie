@@ -2,7 +2,7 @@ package ru.alexeyoss.foodie.features.cart.domain
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.alexeyoss.core.common.di.modules.CoroutinesModule
+import ru.alexeyoss.foodie.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.foodie.features.cart.domain.entities.UiCartItem
 import ru.alexeyoss.foodie.features.cart.domain.entities.UiCartState
 import ru.alexeyoss.foodie.features.cart.presentation.cart.adapter.QuantityOperation
@@ -57,7 +57,6 @@ class UpdateUiCartState
                     cartItems = newCartItemMutableList.toList(),
                     totalSum = totalSum
                 )
-
             }
 
             null -> {

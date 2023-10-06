@@ -22,12 +22,14 @@ interface MainToolsProvider {
     fun provideDefaultDispatcher(): CoroutineDispatcher
 }
 
-@[PerApplication Component(
+@[
+PerApplication Component(
     modules = [
         MainToolsModule::class,
         CoroutinesModule::class
     ]
-)]
+)
+]
 interface MainToolsComponent : MainToolsProvider {
 
     @Component.Builder

@@ -13,11 +13,11 @@ import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.dp
 import ru.alexeyoss.core_ui.presentation.itemDecorators.LinearVerticalMarginItemDecoration
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
-import ru.alexeyoss.core_ui.presentation.toolbar.FoodieToolbarStates
 import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateOwner
 import ru.alexeyoss.core_ui.presentation.viewBinding.viewBinding
-import ru.alexeyoss.features.cart.R
-import ru.alexeyoss.features.cart.databinding.FragmentCartBinding
+import ru.alexeyoss.foodie.coreui.presentation.toolbar.FoodieToolbarStates
+import ru.alexeyoss.foodie.features.cart.R
+import ru.alexeyoss.foodie.features.cart.databinding.FragmentCartBinding
 import ru.alexeyoss.foodie.features.cart.di.CartComponentViewModel
 import ru.alexeyoss.foodie.features.cart.di.provider.CartComponentDepsProvider
 import ru.alexeyoss.foodie.features.cart.presentation.CartRouter
@@ -26,7 +26,8 @@ import ru.alexeyoss.foodie.features.cart.presentation.cart.adapter.CartAdapter
 import ru.alexeyoss.foodie.features.cart.presentation.cart.adapter.QuantityOperation
 import javax.inject.Inject
 
-class CartFragment : Fragment(R.layout.fragment_cart),
+class CartFragment :
+    Fragment(R.layout.fragment_cart),
     BackButtonListener,
     ToolbarStateOwner {
 
@@ -71,17 +72,15 @@ class CartFragment : Fragment(R.layout.fragment_cart),
         viewModel.uiCartScreenState.observe(viewLifecycleOwner) { uiCartState ->
             cartAdapter.submitList(uiCartState.cartItems)
 
-            if (uiCartState.cartItems?.isNotEmpty() == true)
+            if (uiCartState.cartItems?.isNotEmpty() == true) {
                 binding.payBtnWithSum.text = resources.getString(
                     R.string.total_text,
                     uiCartState.totalSum.toString()
                 )
-            else {
+            } else {
                 binding.payBtnWithSum.text = resources.getString(R.string.default_total_text)
             }
         }
-
-
     }
 
     private fun initRecyclerView() = with(binding) {
@@ -115,6 +114,4 @@ class CartFragment : Fragment(R.layout.fragment_cart),
         const val ITEM_VERTICAL_MARGIN = 8
         fun getNewInstance() = CartFragment()
     }
-
-
 }

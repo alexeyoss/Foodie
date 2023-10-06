@@ -22,7 +22,6 @@ object CoroutinesModule {
     @Provides
     fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
-
     @Retention(AnnotationRetention.BINARY)
     @Qualifier
     annotation class IoDispatcher
@@ -34,5 +33,4 @@ object CoroutinesModule {
     @Retention(AnnotationRetention.BINARY)
     @Qualifier
     annotation class DefaultDispatcher
-
 }

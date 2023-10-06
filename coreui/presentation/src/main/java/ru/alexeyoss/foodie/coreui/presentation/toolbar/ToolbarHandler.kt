@@ -1,23 +1,25 @@
-package ru.alexeyoss.core_ui.presentation.toolbar
+package ru.alexeyoss.foodie.coreui.presentation.toolbar
 
+import android.widget.Toolbar
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
-import android.widget.Toolbar
+import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarStateOwner
 
 /**
  * Abstract class for flexible handling custom [Toolbar].
  * Use [addToolbarStateListener] and [removeToolbarStateListener] in Activity methods [FragmentActivity.onCreate]
  * and [FragmentActivity.onDestroy] accordingly.
  *  @see ToolbarStateOwner
- *  @see BaseToolbarState
+ *  @see ToolbarState
  * */
-abstract class ToolbarHandler<A : FragmentActivity, T : BaseToolbarState>
+abstract class ToolbarHandler<A : FragmentActivity, T : ToolbarState>
 protected constructor(
-    private val activity: A, @IdRes private val containerId: Int
+    private val activity: A,
+    @IdRes private val containerId: Int
 ) {
 
     val lifeCycleObserver: DefaultLifecycleObserver = object : DefaultLifecycleObserver {
@@ -57,5 +59,4 @@ protected constructor(
      * Override method for toolbar in certain Activity. Update view components depending on our custom [FoodieToolbarStates]
      * */
     protected abstract fun updateToolbarView(toolbarState: T)
-
 }

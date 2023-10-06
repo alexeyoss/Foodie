@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.alexeyoss.core.common.data.Container
-import ru.alexeyoss.core.common.di.modules.CoroutinesModule
+import ru.alexeyoss.foodie.core.common.data.Container
+import ru.alexeyoss.foodie.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.foodie.features.cart.domain.GetCartItems
 import ru.alexeyoss.foodie.features.cart.domain.UpdateUiCartState
 import ru.alexeyoss.foodie.features.cart.domain.entities.UiCartState
@@ -39,7 +39,6 @@ class CartViewModel
 
     private val _uiCartScreenState: MutableLiveData<UiCartState> = MutableLiveData()
     val uiCartScreenState: LiveData<UiCartState> = _uiCartScreenState
-
 
     fun initUiCartState() {
         /**
@@ -74,7 +73,6 @@ class CartViewModel
                 }
             }
         }
-
     }
 
     class Factory @Inject constructor(

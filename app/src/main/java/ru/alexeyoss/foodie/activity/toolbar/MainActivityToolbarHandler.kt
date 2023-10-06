@@ -4,18 +4,19 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.MutableLiveData
 import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
-import ru.alexeyoss.core_ui.presentation.toolbar.FoodieToolbarStates
-import ru.alexeyoss.core_ui.presentation.toolbar.ToolbarHandler
-import ru.alexeyoss.core_ui.theme.R.drawable
 import ru.alexeyoss.foodie.activity.MainActivity
 import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
+import ru.alexeyoss.foodie.coreui.presentation.toolbar.FoodieToolbarStates
+import ru.alexeyoss.foodie.coreui.presentation.toolbar.ToolbarHandler
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import java.util.Calendar
 import javax.inject.Inject
+import ru.alexeyoss.foodie.core_ui.theme.R.drawable as ThemeDrawable
 
 class MainActivityToolbarHandler
 @Inject constructor(
-    private val activity: MainActivity, containerId: Int
+    private val activity: MainActivity,
+    containerId: Int
 ) : ToolbarHandler<MainActivity, FoodieToolbarStates>(activity, containerId) {
 
     init {
@@ -37,7 +38,6 @@ class MainActivityToolbarHandler
     private val locationData = MutableLiveData<UiLocationInfo>()
 
     private fun initToolbarListeners() {
-
         activity.viewModel.toolbarLocationStateFlow.collectOnLifecycle(activity) { locationUiStates ->
             when (locationUiStates) {
                 is MainActivityLocationUiStates.Error -> Unit
@@ -82,12 +82,9 @@ class MainActivityToolbarHandler
             subtitle = lastDate.value
             title = locationData.value?.cityName ?: ""
 
-            setLogo(drawable.ic_pinpoint)
+            setLogo(ThemeDrawable.ic_pinpoint)
             setDisplayHomeAsUpEnabled(false)
             profilePhoto.visibility = VISIBLE
         }
     }
 }
-
-
-

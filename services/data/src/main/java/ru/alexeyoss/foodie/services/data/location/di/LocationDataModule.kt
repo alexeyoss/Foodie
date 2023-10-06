@@ -2,7 +2,7 @@ package ru.alexeyoss.foodie.services.data.location.di
 
 import dagger.Binds
 import dagger.Module
-import ru.alexeyoss.core.common.di.scope.PerApplication
+import ru.alexeyoss.foodie.core.common.di.scope.PerApplication
 import ru.alexeyoss.foodie.services.data.location.LocationDataRepository
 import ru.alexeyoss.foodie.services.data.location.RealLocationDataRepository
 import ru.alexeyoss.foodie.services.data.location.sources.LocationDataSource
@@ -18,5 +18,4 @@ interface LocationDataModule {
     @Binds
     @PerApplication
     fun bindLocationDataSource(impl: LocationDataSourceImpl): LocationDataSource
-
 }

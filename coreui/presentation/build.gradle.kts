@@ -14,6 +14,5 @@ dependencies {
     implementation(libs.appCompat)
     implementation(libs.lifecycle.runtime)
     implementation(libs.material)
-
     api(project(Modules.core_ui.theme))
 }

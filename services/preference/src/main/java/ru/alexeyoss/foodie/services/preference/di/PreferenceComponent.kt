@@ -1,9 +1,8 @@
 package ru.alexeyoss.foodie.services.preference.di
 
 import dagger.Component
-import ru.alexeyoss.core.common.di.MainToolsComponent
-import ru.alexeyoss.core.common.di.MainToolsProvider
-import ru.alexeyoss.core.common.di.scope.PerApplication
+import ru.alexeyoss.foodie.core.common.di.MainToolsProvider
+import ru.alexeyoss.foodie.core.common.di.scope.PerApplication
 import ru.alexeyoss.foodie.services.preference.prefs.PermissionsPrefs
 
 
