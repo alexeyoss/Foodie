@@ -2,11 +2,11 @@ package ru.alexeyoss.foodie.mediators
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import ru.alexeyoss.core.common.exceptions.CommonException
-import ru.alexeyoss.core.common.exceptions.ConnectionException
-import ru.alexeyoss.core.common.data.Container
-import ru.alexeyoss.network.utils.ErrorState
-import ru.alexeyoss.network.utils.ResponseStates
+import ru.alexeyoss.foodie.core.common.data.Container
+import ru.alexeyoss.foodie.core.common.exceptions.CommonException
+import ru.alexeyoss.foodie.core.common.exceptions.ConnectionException
+import ru.alexeyoss.foodie.services.network.utils.ErrorState
+import ru.alexeyoss.foodie.services.network.utils.ResponseStates
 
 /**
  * Flow wrapper for matching [ResponseStates] with [Container] states

@@ -4,20 +4,22 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
-import ru.alexeyoss.core.common.activity.ActiveActivityHolder
-import ru.alexeyoss.core.common.activity.DefaultActivityLifecycleCallbacks
-import ru.alexeyoss.core.common.di.App
-import ru.alexeyoss.features.cart.di.CartDeps
-import ru.alexeyoss.features.cart.di.provider.CartComponentDepsProvider
-import ru.alexeyoss.features.categories.di.CategoriesDeps
-import ru.alexeyoss.features.categories.di.provider.CategoriesComponentDepsProvider
+import ru.alexeyoss.foodie.core.common.activity.ActiveActivityHolder
+import ru.alexeyoss.foodie.core.common.activity.DefaultActivityLifecycleCallbacks
+import ru.alexeyoss.foodie.core.common.di.App
+import ru.alexeyoss.foodie.features.cart.di.CartDeps
+import ru.alexeyoss.foodie.features.cart.di.provider.CartComponentDepsProvider
+import ru.alexeyoss.foodie.features.categories.di.CategoriesDeps
+import ru.alexeyoss.foodie.features.categories.di.provider.CategoriesComponentDepsProvider
 import ru.alexeyoss.features.dishes.di.DishesDeps
 import ru.alexeyoss.features.dishes.di.provider.DishesComponentDepsProvider
 import ru.alexeyoss.foodie.di.AppComponent
 import timber.log.Timber
 import javax.inject.Inject
 
-class FoodieApp : Application(), App,
+class FoodieApp :
+    Application(),
+    App,
     CategoriesComponentDepsProvider,
     DishesComponentDepsProvider,
     CartComponentDepsProvider {
@@ -35,7 +37,6 @@ class FoodieApp : Application(), App,
         registerActiveActivityListener()
         setDebugLogging()
     }
-
 
     private fun registerActiveActivityListener() {
         registerActivityLifecycleCallbacks(object : DefaultActivityLifecycleCallbacks {

@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.alexeyoss.features.dishes.databinding.ItemDishesFragmentBinding
 import ru.alexeyoss.features.dishes.domain.models.UiDishDTO
+import ru.alexeyoss.foodie.features.dishes.databinding.ItemDishesFragmentBinding
 
 class DishesAdapter(
     private val onClickDish: (UiDishDTO) -> Unit
@@ -18,7 +18,6 @@ class DishesAdapter(
         val binding = ItemDishesFragmentBinding.inflate(inflater, parent, false)
         return DishHolder(binding, onClickDish)
     }
-
 
     override fun onBindViewHolder(holder: DishHolder, position: Int) {
         holder.onBind(currentList[position])
@@ -33,7 +32,6 @@ class DishesAdapter(
                 if (bindingAdapterPosition == RecyclerView.NO_POSITION) return@setOnClickListener
                 onClickDish(item)
             }
-
         }
 
         override fun onBind(item: UiDishDTO) {
@@ -47,6 +45,7 @@ class DishesAdapter(
 
     companion object {
         private val diffUtil = object : DiffUtil.ItemCallback<UiDishDTO>() {
+
             override fun areItemsTheSame(oldItem: UiDishDTO, newItem: UiDishDTO): Boolean {
                 return oldItem.id == newItem.id
             }

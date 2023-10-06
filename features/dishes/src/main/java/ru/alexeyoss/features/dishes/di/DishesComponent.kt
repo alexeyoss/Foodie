@@ -6,17 +6,18 @@ import dagger.Component
 import dagger.Module
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
-import ru.alexeyoss.core.common.di.CoroutinesModule
-import ru.alexeyoss.core.common.di.scope.PerScreen
 import ru.alexeyoss.features.dishes.domain.repositories.DishesRepository
 import ru.alexeyoss.features.dishes.presentation.DishesRouter
 import ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment
 import ru.alexeyoss.features.dishes.presentation.dishes.DishesViewModel
+import ru.alexeyoss.foodie.core.common.di.modules.CoroutinesModule
+import ru.alexeyoss.foodie.core.common.di.scope.PerScreen
 
-@[PerScreen Component(
+@PerScreen
+@Component(
     modules = [DishesModule::class],
     dependencies = [DishesDeps::class]
-)]
+)
 interface DishesComponent {
 
     fun inject(dishesFragment: DishesFragment)
@@ -33,14 +34,15 @@ interface DishesComponent {
     includes = [CoroutinesModule::class]
 )
 internal interface DishesModule {
-
     @Binds
     @PerScreen
     @[IntoMap ClassKey(DishesViewModel::class)]
     fun bindCategoriesViewModel(dishesViewModel: DishesViewModel): ViewModel
-
 }
 
+/**
+ * Describe deps that we need from the AppComponent
+ * */
 interface DishesDeps {
     val dishesRouter: DishesRouter
     val dishesRepository: DishesRepository

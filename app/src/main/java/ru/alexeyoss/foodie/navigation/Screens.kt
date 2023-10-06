@@ -5,8 +5,8 @@ import android.net.Uri
 import android.provider.Settings
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import ru.alexeyoss.features.cart.presentation.cart.CartFragment
-import ru.alexeyoss.features.categories.presentation.categories.CategoriesFragment
+import ru.alexeyoss.foodie.features.cart.presentation.cart.CartFragment
+import ru.alexeyoss.foodie.features.categories.presentation.categories.CategoriesFragment
 import ru.alexeyoss.features.dishes.presentation.dishes.DishesFragment
 import ru.alexeyoss.foodie.BuildConfig
 
@@ -28,6 +28,9 @@ object Screens {
         CartFragment.getNewInstance()
     }
 
+    /*
+    * Potential Android Hijacking Attack (foreign apps can execute own screens due [Intent.FLAG_ACTIVITY_NEW_TASK])
+    * */
     fun settingsActivity() = ActivityScreen {
         Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,

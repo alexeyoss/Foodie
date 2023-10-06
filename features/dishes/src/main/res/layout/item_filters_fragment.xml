@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:theme="@style/Theme.Foodie">
 
     <com.google.android.material.card.MaterialCardView
@@ -13,6 +14,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/filterText"
             android:layout_width="wrap_content"
+            app:emojiCompatEnabled="?attr/emojiCompatEnabled"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:paddingHorizontal="@dimen/large_padding"

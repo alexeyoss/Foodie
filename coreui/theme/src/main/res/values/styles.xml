@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Buttons. -->
+    <style name="Widget.Foodie.Button.Light.SmallSize" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:padding">@dimen/small_padding</item>
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="iconPadding">@dimen/zero_padding</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">@color/black</item>
+    </style>
+
+    <style name="Widget.Foodie.Button.Primary.LargeSize" parent="Widget.MaterialComponents.Button">
+        <item name="android:paddingTop">@dimen/specific_padding</item>
+        <item name="colorButtonNormal">?attr/colorPrimaryVariant</item>
+        <item name="android:paddingBottom">@dimen/specific_padding</item>
+        <item name="backgroundTint">?attr/colorPrimaryVariant</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <!--Main Activity. -->
+    <style name="Widget.Foodie.AppBarLayout.Light" parent="Widget.MaterialComponents.AppBarLayout.PrimarySurface">
+        <item name="background">?attr/colorPrimarySurface</item>
+        <item name="elevation">@dimen/zeroElevation</item>
+    </style>
+
+    <style name="Widget.Foodie.Toolbar.Light" parent="Widget.MaterialComponents.Toolbar">
+        <item name="minHeight">?attr/actionBarSize</item>
+        <item name="titleTextAppearance">?attr/textAppearanceHeadline6</item>
+        <item name="subtitleTextAppearance">?attr/textAppearanceSubtitle2</item>
+    </style>
+
+    <style name="Widget.Foodie.BottomNavigationView.Light" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemIconSize">@dimen/icon_size_bottomView</item>
+        <item name="itemIconTint">@color/bottom_nav_color</item>
+        <item name="itemTextColor">@color/bottom_nav_color</item>
+        <item name="android:background">?attr/colorPrimarySurface</item>
+        <item name="itemTextAppearanceActive">?attr/textAppearanceOverline</item>
+        <item name="itemTextAppearanceInactive">?attr/textAppearanceOverline</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <style name="Widget.Foodie.ProfileImageView.Light" parent="">
+        <item name="android:layout_gravity">end</item>
+        <item name="android:layout_marginEnd">@dimen/large_margin</item>
+    </style>
+
+    <!-- Cart Fragment. -->
+    <style name="Widget.Foodie.QuantitySelector.Light" parent="">
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+    </style>
+
+    <!-- Dialogs.-->
+
+    <style name="Theme.Foodie.Dialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="theme">@style/Theme.Foodie</item>
+    </style>
+
+    <style name="Theme.Foodie.Dialog.CustomSize" parent="Theme.Foodie.Dialog">
+        <item name="android:windowBackground">@drawable/dish_details_background</item>
+    </style>
+
+    <!--Alert Dialog.-->
+    <style name="Theme.Foodie.AlertDialog.Light" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        // TODO windowBackground isn't applied
+        <item name="android:windowBackground">@drawable/dish_details_background</item>
+        <item name="android:textColorPrimary">?attr/itemTextColor</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.Foodie.AlertDialog.ButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.Foodie.AlertDialog.ButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.Foodie.AlertDialog.ButtonStyle</item>
+    </style>
+
+    <style name="Widget.Foodie.AlertDialog.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">?attr/itemTextColor</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+
+</resources>

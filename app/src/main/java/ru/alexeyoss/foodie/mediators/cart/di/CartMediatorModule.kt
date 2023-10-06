@@ -2,8 +2,8 @@ package ru.alexeyoss.foodie.mediators.cart.di
 
 import dagger.Binds
 import dagger.Module
-import ru.alexeyoss.features.cart.domain.repositories.CartRepository
-import ru.alexeyoss.features.cart.presentation.CartRouter
+import ru.alexeyoss.foodie.features.cart.domain.repositories.CartRepository
+import ru.alexeyoss.foodie.features.cart.presentation.CartRouter
 import ru.alexeyoss.foodie.mediators.cart.AdapterCartRouter
 import ru.alexeyoss.foodie.mediators.cart.repositories.AdapterCartRepository
 

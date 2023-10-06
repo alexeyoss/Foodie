@@ -1,12 +1,12 @@
 package ru.alexeyoss.foodie.mediators.categories.mappers
 
-import ru.alexeyoss.network.models.CategoryDTO
-import ru.alexeyoss.features.categories.domain.entities.UiCategory
-import ru.alexeyoss.core.common.data.BaseMapper
+import ru.alexeyoss.foodie.core.common.data.BaseMapper
+import ru.alexeyoss.foodie.features.categories.domain.entities.UiCategory
+import ru.alexeyoss.foodie.services.network.models.responses.CategoryDTO
 import javax.inject.Inject
 
 class CategoryMapper
-    @Inject constructor(): BaseMapper<UiCategory, CategoryDTO> {
+@Inject constructor() : BaseMapper<UiCategory, CategoryDTO> {
     override fun mapToDomainModel(foreignModel: CategoryDTO): UiCategory {
         return UiCategory(
             id = foreignModel.id,

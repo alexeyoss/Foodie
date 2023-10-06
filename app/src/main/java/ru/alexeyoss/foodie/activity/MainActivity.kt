@@ -1,25 +1,29 @@
 package ru.alexeyoss.foodie.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
+import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker
 import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.Lazy
-import ru.alexeyoss.core_ui.presentation.AlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.foodie.R
+import ru.alexeyoss.foodie.activity.toolbar.MainActivityToolbarHandler
 import ru.alexeyoss.foodie.appComponent
+import ru.alexeyoss.foodie.coreui.presentation.AlertDialogBuilder
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import ru.alexeyoss.foodie.navigation.Screens
-import ru.alexeyoss.foodie.permission.LocationPermissionRequest
-import ru.alexeyoss.foodie.permission.LocationPermissionRequest.permissions
+import ru.alexeyoss.foodie.permissions.LocationPermissionRequest
+import ru.alexeyoss.foodie.permissions.LocationPermissionRequest.permissions
+import ru.alexeyoss.foodie.permissions.LocationPermissionRequest.showPermissionsRational
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -29,8 +33,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Inject
-    internal lateinit var viewModelFactory: Lazy<MainActivityViewModel.Factory>
-    private val viewModel by viewModels<MainActivityViewModel> { viewModelFactory.get() }
+    lateinit var viewModelFactory: Lazy<MainActivityViewModel.Factory>
+    val viewModel by viewModels<MainActivityViewModel> { viewModelFactory.get() }
 
     @Inject
     lateinit var router: Router
@@ -38,20 +42,24 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    private val toolbarHandler by lazy {
-        MainActivityToolbarHandler(
-            activity = this@MainActivity, containerId = R.id.navHostFragment
-        )
-    }
-
     private val locationPermissionLauncher by lazy {
         registerForActivityResult(RequestMultiplePermissions(), ::onLocationPermissionResult)
     }
 
+    private val toolbarHandler by lazy {
+        MainActivityToolbarHandler(
+            activity = this@MainActivity,
+            containerId = R.id.navHostFragment
+        )
+    }
+
     private val navigator = AppNavigator(
-        activity = this@MainActivity, containerId = R.id.navHostFragment, fragmentManager = supportFragmentManager
+        activity = this@MainActivity,
+        containerId = R.id.navHostFragment,
+        fragmentManager = supportFragmentManager
     )
 
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this@MainActivity)
@@ -60,27 +68,21 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.customToolbar)
 
 
+        Dispatchers
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))
         }
 
-        locationPermissionLauncher.launch(permissions)
+        if (!checkPermissionsStatus(permissions)) {
+            locationPermissionLauncher.launch(permissions)
+        } else {
+            viewModel.getLastKnownLocation()
+        }
 
-        registerToolbarHandler()
+        lifecycle.addObserver(toolbarHandler.lifeCycleObserver)
+
         initListeners()
-    }
-
-    private fun registerToolbarHandler() {
-        lifecycle.addObserver(object : DefaultLifecycleObserver {
-            override fun onCreate(owner: LifecycleOwner) {
-                toolbarHandler.addToolbarStateListener()
-            }
-
-            override fun onDestroy(owner: LifecycleOwner) {
-                toolbarHandler.removeToolbarStateListener()
-            }
-        })
     }
 
     private fun initListeners() {
@@ -115,19 +117,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // HelpMe is it correct to build independent Permission Manager ?
+    @SuppressLint("MissingPermission")
     private fun onLocationPermissionResult(result: Map<String, Boolean>) {
-        if (result.all { permission -> permission.value }) {
-            // TODO start location service  OR set locationInfo into Toolbar
+        if (result.any { permission -> permission.value }) {
+            // Set last known location if ANY of permissions is provided
+            viewModel.getLastKnownLocation()
         } else {
-            if (shouldShowRequestPermissionRationale(
-                    this@MainActivity, permissions.first()
-                )
-            ) {
+            if (shouldShowRequestPermissionRationale(this@MainActivity, permissions.random())) {
                 locationPermissionLauncher.launch(permissions)
             } else {
-                // TODO set default position
-                if (LocationPermissionRequest.showPermissionsRational) {
+                // Set default city name if ALL permissions is restricted
+                viewModel.setDefaultCityName()
+
+                if (showPermissionsRational) {
                     AlertDialogBuilder.createPermissionDialog(
                         this@MainActivity,
                         message = LocationPermissionRequest.permissionsRationalStr,
@@ -136,6 +138,14 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+        }
+    }
+
+    private fun checkPermissionsStatus(permissions: Array<String>): Boolean {
+        return permissions.any { permission ->
+            ContextCompat.checkSelfPermission(
+                this@MainActivity, permission
+            ) == PermissionChecker.PERMISSION_GRANTED
         }
     }
 
