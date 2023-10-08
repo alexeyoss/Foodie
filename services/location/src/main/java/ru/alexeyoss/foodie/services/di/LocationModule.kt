@@ -4,15 +4,15 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.Module
 import dagger.Provides
-import ru.alexeyoss.foodie.core.common.di.App
+import ru.alexeyoss.foodie.core.common.di.AppContextProvider
 import ru.alexeyoss.foodie.services.location.LocationService
 import ru.alexeyoss.foodie.services.location.interactor.DefaultLocationInteractor
 
 @Module
 object LocationModule {
     @Provides
-    fun provideFusedLocationProviderClient(app: App): FusedLocationProviderClient {
-        return LocationServices.getFusedLocationProviderClient(app.getApplicationContext())
+    fun provideFusedLocationProviderClient(appContextProvider: AppContextProvider): FusedLocationProviderClient {
+        return LocationServices.getFusedLocationProviderClient(appContextProvider.getApplicationContext())
     }
 
     @Provides

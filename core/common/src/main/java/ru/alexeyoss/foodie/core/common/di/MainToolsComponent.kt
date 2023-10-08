@@ -9,7 +9,7 @@ import ru.alexeyoss.foodie.core.common.di.modules.MainToolsModule
 import ru.alexeyoss.foodie.core.common.di.scope.PerApplication
 
 interface MainToolsProvider {
-    fun provideContext(): App
+    fun provideContext(): AppContextProvider
     fun provideActiveActivityHolder(): ActiveActivityHolder
 
     @CoroutinesModule.IoDispatcher
@@ -35,15 +35,15 @@ interface MainToolsComponent : MainToolsProvider {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun app(app: App): Builder
+        fun app(appContextProvider: AppContextProvider): Builder
 
         fun build(): MainToolsComponent
     }
 
     class Initializer private constructor() {
         companion object {
-            fun init(app: App): MainToolsProvider = DaggerMainToolsComponent.builder()
-                .app(app)
+            fun init(appContextProvider: AppContextProvider): MainToolsProvider = DaggerMainToolsComponent.builder()
+                .app(appContextProvider)
                 .build()
         }
     }

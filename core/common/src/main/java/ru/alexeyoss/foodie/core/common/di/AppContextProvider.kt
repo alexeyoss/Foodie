@@ -5,6 +5,6 @@ import android.content.Context
 /**
  * Base interface for providing AppContext
  * */
-interface App {
+interface AppContextProvider {
     fun getApplicationContext(): Context
 }

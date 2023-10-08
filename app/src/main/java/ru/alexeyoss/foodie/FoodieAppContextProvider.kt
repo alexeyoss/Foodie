@@ -6,26 +6,19 @@ import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import ru.alexeyoss.foodie.core.common.activity.ActiveActivityHolder
 import ru.alexeyoss.foodie.core.common.activity.DefaultActivityLifecycleCallbacks
-import ru.alexeyoss.foodie.core.common.di.App
-import ru.alexeyoss.foodie.features.cart.di.CartDeps
-import ru.alexeyoss.foodie.features.cart.di.provider.CartComponentDepsProvider
-import ru.alexeyoss.foodie.features.categories.di.CategoriesDeps
-import ru.alexeyoss.foodie.features.categories.di.provider.CategoriesComponentDepsProvider
-import ru.alexeyoss.features.dishes.di.DishesDeps
-import ru.alexeyoss.features.dishes.di.provider.DishesComponentDepsProvider
+import ru.alexeyoss.foodie.core.common.di.AppContextProvider
 import ru.alexeyoss.foodie.di.AppComponent
+import ru.alexeyoss.foodie.di.AppComponentDepsProvider
 import timber.log.Timber
 import javax.inject.Inject
 
-class FoodieApp :
+class FoodieAppContextProvider :
     Application(),
-    App,
-    CategoriesComponentDepsProvider,
-    DishesComponentDepsProvider,
-    CartComponentDepsProvider {
+    AppContextProvider,
+    AppComponentDepsProvider {
 
-    val appComponent: AppComponent by lazy {
-        AppComponent.Initializer.init(this@FoodieApp)
+    override val appComponent: AppComponent by lazy {
+        AppComponent.Initializer.init(this@FoodieAppContextProvider)
     }
 
     @Inject
@@ -33,7 +26,7 @@ class FoodieApp :
 
     override fun onCreate() {
         super.onCreate()
-        appComponent.inject(this@FoodieApp)
+        appComponent.inject(this@FoodieAppContextProvider)
         registerActiveActivityListener()
         setDebugLogging()
     }
@@ -56,15 +49,10 @@ class FoodieApp :
             Timber.plant(Timber.DebugTree())
         }
     }
-
-    // TODO build common AppComponentProvider interface for providing AppComponent
-    override fun getCategoryDeps(): CategoriesDeps = appComponent
-    override fun getDishesDeps(): DishesDeps = appComponent
-    override fun getCartDeps(): CartDeps = appComponent
 }
 
 val Context.appComponent: AppComponent
     get() = when (this) {
-        is FoodieApp -> appComponent
+        is FoodieAppContextProvider -> appComponent
         else -> applicationContext.appComponent
     }
