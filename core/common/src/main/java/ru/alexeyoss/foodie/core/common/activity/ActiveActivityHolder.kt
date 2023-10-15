@@ -28,5 +28,4 @@ class ActiveActivityHolder
     fun removeActiveActivity() {
         this.activity = null
     }
-
 }

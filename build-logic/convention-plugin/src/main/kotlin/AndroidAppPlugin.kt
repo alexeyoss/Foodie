@@ -3,10 +3,13 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 import ru.alexeyoss.foodie.buildlogic.config.AppConfig
 import ru.alexeyoss.foodie.buildlogic.config.Plugins
 import ru.alexeyoss.foodie.buildlogic.extensions.applyPlugin
 import ru.alexeyoss.foodie.buildlogic.extensions.configureKotlin
+import ru.alexeyoss.foodie.buildlogic.extensions.getVersionCatalog
+import ru.alexeyoss.foodie.buildlogic.extensions.implementation
 import ru.alexeyoss.foodie.buildlogic.extensions.kotlinOptions
 
 /**
@@ -55,10 +58,6 @@ open class AndroidAppPlugin : Plugin<Project> {
                 isMinifyEnabled = true
             }
         }
-        compileOptions {
-            sourceCompatibility = AppConfig.JVM_TARGET
-            targetCompatibility = AppConfig.JVM_TARGET
-        }
         kotlinOptions {
             jvmTarget = AppConfig.JVM_TARGET.toString()
         }
@@ -76,5 +75,11 @@ open class AndroidAppPlugin : Plugin<Project> {
             }
         }
         configureKotlin(this)
+        dependencies {
+            val composeVersion = getVersionCatalog().findVersion("compose_bom")
+
+            implementation(platform("androidx.compose:compose-bom:$composeVersion"))
+            implementation("androidx.compose.runtime:runtime")
+        }
     }
 }

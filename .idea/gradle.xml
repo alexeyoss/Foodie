@@ -41,6 +41,7 @@
             <option value="$PROJECT_DIR$/services/location" />
             <option value="$PROJECT_DIR$/services/navigation" />
             <option value="$PROJECT_DIR$/services/network" />
+            <option value="$PROJECT_DIR$/services/notification" />
           </set>
         </option>
       </GradleProjectSettings>

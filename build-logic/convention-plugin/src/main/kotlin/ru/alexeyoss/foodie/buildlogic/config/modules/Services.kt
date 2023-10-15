@@ -7,4 +7,5 @@ object Services {
     const val network = ":services:network"
     const val preference = ":services:preference"
     const val compose = ":services:compose"
+    const val notification = ":services:notification"
 }

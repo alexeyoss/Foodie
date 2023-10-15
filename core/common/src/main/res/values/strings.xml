@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dailyNotificationChannelDesc">Ежедневные уведоления пользователя, побуждающие зайти в приложение</string>
+    <string name="dailyNotificationContentTitle">Куда же ты пропал?</string>
+    <string name="dailyNotificationContentText">Кажется настало время зайти в приложение</string>
+
+</resources>

@@ -25,6 +25,7 @@ include(":services:network")
 include(":services:location")
 include(":services:navigation")
 include(":services:compose")
+include(":services:notification")
 // include(":services:preference")
 
 include(":core:common")

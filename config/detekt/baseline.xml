@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <SmellBaseline>
-  <ManuallySuppressedIssues/>
-  <CurrentIssues>
-  </CurrentIssues>
+  <ManuallySuppressedIssues>
+    <ID>MagicNumber:NotificationWorker.kt$NotificationWorker$1000</ID>
+  </ManuallySuppressedIssues>
+  <CurrentIssues/>
 </SmellBaseline>
