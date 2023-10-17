@@ -2,28 +2,23 @@ package ru.alexeyoss.foodie.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
-import androidx.core.content.ContextCompat
-import androidx.core.content.PermissionChecker
 import com.github.terrakok.cicerone.Forward
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import dagger.Lazy
-import kotlinx.coroutines.Dispatchers
+import ru.alexeyoss.core_ui.presentation.collectOnLifecycle
 import ru.alexeyoss.core_ui.presentation.listeners.BackButtonListener
 import ru.alexeyoss.foodie.R
 import ru.alexeyoss.foodie.activity.toolbar.MainActivityToolbarHandler
 import ru.alexeyoss.foodie.appComponent
+import ru.alexeyoss.foodie.core.common.activity.ActiveActivityHolder
 import ru.alexeyoss.foodie.coreui.presentation.AlertDialogBuilder
 import ru.alexeyoss.foodie.databinding.ActivityMainBinding
 import ru.alexeyoss.foodie.navigation.Screens
-import ru.alexeyoss.foodie.permissions.LocationPermissionRequest
-import ru.alexeyoss.foodie.permissions.LocationPermissionRequest.permissions
-import ru.alexeyoss.foodie.permissions.LocationPermissionRequest.showPermissionsRational
+import ru.alexeyoss.foodie.permissions.request.LocationPermissionRequest
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -42,9 +37,8 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    private val locationPermissionLauncher by lazy {
-        registerForActivityResult(RequestMultiplePermissions(), ::onLocationPermissionResult)
-    }
+    @Inject
+    lateinit var activeActivityHolder: ActiveActivityHolder
 
     private val toolbarHandler by lazy {
         MainActivityToolbarHandler(
@@ -63,24 +57,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this@MainActivity)
+        activeActivityHolder.activity = this@MainActivity
 
         setContentView(binding.root)
         setSupportActionBar(binding.customToolbar)
 
-        Dispatchers
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.categoriesFragment
             navigator.applyCommands(arrayOf(Forward(Screens.categories())))
         }
 
-        if (!checkPermissionsStatus(permissions)) {
-            locationPermissionLauncher.launch(permissions)
-        } else {
-            viewModel.getLastKnownLocation()
-        }
+        viewModel.checkPermissionStatus()
 
         lifecycle.addObserver(toolbarHandler.lifeCycleObserver)
-
         initListeners()
     }
 
@@ -93,6 +82,19 @@ class MainActivity : AppCompatActivity() {
                 R.id.accountFragment -> Unit
             }
             true
+        }
+
+        viewModel.mainActivitySideEffects.collectOnLifecycle(this@MainActivity) { sideEffect ->
+            when (sideEffect) {
+                MainActivitySideEffects.Initial -> Unit
+                MainActivitySideEffects.ShowPermissionRational ->
+                    AlertDialogBuilder.createPermissionDialog(
+                        this@MainActivity,
+                        message = LocationPermissionRequest.permissionsRationalStr,
+                        positiveBtnText = R.string.appSettingsBtnText,
+                        onPositive = { router.navigateTo(LocationPermissionRequest.settingsRationalRoute!!) },
+                    ).show()
+            }
         }
     }
 
@@ -116,40 +118,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("MissingPermission")
-    private fun onLocationPermissionResult(result: Map<String, Boolean>) {
-        if (result.any { permission -> permission.value }) {
-            // Set last known location if ANY of permissions is provided
-            viewModel.getLastKnownLocation()
-        } else {
-            if (shouldShowRequestPermissionRationale(this@MainActivity, permissions.random())) {
-                locationPermissionLauncher.launch(permissions)
-            } else {
-                // Set default city name if ALL permissions is restricted
-                viewModel.setDefaultCityName()
-
-                if (showPermissionsRational) {
-                    AlertDialogBuilder.createPermissionDialog(
-                        this@MainActivity,
-                        message = LocationPermissionRequest.permissionsRationalStr,
-                        positiveBtnText = R.string.appSettingsBtnText,
-                        onPositive = { router.navigateTo(LocationPermissionRequest.settingsRationalRoute!!) },
-                    ).show()
-                }
-            }
-        }
-    }
-
-    private fun checkPermissionsStatus(permissions: Array<String>): Boolean {
-        return permissions.any { permission ->
-            ContextCompat.checkSelfPermission(
-                this@MainActivity, permission
-            ) == PermissionChecker.PERMISSION_GRANTED
-        }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // Delegate result to permission manager via viewModel method
+        viewModel.onPermissionResult(requestCode, permissions, grantResults)
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        activeActivityHolder.activity = null
         binding.bottomNavigationView.setOnItemSelectedListener(null)
     }
 }

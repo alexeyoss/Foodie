@@ -1,16 +1,14 @@
 package ru.alexeyoss.foodie
 
-import android.app.Activity
 import android.app.Application
 import android.content.Context
-import androidx.fragment.app.FragmentActivity
 import androidx.work.Configuration
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import de.hdodenhof.circleimageview.BuildConfig
 import ru.alexeyoss.foodie.core.common.activity.ActiveActivityHolder
-import ru.alexeyoss.foodie.core.common.activity.DefaultActivityLifecycleCallbacks
 import ru.alexeyoss.foodie.core.common.di.AppContextProvider
 import ru.alexeyoss.foodie.di.AppComponent
 import ru.alexeyoss.foodie.di.AppComponentDepsProvider
@@ -37,23 +35,10 @@ class FoodieApplication :
     @Inject
     lateinit var notificationWorkerFactory: NotificationWorkerFactory
 
-    private val lifecycleCallbacks = object : DefaultActivityLifecycleCallbacks {
-
-        override fun onActivityResumed(activity: Activity) {
-            activeActivityHolder.registerActiveActivity(activity as FragmentActivity)
-        }
-
-        override fun onActivityPaused(activity: Activity) {
-            activeActivityHolder.removeActiveActivity()
-        }
-    }
-
     override fun onCreate() {
         super.onCreate()
         appComponent.inject(this@FoodieApplication)
         setDebugLogging()
-
-        registerActivityLifecycleCallbacks(lifecycleCallbacks)
         performDailyNotificationWork()
     }
 
@@ -79,17 +64,17 @@ class FoodieApplication :
     }
 
     private fun buildNotificationWorkRequest(): PeriodicWorkRequest {
-        return PeriodicWorkRequest.Builder(
-            NotificationWorker::class.java,
+        return PeriodicWorkRequestBuilder<NotificationWorker>(
             dailyNotificationRepeatInterval,
-            TimeUnit.MINUTES,
+            TimeUnit.HOURS,
             dailyNotificationFlexInterval,
-            TimeUnit.MINUTES
+            TimeUnit.HOURS
         ).build()
     }
+
     companion object {
-        const val dailyNotificationRepeatInterval = 15L
-        const val dailyNotificationFlexInterval = 15L
+        const val dailyNotificationRepeatInterval = 12L
+        const val dailyNotificationFlexInterval = 12L
     }
 }
 

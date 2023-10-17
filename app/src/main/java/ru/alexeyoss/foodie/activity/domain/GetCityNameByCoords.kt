@@ -1,16 +1,13 @@
 package ru.alexeyoss.foodie.activity.domain
 
 import androidx.annotation.RequiresPermission
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import ru.alexeyoss.foodie.core.common.data.Container
 import ru.alexeyoss.foodie.activity.domain.entities.UiLocationInfo
 import ru.alexeyoss.foodie.activity.domain.repositories.LocationRepository
+import ru.alexeyoss.foodie.core.common.data.Container
 import ru.alexeyoss.foodie.services.location.interactor.DefaultLocationInteractor
 import ru.alexeyoss.foodie.services.location.interactor.DefaultLocationStates
 import javax.inject.Inject
@@ -36,9 +33,9 @@ constructor(
             .flatMapLatest { location ->
                 if (location != null) {
                     locationRepository.getCityNameByCoords(location)
-                } else locationRepository.getDefaultCityName()
+                } else {
+                    locationRepository.getDefaultCityName()
+                }
             }
     }
-
-
 }

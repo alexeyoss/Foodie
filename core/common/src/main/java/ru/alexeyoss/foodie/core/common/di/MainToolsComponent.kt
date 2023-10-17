@@ -3,14 +3,12 @@ package ru.alexeyoss.foodie.core.common.di
 import dagger.BindsInstance
 import dagger.Component
 import kotlinx.coroutines.CoroutineDispatcher
-import ru.alexeyoss.foodie.core.common.activity.ActiveActivityHolder
 import ru.alexeyoss.foodie.core.common.di.modules.CoroutinesModule
 import ru.alexeyoss.foodie.core.common.di.modules.MainToolsModule
 import ru.alexeyoss.foodie.core.common.di.scope.PerApplication
 
 interface MainToolsProvider {
     fun provideContext(): AppContextProvider
-    fun provideActiveActivityHolder(): ActiveActivityHolder
 
     @CoroutinesModule.IoDispatcher
     fun provideIODispatcher(): CoroutineDispatcher

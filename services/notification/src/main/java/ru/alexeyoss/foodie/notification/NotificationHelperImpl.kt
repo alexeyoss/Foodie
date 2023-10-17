@@ -33,7 +33,7 @@ constructor(
         }
     }
 
-    override fun createDailyNotification(): NotificationCompat.Builder {
+    override fun getDailyNotificationBuilder(): NotificationCompat.Builder {
         // TODO experiment with the pending intent
         return NotificationCompat.Builder(context, NotificationChannelSettings.DAILY.id)
             .setSmallIcon(CoreDrawable.ic_notification)

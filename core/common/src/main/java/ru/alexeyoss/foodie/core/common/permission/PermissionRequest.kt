@@ -2,11 +2,10 @@ package ru.alexeyoss.foodie.core.common.permission
 
 import com.github.terrakok.cicerone.Screen
 
-
 /**
  * Базовый класс запроса Runtime Permissions.
  */
-abstract class BasePermissionRequest {
+abstract class PermissionRequest {
 
     /**
      * Запрашиваемые разрешения.
@@ -36,5 +35,4 @@ abstract class BasePermissionRequest {
      */
     var settingsRationalRoute: Screen? = null
         protected set
-
 }

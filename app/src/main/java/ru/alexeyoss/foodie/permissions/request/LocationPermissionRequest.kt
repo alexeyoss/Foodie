@@ -1,15 +1,14 @@
-package ru.alexeyoss.foodie.permissions
+package ru.alexeyoss.foodie.permissions.request
 
 import android.Manifest
-import ru.alexeyoss.foodie.core.common.permission.BasePermissionRequest
 import ru.alexeyoss.foodie.R
+import ru.alexeyoss.foodie.core.common.permission.PermissionRequest
 import ru.alexeyoss.foodie.navigation.Screens
 
-object LocationPermissionRequest : BasePermissionRequest() {
+object LocationPermissionRequest : PermissionRequest() {
     init {
         showPermissionsRational = true
         permissionsRationalStr = R.string.locationRationalText
-
         showSettingsRational = true
         settingsRationalRoute = Screens.settingsActivity()
     }

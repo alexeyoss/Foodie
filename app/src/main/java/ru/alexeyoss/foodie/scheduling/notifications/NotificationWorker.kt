@@ -1,7 +1,9 @@
 package ru.alexeyoss.foodie.scheduling.notifications
 
-import android.annotation.SuppressLint
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -16,16 +18,24 @@ class NotificationWorker
     @Assisted private val notificationHelper: NotificationHelper
 ) : Worker(context, workerParams) {
 
-    @SuppressLint("MissingPermission")
     override fun doWork(): Result {
         return try {
             notificationHelper.setupNotificationChannels()
-            val notification = notificationHelper.createDailyNotification().build()
-            // TODO Check permission from PermissionManagerHelper
-            NotificationManagerCompat.from(context).notify(1, notification)
+            val notification = notificationHelper.getDailyNotificationBuilder().build()
+
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO save info to localStore OR analytical service
+                Unit
+            } else {
+                NotificationManagerCompat.from(context).notify(1, notification)
+            }
 
             Result.success()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             Result.failure()
         }
     }
